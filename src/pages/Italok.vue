@@ -1,9 +1,7 @@
 <script setup>
-import Rightside from '../components/Rightside.vue';
-
-
+import Rightside from "../components/Rightside.vue";
 </script>
 
 <template>
-<Rightside title="Italok" type="italok" />
+  <Rightside title="Italok" queryType="italok" />
 </template>

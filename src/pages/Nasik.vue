@@ -1,7 +1,7 @@
 <script setup>
-import Rightside from '../components/Rightside.vue';
+import Rightside from "../components/Rightside.vue";
 </script>
 
 <template>
-<Rightside title="Nasik" type="nasik" />
+  <Rightside title="Nasik" queryType="nasik" />
 </template>

@@ -1,7 +1,7 @@
 <script setup>
-import Rightside from '../components/Rightside.vue';
+import Rightside from "../components/Rightside.vue";
 </script>
 
 <template>
-    <Rightside title="Hamburgerek" type="hamburgerek" />
+  <Rightside title="Hamburgerek" queryType="hamburgerek" />
 </template>
