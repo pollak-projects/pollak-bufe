@@ -1,6 +1,7 @@
 <script setup>
   import { ref, computed } from 'vue';
   import Rightside from './components/Rightside.vue';
+import { RouterView, RouterLink } from 'vue-router';
 
   const time = ref(new Date())
 
@@ -27,25 +28,25 @@
       <nav class="h-full p-6">
         <ul class="h-full flex flex-col justify-evenly content-center flex-wrap text-[#6750A4] text-2xl">
           <li class="w-full border-b border-[#D1C0FB] pr-2 pl-2 pb-3">
-            <a href="szendvicsek" class="flex justify-between w-full">Szendvicsek <img width="20px" src="./assets/arrow_right.svg"></a>
+            <RouterLink to="/szendvicsek" class="flex justify-between w-full">Szendvicsek <img width="20px" src="./assets/arrow_right.svg"></RouterLink>
           </li>
           <li class="w-full border-b border-[#D1C0FB] pr-2 pl-2 pb-3">
-            <a class="flex justify-between w-full" href="hot-dogok">Hot-dogok <img width="20px" src="./assets/arrow_right.svg"></a>
+            <RouterLink class="flex justify-between w-full" to="/hot-dogok">Hot-dogok <img width="20px" src="./assets/arrow_right.svg"></RouterLink>
           </li>
           <li class="w-full border-b border-[#D1C0FB] pr-2 pl-2 pb-3">
-            <a class="flex justify-between w-full" href="hamburgerek">Hamburgerek <img width="20px" src="./assets/arrow_right.svg"></a>
+            <RouterLink class="flex justify-between w-full" to="/hamburgerek">Hamburgerek <img width="20px" src="./assets/arrow_right.svg"></RouterLink>
           </li>
           <li class="w-full border-b border-[#D1C0FB] pr-2 pl-2 pb-3">
-            <a class="flex justify-between w-full" href="italok">Italok <img width="20px" src="./assets/arrow_right.svg"></a>
+            <RouterLink class="flex justify-between w-full" to="/italok">Italok <img width="20px" src="./assets/arrow_right.svg"></RouterLink>
           </li>
           <li class="w-full border-b border-[#D1C0FB] pr-2 pl-2 pb-3">
-            <a class="flex justify-between w-full" href="nasik">Nasik <img width="20px" src="./assets/arrow_right.svg"></a>
+            <RouterLink class="flex justify-between w-full" to="/nasik">Nasik <img width="20px" src="./assets/arrow_right.svg"></RouterLink>
           </li>
         </ul>
       </nav>
     </div>
     <div class="w-3/4 h-screen max-h-screen p-4">
-      <Rightside title="Hamburgerek" type="hamburger" />
+      <RouterView />
     </div>
   </main>
 </template>
