@@ -34,7 +34,7 @@ const router = createRouter({
             component: () => import("../pages/Nasik.vue")
         },
         {
-            path: "/extrak",
+            path: "/extrak/:id",
             name: "Extrák",
             component: () => import("../pages/Extrak.vue")
         },
