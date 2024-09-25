@@ -13,7 +13,7 @@ export default defineConfig({
   })],
   build: {
     lib: {
-      entry: './src/entry.js',
+      entry: './src/main.js',
       formats: ['es','cjs'],
       name: 'web-component',
       fileName: (format)=>(format === 'es' ? 'index.js' : 'index.cjs')
