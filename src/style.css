@@ -5,3 +5,14 @@
 :root {
   font-family: "Abril Fatface";
 }
+
+.image {
+  width: 200px;
+  height: 200px;
+  transition: transform 0.5s ease; /* Az animáció lassúsága */
+}
+
+.image.active {
+  transform: scale(1.5); /* Kép nagyítása animációval */
+}
+

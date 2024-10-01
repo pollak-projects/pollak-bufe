@@ -33,11 +33,11 @@ const router = createRouter({
             name: "Nasik",
             component: () => import("../pages/Nasik.vue")
         },
-        {
-            path: "/extrak/:id",
-            name: "Extrák",
-            component: () => import("../pages/Extrak.vue")
-        },
+        //{
+         //   path: "/extrak/:id",
+         //   name: "Extrák",
+          //  component: () => import("../pages/Extrak.vue")
+      //  },
         {
             path: "/kosar",
             name: "Kosár",
