@@ -2,11 +2,15 @@
 import { ref } from 'vue';
 import { RouterLink } from "vue-router";
 
-defineProps({
+const props = defineProps({
   nev: String,
   ar: Number,
   kep: String,
 });
+
+function getImageUrl() {
+  return new URL(`../assets/${props.kep}`, import.meta.url);
+}
 
 const isActive = ref(false);
 
@@ -20,18 +24,15 @@ function toggleAnimation() {
     class="bg-white rounded-md border-[#9EA8FF] border-2 drop-shadow-lg p-3 w-60 h-80"
     id="app"
   >
-  <img
-      src="https://static.streetkitchen.hu/live/uploads/2017/04/img_8828.jpg"
-      alt=""
-      class="w-full h-4/5 mb-2 image"
-      :class="{ active: isActive }"
-      @click="toggleAnimation"
-    />
-    <!--<RouterLink to="/extrak/1">-->
-  
-    <p class="font-sans h-[12%] leading-4">{{ nev }}</p>
-    <p class="font-sans font-bold h-[8%]">{{ ar }} Ft</p>
-    <!--</RouterLink>-->
+    <RouterLink to="/extrak/1">
+      <img
+        src="https://static.streetkitchen.hu/live/uploads/2017/04/img_8828.jpg"
+        alt=""
+        class="w-full h-4/5 mb-2"
+      />
+      <p class="font-sans h-[12%] leading-4">{{ nev }}</p>
+      <p class="font-sans font-bold h-[8%]">{{ ar }} Ft</p>
+    </RouterLink>
   </div>
 </template>
 
