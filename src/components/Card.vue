@@ -1,11 +1,15 @@
 <script setup>
 import { RouterLink } from "vue-router";
 
-defineProps({
+const props = defineProps({
   nev: String,
   ar: Number,
   kep: String,
 });
+
+function getImageUrl() {
+  return new URL(`../assets/${props.kep}`, import.meta.url);
+}
 </script>
 
 <template>
@@ -14,7 +18,7 @@ defineProps({
   >
     <RouterLink to="/extrak/1">
       <img
-        src="https://static.streetkitchen.hu/live/uploads/2017/04/img_8828.jpg"
+        :src="getImageUrl()"
         alt=""
         class="w-full h-4/5 mb-2"
       />
