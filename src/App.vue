@@ -20,38 +20,10 @@ function navBack() {
   history.back();
 }
 
-async function Adatcucc() {
-  var requestOptions = {
-  method: 'GET',
-};
-
-fetch("http://localhost/pollakbufe/nologin/egyeb", requestOptions)
-  .then(response => response.text())
-  .then(result => {
-    const valasz = JSON.parse(result)
-    console.log(valasz)
-})
-  .catch(error => console.log('error', error));
-
+function kosar() {
+  
 }
 
-async function Egyebcucc() {
-  var requestOptions = {
-  method: 'GET',
-};
-
-fetch("http://localhost/pollakbufe/nologin/szendvics", requestOptions)
-  .then(response => response.text())
-  .then(result => {
-    const valasz = JSON.parse(result)
-    console.log(valasz)
-})
-  .catch(error => console.log('error', error));
-
-}
-
-Adatcucc()
-Egyebcucc()
 </script>
 
 <template>
@@ -61,11 +33,13 @@ Egyebcucc()
     class="h-8 w-8 absolute left-2 top-2"
     @click="navBack()"
   />
+  <RouterLink to="/kosar">
   <img
     src="./assets/shoppingcart.svg"
     alt=""
     class="h-8 w-8 absolute right-32 top-8"
   />
+</RouterLink>
   <div
     class="h-10 w-20 absolute right-4 top-6 bg-[#F7F2FA] drop-shadow-lg text-3xl flex justify-center items-center rounded-xl font-sans"
   >

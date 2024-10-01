@@ -1,3 +1,10 @@
-<script setup></script>
+<script setup>
+import Cart from "../components/Cart.vue";
+import Rightside from "../components/Rightside.vue";
+</script>
 
-<template></template>
+<template>
+<Cart title="Kosár" queryType="kosar" />
+
+
+</template>

@@ -5,6 +5,7 @@ defineProps({
   nev: String,
   ar: Number,
   kep: String,
+  queryType: String,
 });
 </script>
 
