@@ -1,17 +1,29 @@
 <script setup>
+import { ref } from 'vue';
 import { RouterLink } from "vue-router";
 
-defineProps({
+const props = defineProps({
   nev: String,
   ar: Number,
   kep: String,
   queryType: String,
 });
+
+function getImageUrl() {
+  return new URL(`../assets/${props.kep}`, import.meta.url);
+}
+
+const isActive = ref(false);
+
+function toggleAnimation() {
+  isActive.value = !isActive.value;
+}
 </script>
 
 <template>
   <div
     class="bg-white rounded-md border-[#9EA8FF] border-2 drop-shadow-lg p-3 w-60 h-80"
+    id="app"
   >
     <RouterLink to="/extrak/1">
       <img
@@ -25,4 +37,17 @@ defineProps({
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.image {
+  transition: transform 0.5s ease;
+  z-index: 9000000000;
+}
+
+.image.active {
+  position: absolute;
+  transform: scale(3, 3.3) translateX(-175px) translateY(70px);
+  left: 0;
+  top: 0;   
+}
+
+</style>

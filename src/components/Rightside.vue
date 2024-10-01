@@ -4,7 +4,9 @@ import Card from "./Card.vue";
 defineProps({
   title: String,
   queryType: String,
+  elemek: Array
 });
+
 </script>
 
 <template>
@@ -14,9 +16,7 @@ defineProps({
   <div
     class="flex gap-10 h-[calc(100%-7rem)] justify-center flex-wrap content-start overflow-x-hidden overflow-y-auto pb-10"
   >
-    <Card nev="Sajtos Hamburger" ar="1000" kep="" />
-    <Card nev="Pirított hagymás Hamburger" ar="1000" kep="" />
-    <Card nev="Sima Hamburger" ar="1000" kep="" />
+    <Card v-for="kajak in elemek" :nev="kajak.nev" :ar="kajak.ar" :kep="kajak.kep"/>
   </div>
 </template>
 
