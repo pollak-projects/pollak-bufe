@@ -10,6 +10,7 @@ defineProps({
 });
 
 
+
 import { ref } from 'vue';
 
 const breakOptions = ref(['1. szünet', '2. szünet', '3. szünet', '4. szünet', '5. szünet']);
@@ -29,22 +30,19 @@ function selectBreak(breakOption) {
  
 
   <template>
-    
-<div class="absolute bottom-10 w-8/12 flex justify-between mx-6" >
-    <button
-      class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-2xl">
-    Kosárba
-    </button>
-  </div>
 
-  
-  <div class="flex items-end justify-center h-screen">
-    <div class="relative inline-block text-left mb-20">
+<h1 class="text-[#554B4B] drop-shadow-lg text-5xl mb-20 ms-10 h-12 text-center">
+    {{ title }}
+  </h1>
+  <div class="h-[75%] flex gap-10 w-full"> <div class="">
+    <div class="absolute text-center justify-between mx-6">
       <div>
         <button @click="toggleDropdown" class="bg-[#D8DCFF] text-[#554B4B] text-2xl rounded px-4 py-2 border border-black rounded-full">
           {{ selectedBreak || 'Válasszon szünetet' }}
         </button>
       </div>
+      
+
 
       <div v-if="isOpen" class="absolute z-10 mt-2 w-56 rounded-md shadow-lg bg-white">
         <ul class="py-1" role="menu">
@@ -59,6 +57,22 @@ function selectBreak(breakOption) {
       </div>
     </div>
   </div>
+  <div class="flex items-center justify-center w-full">
+    <div class="bg-[#ffff99] text-center w-full border-b pr-2 pl-2 pb-10 mt-0">
+      IDE JÖNNEK A MEGVÁSÁROLT TERMÉKEK
+    </div>
+  </div>
+</div>
+<div class="bottom-10 mx-6 text-right" >
+    <button
+      class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-2xl">
+    Rendelés leadása
+    </button>
+  </div>
+
+  
+  
+ 
 </template>
 
 
