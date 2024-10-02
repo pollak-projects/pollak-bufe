@@ -4,7 +4,9 @@ import Rightside from "../components/Rightside.vue";
 </script>
 
 <template>
-<Cart title="Kosár" queryType="kosar" />
+
+
+<Cart title="Rendelés véglegesítése" queryType="kosar" />
 
 
 </template>

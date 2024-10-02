@@ -13,15 +13,15 @@ const italok = [
   {nev: "Gatorade", ar: 700, kep: "gatorade.jpg"},
   {nev: "Márka tea (több ízben)", ar: 490, kep: "markatea.jpg"},
   {nev: "Xixo (több ízben)", ar: 340, kep: "xixo.jpg"},
-  {nev: "Savas, mentes víz 0,5l", ar: 250, kep: "felesviz.jpg"},
+  {nev: "Savas, mentes víz 0,5l", ar: 250, kep: "masfelesviz.jpg"},
   {nev: "Savas, mentes víz 1,5l", ar: 330, kep: "masfelesviz.jpg"},
   {nev: "Forró csokoládé", ar: 300, kep: "forrocsoki.jpg"},
   {nev: "Sima presszó kávé", ar: 250, kep: "presszokave.jpg"},
-  {nev: "Tejszínes presszó kávé", ar: 300, kep: "tejszineskave.jpg"},
-  {nev: "Tejszínhabos presszó kávé", ar: 300, kep: "tejszinhaboskave.jpg"},
-  {nev: "Cappuccino", ar: 300, kep: "cappuccino.jpg"},
+  {nev: "Tejszínes presszó kávé", ar: 300, kep: "presszokave.jpg"},
+  {nev: "Tejszínhabos presszó kávé", ar: 300, kep: "presszokave.jpg"},
+  {nev: "Cappuccino", ar: 300, kep: "cappuccino.png"},
   {nev: "Fekete tea (3dl)", ar: 250, kep: "feketetea.jpg"},
-  {nev: "Gyümölcs tea (3dl)", ar: 250, kep: "gyumolcstea.jpg"}
+  {nev: "Gyümölcs tea (3dl)", ar: 250, kep: "gyumolcstea.png"}
 ]
 </script>
 
