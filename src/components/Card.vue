@@ -27,9 +27,11 @@ function toggleAnimation() {
   >
     <RouterLink to="/extrak/1">
       <img
-        src="https://static.streetkitchen.hu/live/uploads/2017/04/img_8828.jpg"
+        :src="getImageUrl()"
         alt=""
         class="w-full h-4/5 mb-2"
+        :class="{ active: isActive }"
+        @click="toggleAnimation"
       />
       <p class="font-sans h-[12%] leading-4">{{ nev }}</p>
       <p class="font-sans font-bold h-[8%]">{{ ar }} Ft</p>

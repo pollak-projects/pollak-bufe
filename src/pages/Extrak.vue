@@ -25,8 +25,13 @@ function getSelected() {
     Sajtos Hamburger
   </h1>
   <div class="h-[75%] flex gap-10">
-    <ExtraCard text="Ketchup" imgName="ketchup.png" v-model:isKetchup="isKetchup" />
-    <ExtraCard text="Ketchup" imgName="ketchup.png" />
+    <div class="h-[75%] flex flex-wrap gap-10 p-3 mb-13 ">
+      <ExtraCard text="Ketchup" imgName="ketchup.png" />
+      <ExtraCard text="Mustár" imgName="must.png" />
+      <ExtraCard text="Majonéz" imgName="majo.png" />
+      <ExtraCard text="Csípős" imgName="csip.png" />
+      <ExtraCard text="Lilahagyma" imgName="hagyma.png" />
+    </div>
   </div>
   <div class="absolute bottom-10 w-8/12 flex justify-between mx-6">
     <button

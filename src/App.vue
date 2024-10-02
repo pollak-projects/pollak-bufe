@@ -24,6 +24,33 @@ function kosar() {
   
 }
 
+async function Adatcucc() {
+  var requestOptions = {
+  method: 'GET',
+};
+fetch("http://localhost/pollakbufe/nologin/egyeb", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+    const valasz = JSON.parse(result)
+    console.log(valasz)
+})
+  .catch(error => console.log('error', error));
+}
+async function Egyebcucc() {
+  var requestOptions = {
+  method: 'GET',
+};
+fetch("http://localhost/pollakbufe/nologin/szendvics", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+    const valasz = JSON.parse(result)
+    console.log(valasz)
+})
+  .catch(error => console.log('error', error));
+}
+Adatcucc()
+Egyebcucc()
+
 </script>
 
 <template>
