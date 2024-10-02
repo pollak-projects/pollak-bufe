@@ -1,8 +1,8 @@
 <script setup>
 import Rightside from "../components/Rightside.vue";
 
-const szendicsek = [
-  {nev: "Sonkás szendics", ar: 570, kep: "sonkasszendvics.jpg"},
+const szendvicsek = [
+  {nev: "Sonkás szenvdics", ar: 570, kep: "sonkasszendvics.jpg"},
   {nev: "Szalámis szendics", ar: 570, kep: "szalamisszendvics.jpg"},
   {nev: "Rántott húsos szedvics", ar: 800, kep: "rantotthusosszendvics.jpg"}
 ]
