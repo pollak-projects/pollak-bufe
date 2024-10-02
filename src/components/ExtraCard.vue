@@ -6,9 +6,19 @@ const props = defineProps({
   imgName: String,
 });
 
-const isKetchup = defineModel('isKetchup')
+const model = defineModel({
+  default: []
+})
 
 const isActive = ref(false);
+
+function changeviewModel() {
+  isActive.value = !isActive.value
+  model.value.push({
+    name: props.text,
+    value: isActive.value
+  })
+}
 
 function getImageUrl() {
   return new URL(`../assets/${props.imgName}`, import.meta.url);
@@ -17,11 +27,11 @@ function getImageUrl() {
 <template>
   <div
     class="h-52 w-40 flex flex-col items-center justify-between cursor-pointer"
-    @click="isKetchup = !isKetchup"
+    @click="changeviewModel()"
   >
     <div
       class="h-40 w-40 bg-[#d9d9d9] drop-shadow-lg rounded-3xl p-2"
-      :class="{ '!bg-[#bee46c]': isKetchup }"
+      :class="{ '!bg-[#bee46c]': isActive }"
     >
       <img :src="getImageUrl()" alt="" />
     </div>
