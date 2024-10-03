@@ -28,6 +28,6 @@ RUN npm run build
 FROM nginx:latest as prod
 
 COPY --from=prod-builder /usr/src/app/dist /usr/share/nginx/html
-COPY config/site.conf /etc/nginx/conf.d/site.conf
+COPY config/nginx.conf /etc/nginx/nginx.conf
 
 CMD ["nginx", "-g", "daemon off;"]
