@@ -7,17 +7,21 @@ const props = defineProps({
 });
 
 const model = defineModel({
-  default: []
-})
+  default: [],
+});
 
 const isActive = ref(false);
 
 function changeviewModel() {
-  isActive.value = !isActive.value
-  model.value.push({
-    name: props.text,
-    value: isActive.value
-  })
+  isActive.value = !isActive.value;
+  const index = model.value.findIndex((item) => item.name === props.text);
+  console.log(index);
+
+  if (index === -1 && isActive.value) {
+    model.value.push(props.text);
+  } else {
+    model.value.splice(index, 1);
+  }
 }
 
 function getImageUrl() {
