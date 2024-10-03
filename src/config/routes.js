@@ -6,7 +6,7 @@ const router = createRouter({
         {
             path: "/",
             name: "Főoldal",
-            component: () => import("../pages/Home.vue")
+            component: () => import("../pages/Kezdes.vue")
         },
         {
             path: "/szendvicsek",
