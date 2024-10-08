@@ -35,16 +35,16 @@ function selectBreak(breakOption) {
     {{ title }}
   </h1>
   <div class="h-[75%] flex gap-10 w-full"> <div class="">
-    <div class="absolute text-center justify-between mx-6">
-      <div>
-        <button @click="toggleDropdown" class="bg-[#D8DCFF] text-[#554B4B] text-2xl rounded px-4 py-2 border border-black rounded-full">
+    <div class="absolute bottom-20 text-center justify-between mx-6">
+      
+        <button @click="toggleDropdown" class="bg-[#f8d1eb] text-[#554B4B] text-2xl rounded px-4 py-2 border border-black rounded-full">
           {{ selectedBreak || 'Válasszon szünetet' }}
         </button>
-      </div>
+      
       
 
 
-      <div v-if="isOpen" class="absolute z-10 mt-2 w-56 rounded-md shadow-lg bg-white">
+      <div v-if="isOpen" class="absolute -top-[450%] z-10 mt-2 w-56 rounded-md shadow-lg bg-[#f8d1eb]">
         <ul class="py-1" role="menu">
           <li 
             v-for="breakOption in breakOptions" 
