@@ -37,7 +37,7 @@ function selectBreak(breakOption) {
   <div class="h-[75%] flex gap-10 w-full"> <div class="">
     <div class="absolute bottom-20 text-center justify-between mx-6">
       
-        <button @click="toggleDropdown" class="bg-[#f8d1eb] text-[#554B4B] text-2xl rounded px-4 py-2 border border-black rounded-full">
+        <button @click="toggleDropdown" class="bg-[#f8d1eb] text-[#554B4B] text-4xl rounded px-4 py-2 border border-black rounded-full">
           {{ selectedBreak || 'Válasszon szünetet' }}
         </button>
       
@@ -57,15 +57,13 @@ function selectBreak(breakOption) {
       </div>
     </div>
   </div>
-  <div class="flex items-center justify-center w-full">
-    <div class="bg-[#ffff99] text-center w-full border-b pr-2 pl-2 pb-10 mt-0">
-      IDE JÖNNEK A MEGVÁSÁROLT TERMÉKEK
-    </div>
+  <div>
+    <img src="../assets/hamburger.jpg" alt="" srcset="">
   </div>
 </div>
 <div class="absolute bottom-10 right-10  mx-6 text-right" >
     <button
-      class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-2xl">
+      class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-4xl">
     Rendelés leadása
     </button>
   </div>
