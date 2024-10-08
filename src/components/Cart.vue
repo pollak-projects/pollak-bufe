@@ -57,7 +57,8 @@ function selectBreak(breakOption) {
       </div>
     </div>
   </div>
-  <div>
+  <div class="bg-white rounded-md border-[#9EA8FF] border-2 drop-shadow-lg p-3 w-68 h-80">
+    
     <img src="../assets/hamburger.jpg" alt="" srcset="" class="w-64 h-64 border border-black">
   </div>
 </div>
