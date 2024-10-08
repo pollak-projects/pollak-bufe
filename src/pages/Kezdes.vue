@@ -12,8 +12,6 @@ import { RouterLink } from "vue-router";
         </button> 
       </RouterLink>
     </div>
-    <div class="w-screen h-2/3 flex justify-center items-center border-solid border-indigo-600">
-    </div>
   </div>
 </template>
 
