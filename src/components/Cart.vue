@@ -63,7 +63,7 @@ function selectBreak(breakOption) {
     </div>
   </div>
 </div>
-<div class="bottom-10 mx-6 text-right" >
+<div class="absolute bottom-10 right-10  mx-6 text-right" >
     <button
       class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-2xl">
     Rendelés leadása
