@@ -1,6 +1,6 @@
 <script setup>
 import Rightside from "../components/Rightside.vue";
-
+import Navigation from "../components/navigation.vue";
 const nasik = [
   {nev: "Kinder tejszelet", ar: 350, kep: "kindertejszelet.jpg"},
   {nev: "Kinder pingui", ar: 350, kep: "kinderpingui.jpg"},
@@ -18,5 +18,8 @@ const nasik = [
 </script>
 
 <template>
-  <Rightside title="Nasik" queryType="nasik" :elemek="nasik"/>
+  <Navigation />
+  <div class="w-full h-screen max-h-screen p-4">
+    <Rightside title="Nasik" queryType="nasik" :elemek="nasik"/>
+  </div>
 </template>
