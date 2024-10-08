@@ -1,12 +1,13 @@
-export async function Burgercucc() {
-    var requestOptions = {
+export async function Burgercucc(termek) {
+    var requestOptions = {  
     method: 'GET',
   };
-  fetch("http://localhost/pollakbufe/nologin/burger", requestOptions)
-    .then(response => response.text())
-    .then(result => {
-      const valasz = JSON.parse(result)
-      return valasz[0]
+  return new Promise((resolve, reject) => {
+    fetch(`http://localhost/pollakbufe/nologin/${termek}`, requestOptions)
+      .then(async (result) => {
+        const res = await result.text()
+        const valasz = JSON.parse(res)
+        resolve(valasz)
+    }).catch(error => console.log('error', error));
   })
-    .catch(error => console.log('error', error));
-  }
+}

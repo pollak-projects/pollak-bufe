@@ -22,61 +22,6 @@ function navBack() {
 
 function kosar() {}
 
-async function Szendvicscucc() {
-  var requestOptions = {
-    method: "GET",
-  };
-  fetch("http://localhost/pollakbufe/nologin/egyeb", requestOptions)
-    .then((response) => response.text())
-    .then((result) => {
-      const valasz = JSON.parse(result);
-      console.log(valasz);
-    })
-    .catch((error) => console.log("error", error));
-}
-async function Egyebcucc(termek) {
-  var requestOptions = {
-    method: "GET",
-  };
-  fetch(`http://localhost/pollakbufe/nologin/${termek}`, requestOptions)
-    .then((response) => response.text())
-    .then((result) => {
-      const valasz = JSON.parse(result);
-      console.log(valasz);
-    })
-    .catch((error) => console.log("error", error));
-}
-
-async function Italcucc() {
-  var requestOptions = {
-    method: "GET",
-  };
-  fetch("http://localhost/pollakbufe/nologin/ital", requestOptions)
-    .then((response) => response.text())
-    .then((result) => {
-      const valasz = JSON.parse(result);
-      console.log(valasz);
-    })
-    .catch((error) => console.log("error", error));
-}
-async function HotDogcucc() {
-  var requestOptions = {
-    method: "GET",
-  };
-  fetch("http://localhost/pollakbufe/nologin/hotdog", requestOptions)
-    .then((response) => response.text())
-    .then((result) => {
-      const valasz = JSON.parse(result);
-      console.log(valasz);
-    })
-    .catch((error) => console.log("error", error));
-}
-
-//Szendvicscucc()
-Egyebcucc("ital");
-//Burgercucc()
-//Italcucc()
-//HotDogcucc()
 </script>
 
 <template>
