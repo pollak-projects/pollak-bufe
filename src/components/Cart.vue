@@ -5,8 +5,25 @@
 </script>
 
 <template>
-  <div id="app">
-    <h1 class="text-[#554b4b] drop-shadow-lg text-5xl mb-10">{{ title }}</h1>
+  <h1 class="text-[#554b4b] drop-shadow-lg text-5xl mb-10">{{ title }}</h1>
+ 
+<div class="flex gap-10 mb-8 justify-center">
+  <div class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-3 w-64">
+    
+    <img src="../assets/hamburger.jpg" alt="" srcset="" class="w-64 h-64 border border-black">
+    Hamburger <br>
+    1000 Ft
+  </div>
+ 
+  <div class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-3 w-64">
+    
+    <img src="../assets/pepsi.jpg" alt="" srcset="" class="w-64 h-64 border border-black">
+    Pepsi <br>
+    400 Ft
+  </div>
+</div>
+<div id="app">
+  
     <div
       id="slider"
       @touchstart="startTouch"
@@ -40,13 +57,6 @@
       </div>
     </div>
   </div>
-  <div class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-3 w-68 h-80 ml-20">
-    
-    <img src="../assets/hamburger.jpg" alt="" srcset="" class="w-64 h-64 border border-black">
-    Hamburger <br>
-    1000 Ft
-  </div>
-
 <div class="absolute bottom-10 right-10  mx-6 text-right" >
     <button
       class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-4xl">
