@@ -10,6 +10,9 @@
       <input type="radio" name="slider" id="slide2" v-model="currentSlide" value="1" />
       <input type="radio" name="slider" id="slide3" v-model="currentSlide" value="2" />
       <input type="radio" name="slider" id="slide4" v-model="currentSlide" value="3" />
+      <input type="radio" name="slider" id="slide4" v-model="currentSlide" value="4" />
+      <input type="radio" name="slider" id="slide4" v-model="currentSlide" value="5" />
+      <input type="radio" name="slider" id="slide4" v-model="currentSlide" value="6" />
 
       <div id="slides">
         <div id="overflow">
@@ -24,15 +27,13 @@
         <label for="slide2"></label>
         <label for="slide3"></label>
         <label for="slide4"></label>
+        <label for="slide5"></label>
+        <label for="slide6"></label>
+        <label for="slide7"></label>
       </div>
     </div>
 
-    <p>
-      Vue.js implements WebComponent-compliant &lt;content&gt; insertion point mechanism.
-    </p>
-    <p>
-      Markup and CSS borrowed from <a href="http://css-tricks.com/modular-future-web-components/" target="_blank">CSS Tricks</a>.
-    </p>
+
   </div>
 </template>
 
