@@ -4,7 +4,19 @@
   })
 </script>
 
+<script setup>
+  const props = defineProps({
+  title: String
+});
+</script>
+
+
 <template>
+
+<h1 class="text-[#554B4B] drop-shadow-lg text-5xl h-12 w-10 absolute text-center  ">
+    {{ title }}
+  </h1>
+
   <div id="app">
     <h1 class="text-[#554b4b] drop-shadow-lg text-5xl mb-10">{{ title }}</h1>
     <div
