@@ -1,82 +1,124 @@
-<script setup>
-import { RouterLink } from "vue-router";
+<template>
+  <div id="app">
+    <div
+      id="slider"
+      @touchstart="startTouch"
+      @touchmove="moveTouch"
+      @touchend="endTouch"
+    >
+      <input type="radio" name="slider" id="slide1" v-model="currentSlide" value="0" checked />
+      <input type="radio" name="slider" id="slide2" v-model="currentSlide" value="1" />
+      <input type="radio" name="slider" id="slide3" v-model="currentSlide" value="2" />
+      <input type="radio" name="slider" id="slide4" v-model="currentSlide" value="3" />
 
-defineProps({
-  title: String,
-  nev: String,
-  ar: Number,
-  kep: String,
-  queryType: String,
-});
+      <div id="slides">
+        <div id="overflow">
+          <div class="inner" :style="sliderStyle">
+            <img v-for="(img, index) in images" :key="index" :src="img" />
+          </div>
+        </div>
+      </div>
 
-
-
-import { ref } from 'vue';
-
-const breakOptions = ref(['1. szünet', '2. szünet', '3. szünet', '4. szünet', '5. szünet']);
-const isOpen = ref(false);
-const selectedBreak = ref('');
-
-function toggleDropdown() {
-  isOpen.value = !isOpen.value;
-}
-
-function selectBreak(breakOption) {
-  selectedBreak.value = breakOption;
-  isOpen.value = false; // Bezárja a legördülő menüt a választás után
-}
-</script>
-
- 
-
-  <template>
-
-<h1 class="text-[#554B4B] drop-shadow-lg text-5xl mb-20 ms-10 h-12 text-center">
-    {{ title }}
-  </h1>
-  <div class="h-[75%] flex gap-10 w-full"> <div class="">
-    <div class="absolute bottom-20 text-center justify-between mx-6">
-      
-        <button @click="toggleDropdown" class="bg-[#f8d1eb] text-[#554B4B] text-4xl rounded px-4 py-2 border border-black rounded-full">
-          {{ selectedBreak || 'Válasszon szünetet' }}
-        </button>
-      
-      
-
-
-      <div v-if="isOpen" class="absolute -top-[450%] z-10 mt-2 w-56 rounded-md shadow-lg bg-[#f8d1eb]">
-        <ul class="py-1" role="menu">
-          <li 
-            v-for="breakOption in breakOptions" 
-            :key="breakOption" 
-            @click="selectBreak(breakOption)" 
-            class="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
-            {{ breakOption }}
-          </li>
-        </ul>
+      <div class="labels">
+        <label for="slide1"></label>
+        <label for="slide2"></label>
+        <label for="slide3"></label>
+        <label for="slide4"></label>
       </div>
     </div>
-  </div>
-  <div class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-3 w-68 h-80 ml-20">
-    
-    <img src="../assets/hamburger.jpg" alt="" srcset="" class="w-64 h-64 border border-black">
-    Hamburger <br>
-    1000 Ft
-  </div>
-</div>
-<div class="absolute bottom-10 right-10  mx-6 text-right" >
-    <button
-      class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-4xl">
-    Rendelés leadása
-    </button>
-  </div>
 
-  
-  
- 
+    <p>
+      Vue.js implements WebComponent-compliant &lt;content&gt; insertion point mechanism.
+    </p>
+    <p>
+      Markup and CSS borrowed from <a href="http://css-tricks.com/modular-future-web-components/" target="_blank">CSS Tricks</a>.
+    </p>
+  </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      startX: 0,
+      currentSlide: 0,
+      images: [
+        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/5689/rock.jpg',
+        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/5689/grooves.jpg',
+        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/5689/arch.jpg',
+        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/5689/sunset.jpg'
+      ]
+    };
+  },
+  computed: {
+    sliderStyle() {
+      return {
+        transform: `translateX(-${this.currentSlide * 100}%)`,
+        transition: 'transform 0.5s ease'
+      };
+    }
+  },
+  methods: {
+    startTouch(event) {
+      this.startX = event.touches[0].clientX;
+    },
+    moveTouch(event) {
+      event.preventDefault(); // Prevent default scrolling
+    },
+    endTouch(event) {
+      const endX = event.changedTouches[0].clientX;
+      const diffX = this.startX - endX;
 
+      if (diffX > 50) {
+        this.nextSlide(); // Swiped left
+      } else if (diffX < -50) {
+        this.prevSlide(); // Swiped right
+      }
+    },
+    nextSlide() {
+      this.currentSlide = (this.currentSlide + 1) % this.images.length;
+    },
+    prevSlide() {
+      this.currentSlide = (this.currentSlide - 1 + this.images.length) % this.images.length;
+    }
+  }
+};
+</script>
 
+<style>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f4f4f4;
+}
 
-<style scoped></style>
+#slider {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  overflow: hidden;
+  border: 2px solid #ccc;
+}
+
+.inner {
+  display: flex;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+input[type="radio"] {
+  display: none; /* Hide radio buttons */
+}
+
+.labels {
+  display: none; /* Hide labels */
+}
+
+p {
+  margin-top: 20px;
+}
+</style>
