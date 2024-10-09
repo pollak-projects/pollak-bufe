@@ -1,5 +1,6 @@
 <script setup>
 import ExtraCard from "../components/ExtraCard.vue";
+<<<<<<< Updated upstream
 import { routerKey, useRoute, useRouter } from "vue-router";
 import { store } from "../config/store.js";
 import { defineModel } from "vue";
@@ -33,12 +34,35 @@ function Veglegesites() {
   getSelected()
   router.push("/kosar")
 }
+=======
+import { store } from "../config/store.js";
+import { useRoute } from "vue-router";
+
+const route = useRoute()
+
+const ketchup = def
+
+function getSelected(id){
+  console.log(route.params.id)
+  console.log(id)
+  console.log(store.kosar[0])
+
+  store.kosar.push({
+    termek_id: id,
+    extrak: []
+  })
+  console.log(store.kosar)
+}
+
+
+>>>>>>> Stashed changes
 </script>
 
 <template>
   <div class="bg">
 
   </div>
+<<<<<<< Updated upstream
   <div class="w-full h-screen max-h-screen p-4">
     <h1 class="text-[#554B4B] drop-shadow-lg text-5xl mb-20 ms-10">
       Sajtos hamburger  
@@ -70,5 +94,18 @@ function Veglegesites() {
         Véglegesítés
       </button>
     </div>
+=======
+  <div class="absolute bottom-10 w-8/12 flex justify-between mx-6" >
+    <button
+      class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-2xl "
+    >
+      Kosárba
+    </button>
+    <button
+      class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-2xl"
+    >
+      Véglegesítés
+    </button>
+>>>>>>> Stashed changes
   </div>
 </template>

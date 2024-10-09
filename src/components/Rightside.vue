@@ -1,8 +1,14 @@
 <script setup>
 import Card from "./Card.vue";
+<<<<<<< Updated upstream
 import { Burgercucc } from "../config/lekerdezes.js";
 import { onMounted, ref } from "vue";
 const props = defineProps({
+=======
+import { store } from "../config/store.js";
+
+defineProps({
+>>>>>>> Stashed changes
   title: String,
   queryType: String,
   elemek: Array,
@@ -13,7 +19,14 @@ console.log(props.queryType)
 onMounted(async () => {
     re.value = await Burgercucc(props.queryType);
 
+<<<<<<< Updated upstream
  })
+=======
+
+
+
+
+>>>>>>> Stashed changes
 </script>
 
 <template>

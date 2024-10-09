@@ -34,8 +34,13 @@ const router = createRouter({
             component: () => import("../pages/Nasik.vue")
         },
         {
+<<<<<<< Updated upstream
            path: "/extrak/:id",
            name: "Extrák",
+=======
+            path: "/extrak/:id",
+            name: "Extrák",
+>>>>>>> Stashed changes
            component: () => import("../pages/Extrak.vue")
         },
         {
