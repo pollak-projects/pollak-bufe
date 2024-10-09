@@ -1,11 +1,19 @@
 <script setup>
 import Card from "./Card.vue";
-
-defineProps({
+import { Burgercucc } from "../config/lekerdezes.js";
+import { onMounted, ref } from "vue";
+const props = defineProps({
   title: String,
   queryType: String,
   elemek: Array,
 });
+const nev = []
+const re = ref(null)
+console.log(props.queryType)
+onMounted(async () => {
+    re.value = await Burgercucc(props.queryType);
+
+ })
 </script>
 
 <template>
@@ -15,12 +23,7 @@ defineProps({
   <div
     class="flex gap-10 h-[calc(100%-7rem)] justify-center flex-wrap content-start overflow-x-hidden overflow-y-auto pb-10"
   >
-    <Card
-      v-for="kajak in elemek"
-      :nev="kajak.nev"
-      :ar="kajak.ar"
-      :kep="kajak.kep"
-    />
+    <Card v-for="kajak in re" :nev="kajak.etel_nev" :ar="kajak.ar" :kep="kajak.kep"/>
   </div>
 </template>
 

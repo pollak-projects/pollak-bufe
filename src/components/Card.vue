@@ -18,6 +18,8 @@ const isActive = ref(false);
 function toggleAnimation() {
   isActive.value = !isActive.value;
 }
+
+
 </script>
 
 <template>
