@@ -4,7 +4,7 @@ import { RouterLink } from "vue-router";
 
 <template>
   <div class="h-screen">
-    <img class="logo w-screen absolute" src="/public/logo.png" alt="">
+    <img class="logo w-screen absolute move" src="/public/logo.png" alt="">
     <h1 class="w-screen h-1/3 flex justify-center items-end drop-shadow-2xl move">Pollák Büfé</h1>
     <div class="w-screen h-2/3 flex justify-center items-sta rt pt-28 move"> 
       <RouterLink to="/szendvicsek">
@@ -68,7 +68,7 @@ p {
     transform: translateY(0);
   }
   25%, 75% {
-    transform: translateY(2px);
+    transform: translateY(-2px);
   }
 }
 
