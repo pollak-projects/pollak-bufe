@@ -1,5 +1,12 @@
+<script setup>
+  const props = defineProps({
+    title: String
+  })
+</script>
+
 <template>
   <div id="app">
+    <h1 class="text-[#554b4b] drop-shadow-lg text-5xl mb-10">{{ title }}</h1>
     <div
       id="slider"
       @touchstart="startTouch"
@@ -10,9 +17,9 @@
       <input type="radio" name="slider" id="slide2" v-model="currentSlide" value="1" />
       <input type="radio" name="slider" id="slide3" v-model="currentSlide" value="2" />
       <input type="radio" name="slider" id="slide4" v-model="currentSlide" value="3" />
-      <input type="radio" name="slider" id="slide4" v-model="currentSlide" value="4" />
-      <input type="radio" name="slider" id="slide4" v-model="currentSlide" value="5" />
-      <input type="radio" name="slider" id="slide4" v-model="currentSlide" value="6" />
+      <input type="radio" name="slider" id="slide5" v-model="currentSlide" value="4" />
+      <input type="radio" name="slider" id="slide6" v-model="currentSlide" value="5" />
+      <input type="radio" name="slider" id="slide7" v-model="currentSlide" value="6" />
 
       <div id="slides">
         <div id="overflow">
@@ -32,10 +39,23 @@
         <label for="slide7"></label>
       </div>
     </div>
-
-
   </div>
+  <div class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-3 w-68 h-80 ml-20">
+    
+    <img src="../assets/hamburger.jpg" alt="" srcset="" class="w-64 h-64 border border-black">
+    Hamburger <br>
+    1000 Ft
+  </div>
+
+<div class="absolute bottom-10 right-10  mx-6 text-right" >
+    <button
+      class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-4xl">
+    Rendelés leadása
+    </button>
+  </div>
+
 </template>
+
 
 <script>
 export default {
