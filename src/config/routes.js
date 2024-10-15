@@ -47,6 +47,11 @@ const router = createRouter({
             path: "/kezdes",
             name: "Kezdés",
             component: () => import("../pages/Kezdes.vue")
+        },
+        {
+            path: "/sorszam",
+            name: "Sorszám",
+            component: () => import("../pages/Sorszam.vue")
         }
     ]
 })
