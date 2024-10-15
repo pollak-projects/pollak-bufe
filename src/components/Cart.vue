@@ -2,7 +2,7 @@
   <div>
     <h1 class="text-[#554b4b] drop-shadow-lg text-5xl mb-10">{{ title }}</h1>
 
-    <div class="flex gap-10 mb-8 justify-center">
+    <div class="flex gap-10 mb-8 pt-12 justify-center">
       <div class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-3 w-64">
         <img src="../assets/hamburger.jpg" alt="" class="w-64 h-64 border border-black">
         Hamburger <br>
@@ -17,9 +17,9 @@
     </div>
 
     <div class="absolute bottom-10 right-10 mx-6 text-right">
-      <button class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-4xl">
-        Rendelés leadása
-      </button>
+      <button class="blink-button px-8 py-4  border-solid drop-shadow-2xl border rounded-full border-black">  
+          Rendelés leadása
+        </button> 
     </div>
 
     <div class="melyik_szunet text-2xl">
@@ -83,6 +83,42 @@ const prevOption = () => {
 </script>
 
 <style>
+@keyframes blink {
+  0%, 100%{
+    background-color: rgb(115, 126, 223);
+  }
+  50% {
+    background-color: rgb(106, 77, 187);
+  }
+}
+
+@keyframes move {
+  0%, 50%, 100% {
+    transform: translateY(0);
+  }
+  25%, 75% {
+    transform: translateY(-1px);
+  }
+}
+
+button {
+  opacity: 80%;
+  border-color: black;
+  color: rgb(240 228 228);
+  background-color: rgb(61 68 135);
+  font-size: 30px;
+  padding-left: 120px;
+  padding-right: 120px;
+}
+
+.move {
+  animation: move 600s infinite;
+}
+
+
+.blink-button {
+  animation: blink 1.4s infinite;
+}
 
 .melyik_szunet {
   margin-top: 15%;
