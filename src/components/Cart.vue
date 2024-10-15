@@ -17,7 +17,7 @@
     </div>
 
     <div class="absolute bottom-10 right-10 mx-6 text-right">
-      <button class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-4xl">
+      <button class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-4xl " @click="rendelesleadas">
         Rendelés leadása
       </button>
     </div>
@@ -49,6 +49,9 @@ const props = defineProps({
 })
 
 import { ref, computed } from 'vue';
+import { store } from '../config/store';
+
+
 
 // Data for the date slider
 const selectedIndex = ref(3); // Default to the 4th item "4.szünet"
@@ -80,6 +83,12 @@ const prevOption = () => {
     selectedIndex.value--;
   }
 };
+
+const rendelesleadas = () =>
+{
+    store.kosar = []
+}
+
 </script>
 
 <style>
