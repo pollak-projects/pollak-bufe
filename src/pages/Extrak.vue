@@ -30,7 +30,25 @@ function Kosarba() {
 
 function Veglegesites() {
   getSelected();
-  router.push("/kosar");
+  //router.push("/kosar");
+  fetch(`http://localhost/pollakbufe/nologin/ujrendeles`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify({
+                    szendvics: 40,
+                    mustar: 0,
+                    ketchup: 1,
+                    majonez: 1,
+                    csipos: 1,
+                    hagyma: 0,
+                    bankkartya: 1,
+                    szunet: 5,
+                })
+            }).then((res) => {
+                location.reload()
+            })
 }
 </script>
 
@@ -74,7 +92,7 @@ function Veglegesites() {
         Kosárba
       </button>
       <button
-        class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-2xl"
+        class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-2xl" @click="Veglegesites()"
       >
         Véglegesítés
       </button>
