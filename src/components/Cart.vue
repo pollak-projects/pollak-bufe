@@ -22,6 +22,9 @@
       </button>
     </div>
 
+    <div class="melyik_szunet text-2xl">
+    Melyik szünetre kéred?: 
+  </div>
     <div class="date-slider-container">
       <button @click="prevOption" class="slider-btn">←</button>
       <div class="date-slider">
@@ -80,8 +83,13 @@ const prevOption = () => {
 </script>
 
 <style>
+
+.melyik_szunet {
+  margin-top: 15%;
+}
+
 body {
-  font-family: Arial, sans-serif;
+
   text-align: center;
   background-color: #f4f4f4;
 }
