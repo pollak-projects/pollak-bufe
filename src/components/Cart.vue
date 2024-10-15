@@ -26,7 +26,7 @@
     Melyik szünetre kéred?: 
   </div>
     <div class="date-slider-container">
-      <button @click="prevOption" class="slider-btn">←</button>
+      <button @click="prevOption" class="slider-btn">◄</button>
       <div class="date-slider">
         <div class="slider-track" :style="trackStyle">
           <div
@@ -38,7 +38,7 @@
           </div>
         </div>
       </div>
-      <button @click="nextOption" class="slider-btn">→</button>
+      <button @click="nextOption" class="slider-btn">►</button>
     </div>
   </div>
 </template>
@@ -168,13 +168,14 @@ body {
   font-weight: bold;
   transform: scale(1); /* Scale up the focused item */
   filter: blur(0); /* Remove blur effect */
-  color: #1976D2; /* Highlight color */
+  color: rgb(115, 126, 223); /* Highlight color */
 }
 
 .slider-btn {
+  color: #000000;
   background: none;
-  border: 1px solid #ccc;
-  border-radius: 50%;
+  border: 1px solid #f0f0f0;
+  border-radius: 100%;
   cursor: pointer;
   padding: 5px;
   margin: 0 20px;
