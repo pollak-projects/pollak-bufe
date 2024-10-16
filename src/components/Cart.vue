@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-[#554b4b] drop-shadow-lg text-5xl mb-10">{{ title }}</h1>
+    <h1 class="text-[#554b4b] arnyek text-5xl mb-10">{{ title }}</h1>
 
     <div class="flex gap-10 mb-8 pt-12 justify-center">
       <div class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-3 w-64">
@@ -22,7 +22,7 @@
         </button> 
     </div>
 
-    <div class="melyik_szunet text-2xl">
+    <div class="melyik_szunet text-[#554b4b] arnyek text-2xl">
     Melyik szünetre kéred?: 
   </div>
     <div class="date-slider-container">
@@ -83,6 +83,10 @@ const prevOption = () => {
 </script>
 
 <style>
+.arnyek {
+  text-shadow: 1px 5px 5px rgba(0,0,0,0.3);
+}
+
 @keyframes blink {
   0%, 100%{
     background-color: rgb(115, 126, 223);
