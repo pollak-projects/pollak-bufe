@@ -31,24 +31,28 @@ function Kosarba() {
 function Veglegesites() {
   getSelected();
   //router.push("/kosar");
-  fetch(`http://localhost/pollakbufe/nologin/ujrendeles`, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-                body: JSON.stringify({
-                    szendvics: 40,
-                    mustar: 0,
-                    ketchup: 1,
-                    majonez: 1,
-                    csipos: 1,
-                    hagyma: 0,
-                    bankkartya: 1,
-                    szunet: 5,
-                })
-            }).then((res) => {
-                location.reload()
-            })
+}
+
+async function Rendeles_Cucc() {
+  const Formdata = new FormData();
+  Formdata.append("szendvics", 22)
+  Formdata.append("mustar", 1)
+  Formdata.append("ketchup", 1)
+  Formdata.append("majonez", 1)
+  Formdata.append("csipos", 0)
+  Formdata.append("hagyma", 1)
+  Formdata.append("bankkartya", 0)
+  Formdata.append("szunet", 6)
+    var requestOptions = {  
+    method: 'POST',
+    body: Formdata
+  };
+  return new Promise((resolve, reject) => {
+    fetch(`http://localhost/pollakbufe/nologin/ujrendeles`, requestOptions)
+      .then(async (result) => {
+        console.log("szia")
+    }).catch(error => console.log('error', error));
+  })
 }
 
 function getImageUrl() {
@@ -93,7 +97,7 @@ function getImageUrl() {
       </button>
       <button
         class="border rounded-full border-black bg-[#d8dcff] p-3 px-16 text-[#554b4b] text-5xl"
-        @click="Veglegesites()"
+        @click="Rendeles_Cucc()"
       >
         Véglegesítés
       </button>
