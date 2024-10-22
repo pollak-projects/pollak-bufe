@@ -4,6 +4,9 @@ import { routerKey, useRoute, useRouter } from "vue-router";
 import { store } from "../config/store.js";
 import { defineModel } from "vue";
 import Navigation from "../components/navigation.vue";
+import { termekLekerdezes } from '../config/lekerdezes.js';
+import { ref, onMounted } from 'vue';
+
 
 const route = useRoute();
 const router = useRouter();
@@ -58,22 +61,38 @@ async function Rendeles_Cucc() {
 function getImageUrl() {
   return new URL(`../assets/sajtoshambi.png`, import.meta.url);
 }
+
+const props = defineProps({
+  id: Number,
+  nev: String,
+  ar: Number,
+  kep: String,
+  queryType: String,
+});
+
+const re = ref(null);
+console.log(props.queryType);
+onMounted(async () => {
+  re.value = await termekLekerdezes(route.params.id);
+  console.log(re.value)
+});
+
 </script>
 
 <template>
   <div class="bg"></div>
   <div class="w-full h-screen max-h-screen p-4">
     <h1 class="text-[#554B4B] drop-shadow-lg text-6xl mb-20 ms-10">
-      Sajtos hamburger
+      {{ re?re[0].etel_nev:"" }} 
     </h1>
     <div class="justify-center flex">
       <img :src="getImageUrl()" alt="" class="w-4/5 h-4/5 mb-2" :class="{ active: isActive }" @click="toggleAnimation"/>
     </div>
     <div class="text-[#616161] drop-shadow-lg text-8xl mb-20 ms-10 justify-center flex">
-      <h1>1000 Ft</h1>
+      <h1>{{ re?re[0].ar:"" }} Ft</h1>
     </div>
     <div class="text-[#616161] drop-shadow-lg text-5xl mb-20 ms-10 text-center flex leirasfont">
-      Ínycsiklandó sajtos hamburger, másnapos bucival, és döghússal!
+      sad
     </div>
     <div class="h-[75%] flex gap-10">
       <div class="h-[50%] flex flex-wrap gap-10 p-5 mb-13 justify-center">

@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { RouterLink } from "vue-router";
 
 const props = defineProps({
+  id: Number,
   nev: String,
   ar: Number,
   kep: String,
@@ -18,8 +19,6 @@ const isActive = ref(false);
 function toggleAnimation() {
   isActive.value = !isActive.value;
 }
-
-
 </script>
 
 <template>
@@ -27,7 +26,7 @@ function toggleAnimation() {
     class="bg-white rounded-md border-[#9EA8FF] border-2 drop-shadow-lg p-3 w-60 h-80"
     id="app"
   >
-    <RouterLink to="/extrak/1">
+    <RouterLink :to="`/extrak/${id}`">
       <img
         :src="getImageUrl()"
         alt=""

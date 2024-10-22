@@ -26,6 +26,7 @@ onMounted(async () => {
   >
     <Card
       v-for="kajak in re"
+      :id = "kajak.id"
       :nev="kajak.etel_nev"
       :ar="kajak.ar"
       :kep="kajak.kep"
