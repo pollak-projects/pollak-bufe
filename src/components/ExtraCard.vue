@@ -30,15 +30,15 @@ function getImageUrl() {
 </script>
 <template>
   <div
-    class="h-52 w-40 flex flex-col items-center justify-between cursor-pointer"
+    class="h-72 w-56 flex flex-col items-center justify-between cursor-pointer"
     @click="changeviewModel()"
   >
     <div
-      class="h-40 w-40 bg-[#d9d9d9] drop-shadow-lg rounded-3xl p-2"
+      class="h-56 w-56 bg-[#d9d9d9] drop-shadow-lg rounded-[20%] p-2"
       :class="{ '!bg-[#bee46c]': isActive }"
     >
       <img :src="getImageUrl()" alt="" />
     </div>
-    <p class="text-2xl text-[#554b4b]">{{ text }}</p>
+    <p class="text-5xl text-[#554b4b] kecsufont">{{ text }}</p>
   </div>
 </template>

@@ -1,13 +1,20 @@
 <script setup>
-import { RouterLink } from "vue-router";
-</script>
+import { RouterLink, useRouter } from "vue-router"; 
+import { onMounted } from "vue";
 
+const router = useRouter();
+
+onMounted(() => {
+  setTimeout(() => {
+    router.push('/Kezdes');
+  }, 5000); 
+});
+</script>
 <template>
-    <div class="h-screen">
+     <div class="h-screen flex flex-col items-center">
         <h1 class="w-screen h-1/3 flex justify-center items-end drop-shadow-2xl move">A sorszámod:</h1>
-        <div class="flex justify-center items-center h-2/3">
+        <div class="flex justify-center items-center h-7/16">
             <div class="kulsonegy flex justify-center items-center">
-                <!-- Belső négyzet szöveggel -->
                 <div class="belsonegy flex justify-center items-center">
                     123
                 </div>
@@ -17,28 +24,33 @@ import { RouterLink } from "vue-router";
 </template>
 
 <style scoped>
+
 .kulsonegy {
-    background-color: rgb(90, 90, 192); /* Kék háttér */
+    background-color: rgb(90, 90, 192);
     width: 530px; 
-    height: 350px; /* Négyzet alak */
+    height: 350px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 45px;
 }
 
 .belsonegy {
+    width: 490px; 
+    height: 310px;
     border-style: solid; 
-    border-color: wheat; /* Búzaszín szegély */
-    border-width: 4px; /* Szegély szélessége */
+    border-color: white; /* Búzaszín szegély */
+    border-width: 20px; 
+    border-radius: 45px;
     color: white;
-    font-size: 120px;
+    font-size: 160px;
     font-family: "Abril Fatface";
-    padding: 20px; /* Néhány belső térköz a szöveg körül */
+    padding: 60px; /* Néhány belső térköz a szöveg körül */
     text-align: center;
 }
 
-h1 {  
+h1 { 
+  padding-bottom: 10px;
   color: rgb(57, 74, 135);
   text-align: center;
   font-size: 100px;

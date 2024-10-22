@@ -35,11 +35,11 @@ function kosar() {}
     <img
       src="./assets/shoppingcart.svg"
       alt=""
-      class="h-8 w-8 absolute right-32 top-8"
+      class="h-8 w-8 absolute right-36 top-8"
     />
   </RouterLink>
   <div
-    class="h-10 w-20 absolute right-4 top-6 bg-[#F7F2FA] drop-shadow-lg text-3xl flex justify-center items-center rounded-xl font-sans"
+    class="h-10 w-20 absolute right-12 top-6 bg-[#F7F2FA] drop-shadow-lg text-3xl flex justify-center items-center rounded-xl font-sans"
   >
     {{ getHours }}:{{ getMinutes }}
   </div>

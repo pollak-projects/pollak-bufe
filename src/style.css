@@ -16,3 +16,20 @@
   transform: scale(1.5); /* Kép nagyítása animációval */
 }
 
+@font-face {
+  font-family: "Taviraj-Regular";
+  src: url("./assets/fonts/Taviraj-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Kalam-Regular";
+  src: url("./assets/fonts/Kalam-Regular.ttf");
+}
+
+.leirasfont{
+  font-family: "Taviraj-Regular";
+}
+
+.kecsufont{
+  font-family: "Kalam-Regular";
+}
