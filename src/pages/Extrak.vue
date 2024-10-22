@@ -34,25 +34,51 @@ function Veglegesites() {
 }
 
 async function Rendeles_Cucc() {
-  const Formdata = new FormData();
-  Formdata.append("szendvics", 22)
-  Formdata.append("mustar", 1)
-  Formdata.append("ketchup", 1)
-  Formdata.append("majonez", 1)
-  Formdata.append("csipos", 0)
-  Formdata.append("hagyma", 1)
-  Formdata.append("bankkartya", 0)
-  Formdata.append("szunet", 6)
-    var requestOptions = {  
-    method: 'POST',
-    body: Formdata
-  };
-  return new Promise((resolve, reject) => {
-    fetch(`http://localhost/pollakbufe/nologin/ujrendeles`, requestOptions)
-      .then(async (result) => {
-        console.log("szia")
-    }).catch(error => console.log('error', error));
+  store.kosar.forEach((elem)=>{
+    console.log(elem)
+    const Formdata = new FormData();
+    Formdata.append("szendvics", elem.termek_id)
+    elem.extrak.forEach((extra)=>{
+      if(extra === 'mustar')
+      {
+        Formdata.append("mustar", 1)    
+      }
+
+      if(extra === 'ketchup')
+      {
+        Formdata.append('ketchup', 1)
+      }
+
+      if(extra === 'majonez')
+      {
+        Formdata.append('majonez', 1)
+      }
+      if(extra === 'csipos')
+      {
+        Formdata.append('csipos', 1)
+      }
+      if(extra === 'hagyma')
+      {
+        Formdata.append('hagyma', 1)
+      }
+    })
+
+      var requestOptions = {  
+      method: 'POST',
+      body: Formdata
+    };
+    return new Promise((resolve, reject) => {
+      fetch(`http://localhost/pollakbufe/nologin/ujrendeles`, requestOptions)
+        .then(async (result) => {
+          console.log("szia")
+      }).catch(error => console.log('error', error));
+    })
+
+    Formdata.append("bankkartya", 0)
+    Formdata.append("szunet", 6)
   })
+  
+    
 }
 
 function getImageUrl() {
