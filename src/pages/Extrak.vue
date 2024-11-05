@@ -126,7 +126,15 @@ function Teszt2() {
 }
 
 
-
+function openModal() {
+            const modal = document.getElementById("modal");
+            modal.style.display = "flex";
+            
+            setTimeout(() => {
+                modal.style.display = "none";
+                window.history.back();
+            }, 800);
+        }
 
 </script>
 
@@ -157,11 +165,47 @@ function Teszt2() {
     <div class="absolute bottom-10 w-11/12 flex justify-between mx-6">
       <button
         class="border rounded-full border-black bg-[#d8dcff] p-3 px-16 text-[#554b4b] text-5xl"
-        @click="Teszt2()"
+        @click="Teszt2(), openModal()"
       >
-        Kosár
+        Kosárba
       </button>
     </div>
     
+    <div class="modal-background" id="modal">
+        <div class="modal-content">
+            <h2>Sikeresen a kosárba helyezted!</h2>
+            
+        </div>
+    </div>  
+
   </div>
 </template>
+
+<style>
+
+.modal-background {
+            display: none; /* Kezdetben rejtve */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.445); /* Átlátszó fekete háttér */
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* A modális tartalom */
+        .modal-content {
+            background-color: #17bd3b;
+            padding: 80px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 1000px;
+            width: 200%;
+            font-size: 60px;
+            font-family: "Abril Fatface";
+            color: #ffffff;
+        }
+        
+</style>
