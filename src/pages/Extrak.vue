@@ -82,6 +82,7 @@ function IsMajonezTrue() {
 
   if(majonezActive.value){
     addMajonez = 1;
+    addMajonez = 1;
   }else{
     addMajonez = 0;
   }
@@ -158,13 +159,7 @@ function Teszt2() {
         class="border rounded-full border-black bg-[#d8dcff] p-3 px-16 text-[#554b4b] text-5xl"
         @click="Teszt2()"
       >
-        Kosárba
-      </button>
-      <button
-        class="border rounded-full border-black bg-[#d8dcff] p-3 px-16 text-[#554b4b] text-5xl"
-        @click="Teszt()"
-      >
-        Véglegesítés
+        Kosár
       </button>
     </div>
     
