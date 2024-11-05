@@ -2,6 +2,7 @@
 import { ref, computed } from "vue";
 import Rightside from "./components/Rightside.vue";
 import { RouterView, RouterLink } from "vue-router";
+import { GetBasketCount } from "./config/lekerdezes";
 
 const time = ref(new Date());
 
@@ -20,7 +21,7 @@ function navBack() {
   history.back();
 }
 
-function kosar() {}
+let darab = GetBasketCount(); 
 
 </script>
 
@@ -36,7 +37,7 @@ function kosar() {}
       src="./assets/shoppingcart.svg"
       alt=""
       class="h-8 w-8 absolute right-36 top-8"
-    />
+      />
   </RouterLink>
   <div
     class="h-10 w-20 absolute right-12 top-6 bg-[#F7F2FA] drop-shadow-lg text-3xl flex justify-center items-center rounded-xl font-sans"

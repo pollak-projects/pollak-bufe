@@ -30,6 +30,7 @@ onMounted(async () => {
       :nev="kajak.etel_nev"
       :ar="kajak.ar"
       :kep="kajak.kep"
+      :extra="kajak.extra"
     />
   </div>
 </template>

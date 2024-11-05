@@ -1,6 +1,7 @@
 <script setup>
 import ExtraCard from "../components/ExtraCard.vue";
 import { routerKey, useRoute, useRouter } from "vue-router";
+import { AddElementsToBasket, Rendeles_Cucc } from "../config/lekerdezes.js";
 import { store } from "../config/store.js";
 import { defineModel } from "vue";
 import Navigation from "../components/navigation.vue";
@@ -26,64 +27,6 @@ function getSelected() {
   console.log(store.kosar);
 }
 
-function Kosarba() {
-  getSelected();
-  router.push("/szendvicsek");
-}
-
-function Veglegesites() {
-  getSelected();
-  //router.push("/kosar");
-}
-
-async function Rendeles_Cucc() {
-  store.kosar.forEach((elem)=>{
-    console.log(elem)
-    const Formdata = new FormData();
-    Formdata.append("szendvics", elem.termek_id)
-    elem.extrak.forEach((extra)=>{
-      if(extra === 'mustar')
-      {
-        Formdata.append("mustar", 1)    
-      }
-
-      if(extra === 'ketchup')
-      {
-        Formdata.append('ketchup', 1)
-      }
-
-      if(extra === 'majonez')
-      {
-        Formdata.append('majonez', 1)
-      }
-      if(extra === 'csipos')
-      {
-        Formdata.append('csipos', 1)
-      }
-      if(extra === 'hagyma')
-      {
-        Formdata.append('hagyma', 1)
-      }
-    })
-
-      var requestOptions = {  
-      method: 'POST',
-      body: Formdata
-    };
-    return new Promise((resolve, reject) => {
-      fetch(`http://localhost/pollakbufe/nologin/ujrendeles`, requestOptions)
-        .then(async (result) => {
-          console.log("szia")
-      }).catch(error => console.log('error', error));
-    })
-
-    Formdata.append("bankkartya", 0)
-    Formdata.append("szunet", 6)
-  })
-  
-    
-}
-
 function getImageUrl() {
   return new URL(`../assets/sajtoshambi.png`, import.meta.url);
 }
@@ -96,12 +39,93 @@ const props = defineProps({
   queryType: String,
 });
 
+
 const re = ref(null);
-console.log(props.queryType);
 onMounted(async () => {
   re.value = await termekLekerdezes(route.params.id);
-  console.log(re.value)
 });
+
+const ketchupActive = ref(false);
+let addKetchup = 0;
+const mustarActive = ref(false);
+let addMustar = 0;
+const majonezActive = ref(false);
+let addMajonez = 0;
+const csiposActive = ref(false);
+let addCsipos = 0;
+
+const hagymaActive = ref(false);
+let addHagyma = 0;
+
+function IsKetchupTrue() {
+  ketchupActive.value = !ketchupActive.value;
+
+  if(ketchupActive.value){
+    addKetchup = 1;
+  }else{
+    addKetchup = 0;
+  }
+}
+
+function IsMustarTrue() {
+  mustarActive.value = !mustarActive.value;
+
+  if(mustarActive.value){
+    addMustar = 1;
+  }else{
+    addMustar = 0;
+  }
+}
+
+function IsMajonezTrue() {
+  majonezActive.value = !majonezActive.value;
+
+  if(majonezActive.value){
+    addMajonez = 1;
+  }else{
+    addMajonez = 0;
+  }
+}
+
+function IsCsiposTrue() {
+  csiposActive.value = !csiposActive.value;
+
+  if(csiposActive.value){
+    addCsipos = 1;
+  }else{
+    addCsipos = 0;
+  }
+}
+
+function IsHagymaTrue() {
+  hagymaActive.value = !hagymaActive.value;
+
+  if(hagymaActive.value){
+    addHagyma = 1;
+  }else{
+    addHagyma = 0;
+  }
+}
+
+function Teszt() {
+  let formData = new FormData();
+  formData.append("szendvics", route.params.id)
+  formData.append("mustar", addMustar)
+  formData.append("ketchup", addKetchup)
+  formData.append("majonez", addMajonez)
+  formData.append("csipos", addCsipos)
+  formData.append("hagyma", addHagyma)
+  Rendeles_Cucc(formData)
+}
+
+
+function Teszt2() {
+  const id = route.params.id;
+  AddElementsToBasket(id, addMustar, addKetchup, addMajonez, addCsipos, addHagyma)
+}
+
+
+
 
 </script>
 
@@ -118,31 +142,27 @@ onMounted(async () => {
       <h1>{{ re?re[0].ar:"" }} Ft</h1>
     </div>
     <div class="text-[#616161] drop-shadow-lg text-5xl mb-20 ms-10 text-center flex leirasfont">
-      sad
+      Leírás
     </div>
     <div class="h-[75%] flex gap-10">
       <div class="h-[50%] flex flex-wrap gap-10 p-5 mb-13 justify-center">
-        <ExtraCard text="Ketchup" imgName="ketchup.png" v-model="extraModel" />
-        <ExtraCard text="Mustár" imgName="must.png" v-model="extraModel" />
-        <ExtraCard text="Majonéz" imgName="majo.png" v-model="extraModel" />
-        <ExtraCard text="Csípős" imgName="csip.png" v-model="extraModel" />
-        <ExtraCard
-          text="Lilahagyma"
-          imgName="hagyma.png"
-          v-model="extraModel"
-        />
+        <ExtraCard text="Ketchup" imgName="ketchup.png" v-model="extraModel"  @click="IsKetchupTrue()"/>
+        <ExtraCard text="Mustár" imgName="must.png" v-model="extraModel" @click="IsMustarTrue()"/>
+        <ExtraCard text="Majonéz" imgName="majo.png" v-model="extraModel" @click="IsMajonezTrue()"/>
+        <ExtraCard text="Csípős" imgName="csip.png" v-model="extraModel" @click="IsCsiposTrue()"/>
+        <ExtraCard text="Lilahagyma" imgName="hagyma.png" v-model="extraModel" @click="IsHagymaTrue()" />
       </div>
     </div>
     <div class="absolute bottom-10 w-11/12 flex justify-between mx-6">
       <button
         class="border rounded-full border-black bg-[#d8dcff] p-3 px-16 text-[#554b4b] text-5xl"
-        @click="Kosarba()"
+        @click="Teszt2()"
       >
         Kosárba
       </button>
       <button
         class="border rounded-full border-black bg-[#d8dcff] p-3 px-16 text-[#554b4b] text-5xl"
-        @click="Rendeles_Cucc()"
+        @click="Teszt()"
       >
         Véglegesítés
       </button>

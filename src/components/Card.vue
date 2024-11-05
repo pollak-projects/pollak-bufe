@@ -1,11 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 import { RouterLink } from "vue-router";
+import { AddItalToBasket} from '../config/lekerdezes';
 
 const props = defineProps({
   id: Number,
   nev: String,
   ar: Number,
+  extra: Number,
   kep: String,
   queryType: String,
 });
@@ -19,14 +21,24 @@ const isActive = ref(false);
 function toggleAnimation() {
   isActive.value = !isActive.value;
 }
+function RedirectToExtras(id) {
+  if (props.extra == 1) {
+    return `/extrak/${id}`
+  }else{
+    return ``
+  }  
+}
+
+
 </script>
 
 <template>
   <div
     class="bg-white rounded-md border-[#9EA8FF] border-2 drop-shadow-lg p-3 w-60 h-80"
-    id="app"
+    id="app" @click="AddItalToBasket(props.extra, props.id)"
   >
-    <RouterLink :to="`/extrak/${id}`">
+  
+    <RouterLink :to="RedirectToExtras(id)">
       <img
         :src="getImageUrl()"
         alt=""

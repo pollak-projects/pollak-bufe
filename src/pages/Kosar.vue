@@ -2,6 +2,7 @@
 import Cart from "../components/Cart.vue";
 import Rightside from "../components/Rightside.vue";
 import { store } from "../config/store.js";
+
 </script>
 
 <template>

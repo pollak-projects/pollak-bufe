@@ -14,7 +14,7 @@ const isActive = ref(false);
 
 function changeviewModel() {
   isActive.value = !isActive.value;
-  const index = model.value.findIndex((item) => item.name === props.text);
+  let index = model.value.findIndex((item) => item.name === props.text);
   console.log(index);
 
   if (index === -1 && isActive.value) {
@@ -27,6 +27,7 @@ function changeviewModel() {
 function getImageUrl() {
   return new URL(`../assets/${props.imgName}`, import.meta.url);
 }
+
 </script>
 <template>
   <div
