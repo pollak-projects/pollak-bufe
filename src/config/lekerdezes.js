@@ -72,11 +72,14 @@ export function GetElementsInBasket() {
 }
 
 let count = 0;
+
 export function GetBasketCount() {
-  for (const element of basketData.entries()) {
-    count++;
-  }
+  count++;
   console.log(count)
+  return count;
+}
+
+export function GetBasketCount2() {
   return count;
 }
 

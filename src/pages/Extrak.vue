@@ -82,7 +82,6 @@ function IsMajonezTrue() {
 
   if(majonezActive.value){
     addMajonez = 1;
-    addMajonez = 1;
   }else{
     addMajonez = 0;
   }
@@ -108,19 +107,7 @@ function IsHagymaTrue() {
   }
 }
 
-function Teszt() {
-  let formData = new FormData();
-  formData.append("szendvics", route.params.id)
-  formData.append("mustar", addMustar)
-  formData.append("ketchup", addKetchup)
-  formData.append("majonez", addMajonez)
-  formData.append("csipos", addCsipos)
-  formData.append("hagyma", addHagyma)
-  Rendeles_Cucc(formData)
-}
-
-
-function Teszt2() {
+function AddToBasket() {
   const id = route.params.id;
   AddElementsToBasket(id, addMustar, addKetchup, addMajonez, addCsipos, addHagyma)
 }
@@ -165,7 +152,7 @@ function openModal() {
     <div class="absolute bottom-10 w-11/12 flex justify-between mx-6">
       <button
         class="border rounded-full border-black bg-[#d8dcff] p-3 px-16 text-[#554b4b] text-5xl"
-        @click="Teszt2(), openModal()"
+        @click="AddToBasket(), openModal()"
       >
         Kosárba
       </button>

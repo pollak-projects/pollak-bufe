@@ -17,7 +17,7 @@ function getImageUrl() {
 }
 
 const isActive = ref(false);
-
+let ital = 0;
 function toggleAnimation() {
   isActive.value = !isActive.value;
 }
@@ -25,9 +25,21 @@ function RedirectToExtras(id) {
   if (props.extra == 1) {
     return `/extrak/${id}`
   }else{
+    ital = 1;
     return ``
   }  
+
 }
+
+function AddToBasket(ital) {
+  if(ital == 1){
+    AddItalToBasket(props.extra, props.id)
+  }
+
+}
+
+
+
 
 
 </script>
@@ -35,8 +47,8 @@ function RedirectToExtras(id) {
 <template>
   <div
     class="bg-white rounded-md border-[#9EA8FF] border-2 drop-shadow-lg p-3 w-60 h-80"
-    id="app" @click="AddItalToBasket(props.extra, props.id)"
-  >
+    id="app" @click="AddToBasket(ital)"
+    >
   
     <RouterLink :to="RedirectToExtras(id)">
       <img
