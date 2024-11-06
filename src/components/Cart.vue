@@ -79,11 +79,12 @@
 
 <script setup>
 const props = defineProps({
-  title: String
+  title: String,
 })
 
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { store } from '../config/store';
+import { GetElementsInBasket, Rendeles_Cucc, GetExtraInBasket, SzunetLekerdezes } from '../config/lekerdezes';
 
 const selectedIndex = ref(3); 
 const options = ref([
@@ -102,6 +103,22 @@ const trackStyle = computed(() => {
   };
 });
 
+let szunet = 4;
+
+let szendvicsNevData = ref(null);
+let szendvicsArData = ref(null);
+
+let extraNevData = ref(null);
+let extraArData = ref(null);
+
+let szunet = 4;
+
+let szendvicsNevData = ref(null);
+let szendvicsArData = ref(null);
+
+let extraNevData = ref(null);
+let extraArData = ref(null);
+
 
 const paymentMethod = ref(''); 
 const selectPayment = (method) => {
@@ -113,12 +130,16 @@ const nextOption = () => {
   if (selectedIndex.value < options.value.length - 1) {
     selectedIndex.value++;
   }
+
+  szunet = (selectedIndex.value + 1)
 };
 
 const prevOption = () => {
   if (selectedIndex.value > 0) {
     selectedIndex.value--;
   }
+
+  szunet = (selectedIndex.value + 1)
 };
 
 
@@ -131,7 +152,82 @@ const rendelesleadas = () => {
   store.kosar = [];
   alert(`Rendelés leadva! Fizetési mód: ${paymentMethod.value === 'card' ? 'Bankkártya' : 'Készpénz'}`);
 };
+const rendelesleadas = () =>
+{
+  Rendeles_Cucc(szunet)
+}
+
+const re = ref(null);
+onMounted(async () => {
+    re.value = await GetElementsInBasket()
+    if(re.value[0] != null){
+      szendvicsNevData.value = re.value[0].etel_nev;
+      szendvicsArData.value = re.value[0].ar;
+    }
+});
+
+const re2 = ref(null);
+onMounted(async () => {
+  re2.value = await GetExtraInBasket();
+  if(re2.value[0] != null){
+    console.log("Szia extra")
+      extraNevData.value = re2.value[0].etel_nev;
+      extraArData.value = re2.value[0].ar;
+    }
+});
+
+const szunetek = ref(null)
+onMounted(async () => {
+  szunetek.value = await SzunetLekerdezes();
+})
+
 </script>
+
+<template>
+  <div>
+    <h1 class="text-[#554b4b] drop-shadow-lg text-5xl mb-10">{{ title }}</h1>
+
+    <div class="flex gap-10 mb-8 justify-center">
+      <div class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-3 w-64">
+        <img src="../assets/hamburger.jpg" alt="" class="w-64 h-64 border border-black">
+        {{ szendvicsNevData }}<br>
+        {{ szendvicsArData }} Ft
+      </div>
+
+      <div class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-3 w-64">
+        <img src="../assets/pepsi.jpg" alt="" class="w-64 h-64 border border-black">
+        {{ extraNevData }} <br>
+        {{ extraArData }} Ft
+      </div>
+    </div>
+
+    <div class="absolute bottom-10 right-10 mx-6 text-right">
+      <button class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-4xl " @click="rendelesleadas">
+        Rendelés leadása
+      </button>
+    </div>
+
+    <div class="melyik_szunet text-2xl">
+    Melyik szünetre kéred?: 
+  </div>
+    <div class="date-slider-container">
+      <button @click="prevOption(index)" class="slider-btn">←</button>
+      <div class="date-slider">
+        <div class="slider-track" :style="trackStyle">
+          <div
+            v-for="(option, index) in options"
+            :key="index"
+            :class="['date-item', { active: index === selectedIndex }]"
+          >
+            {{ option }}
+          </div>
+        </div>
+      </div>
+      <button @click="nextOption(index)" class="slider-btn">→</button>
+    </div>
+  </div>
+</template>
+
 
 <style>
 
