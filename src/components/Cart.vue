@@ -1,103 +1,3 @@
-<template>
-  <div>
-    <h1 class="text-[#554b4b] arnyek text-7xl mb-10 mt-10 text-center">
-      {{ title }}
-    </h1>
-
-    <div class="flex gap-10 mb-1 pt-7 justify-center">
-      <div
-        class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-6 w-96 text-center"
-      >
-        <img
-          src="../assets/hamburger.jpg"
-          alt="Hamburger"
-          class="w-96 h-96 border-2 border-black"
-        />
-        <p class="text-4xl mt-4">Hamburger</p>
-        <p class="text-3xl mt-2">1000 Ft</p>
-        <div class="flex justify-center mt-2">
-          <div class="flex justify-center mt-2 w-16 h-16">
-            <img src="../assets/csip.png" alt="Csípős szósz" />
-            <img src="../assets/majo.png" alt="Majonéz" />
-            <img src="../assets/must.png" alt="Mustár" />
-            <img src="../assets/ketchup.png" alt="Ketchup" />
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-6 w-96 text-center"
-      >
-        <img
-          src="../assets/pepsi.jpg"
-          alt="Pepsi"
-          class="w-96 h-96 border-2 border-black"
-        />
-        <p class="text-4xl mt-4">Pepsi</p>
-        <p class="text-3xl mt-2">400 Ft</p>
-      </div>
-    </div>
-
-    <div class="mt-36 text-center mb-5">
-      <h2 class="mt-16 text-6xl text-[#554b4b] arnyek mb-6">Fizetési Mód</h2>
-      <div class="flex justify-center gap-12">
-        <div
-          @click="selectPayment('card')"
-          :class="['payment-option', { selected: paymentMethod === 'card' }]"
-        >
-          <img
-            src="../assets/card.png"
-            alt="Bankkártya"
-            class="w-64 h-64 mx-auto"
-          />
-          <p class="text-4xl text-[#554b4b] mt-2">Bankkártya</p>
-        </div>
-
-        <div
-          @click="selectPayment('cash')"
-          :class="['payment-option', { selected: paymentMethod === 'cash' }]"
-        >
-          <img
-            src="../assets/cash.png"
-            alt="Készpénz"
-            class="w-64 h-64 mx-auto"
-          />
-          <p class="text-4xl text-[#554b4b] mt-2">Készpénz</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="absolute bottom-10 right-10 mx-6 text-right">
-      <button
-        class="border rounded-full border-black bg-gradient-to-r from-[#d8dcff] to-[#737edf] p-3 px-12 text-[#554b4b] text-6xl h-28 shadow-lg drop-shadow-lg focus:outline-none"
-        @click="rendelesleadas"
-      >
-        Rendelés leadása
-      </button>
-    </div>
-
-    <div class="melyik_szunet text-[#554b4b] text-center arnyek text-6xl mt-36">
-      Melyik szünetre kéred?:
-    </div>
-
-    <div class="date-slider-container text-4xl">
-      <button @click="prevOption" class="slider-btn">◄</button>
-      <div class="date-slider">
-        <div class="slider-track" :style="trackStyle">
-          <div
-            v-for="(option, index) in options"
-            :key="index"
-            :class="['date-item', { active: index === selectedIndex }]"
-          >
-            {{ option }}
-          </div>
-        </div>
-      </div>
-      <button @click="nextOption" class="slider-btn">►</button>
-    </div>
-  </div>
-</template>
-
 <script setup>
 const props = defineProps({
   title: String,
@@ -206,46 +106,69 @@ onMounted(async () => {
 
 <template>
   <div>
-    <h1 class="text-[#554b4b] drop-shadow-lg text-5xl mb-10">{{ title }}</h1>
+    <h1 class="text-[#554b4b] arnyek text-7xl mb-10 mt-10 text-center">{{ title }}</h1>
 
     <div class="flex gap-10 mb-8 justify-center">
       <div
-        class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-3 w-64"
+        class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-6 w-96 text-center"
       >
         <img
           src="../assets/hamburger.jpg"
           alt=""
-          class="w-64 h-64 border border-black"
+          class="w-96 h-96 border-2 border-black"
         />
         {{ szendvicsNevData }}<br />
         {{ szendvicsArData }} Ft
       </div>
 
       <div
-        class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-3 w-64"
+        class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-6 w-96 text-center"
       >
         <img
           src="../assets/pepsi.jpg"
           alt=""
-          class="w-64 h-64 border border-black"
+          class="w-96 h-96 border-2 border-black"
         />
         {{ extraNevData }} <br />
         {{ extraArData }} Ft
       </div>
     </div>
 
-    <div class="absolute bottom-10 right-10 mx-6 text-right">
-      <button
-        class="border rounded-full border-black bg-[#d8dcff] p-3 px-12 text-[#554b4b] text-4xl"
-        @click="rendelesleadas"
-      >
-        Rendelés leadása
-      </button>
+    <div class="mt-36 text-center mb-5">
+      <h2 class="mt-16 text-6xl text-[#554b4b] arnyek mb-6">Fizetési Mód</h2>
+      <div class="flex justify-center gap-12">
+        <div
+          @click="selectPayment('card')"
+          :class="['payment-option', { selected: paymentMethod === 'card' }]"
+        >
+          <img
+            src="../assets/card.png"
+            alt="Bankkártya"
+            class="w-64 h-64 mx-auto"
+          />
+          <p class="text-4xl text-[#554b4b] mt-2">Bankkártya</p>
+        </div>
+
+        <div
+          @click="selectPayment('cash')"
+          :class="['payment-option', { selected: paymentMethod === 'cash' }]"
+        >
+          <img
+            src="../assets/cash.png"
+            alt="Készpénz"
+            class="w-64 h-64 mx-auto"
+          />
+          <p class="text-4xl text-[#554b4b] mt-2">Készpénz</p>
+        </div>
+      </div>
     </div>
 
-    <div class="melyik_szunet text-2xl">Melyik szünetre kéred?:</div>
-    <div class="date-slider-container">
-      <button @click="prevOption(index)" class="slider-btn">←</button>
+    <div class="melyik_szunet text-[#554b4b] text-center arnyek text-6xl mt-36">
+      Melyik szünetre kéred?:
+    </div>
+
+    <div class="date-slider-container text-4xl">
+      <button @click="prevOption" class="slider-btn">◄</button>
       <div class="date-slider">
         <div class="slider-track" :style="trackStyle">
           <div
@@ -257,9 +180,18 @@ onMounted(async () => {
           </div>
         </div>
       </div>
-      <button @click="nextOption(index)" class="slider-btn">→</button>
+      <button @click="nextOption(index)" class="slider-btn">►</button>
     </div>
   </div>
+
+  <div class="absolute mt-20 mr-20 right-10 mx-6 text-right">
+      <button
+        class="border rounded-full border-black bg-gradient-to-r from-[#d8dcff] to-[#737edf] p-3 px-12 text-[#554b4b] text-6xl h-28 shadow-lg drop-shadow-lg focus:outline-none"
+        @click="rendelesleadas"
+      >
+        Rendelés leadása
+      </button>
+    </div>
 </template>
 
 <style>
