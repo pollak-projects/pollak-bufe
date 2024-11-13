@@ -12,6 +12,7 @@ import {
   GetExtraInBasket,
   SzunetLekerdezes,
 } from "../config/lekerdezes";
+import Card from "./Card.vue";
 
 const selectedIndex = ref(3);
 const options = ref([
@@ -109,32 +110,25 @@ onMounted(async () => {
 
 <template>
   <div>
+    
     <h1 class="text-[#554b4b] arnyek text-7xl mb-10 mt-10 text-center">{{ title }}</h1>
 
     <div class="flex gap-10 mb-8 justify-center">
-      <div
-        class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-6 w-96 text-center"
-      >
-        <img
-          src="../assets/hamburger.jpg"
-          alt=""
-          class="w-96 h-96 border-2 border-black"
-        />
-        {{ szendvicsNevData }}<br />
-        {{ szendvicsArData }} Ft
-      </div>
+      <Card
+      v-for="n in store2.kosar"
+      :id = "n.darab[0].id"
+      :nev="n.darab[0].etel_nev"
+      :ar="n.darab[0].ar"
+      :kep="n.darab[0].kep"
+    />
 
-      <div
-        class="bg-white rounded-md border-[#000000] border-2 drop-shadow-lg p-6 w-96 text-center"
-      >
-        <img
-          src="../assets/pepsi.jpg"
-          alt=""
-          class="w-96 h-96 border-2 border-black"
-        />
-        {{ extraNevData }} <br />
-        {{ extraArData }} Ft
-      </div>
+    <Card
+      v-for="n in store2.kosarExtra"
+      :id = "n.darab[0].id"
+      :nev="n.darab[0].etel_nev"
+      :ar="n.darab[0].ar"
+      :kep="n.darab[0].kep"
+    />
     </div>
 
     <div class="mt-36 text-center mb-5">
