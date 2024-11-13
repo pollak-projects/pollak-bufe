@@ -5,9 +5,10 @@ const props = defineProps({
 
 import { ref, computed, onMounted } from "vue";
 import { store } from "../config/store";
+import { store2 } from "../config/store";
 import {
   GetElementsInBasket,
-  Rendeles_Cucc,
+  Rendeles_Cucc2,
   GetExtraInBasket,
   SzunetLekerdezes,
 } from "../config/lekerdezes";
@@ -73,15 +74,18 @@ const rendelesleadas = () => {
   store.kosar = [];
   alert(
     `Rendelés leadva! Fizetési mód: ${
-      paymentMethod.value === "card" ? "Bankkártya" : "Készpénz"
+      paymentMethod.value === "1" ? "Bankkártya" : "Készpénz"
     }`
   );
-  Rendeles_Cucc(szunet);
+  Rendeles_Cucc2(szunet, paymentMethod.value);
 };
+
 
 const re = ref(null);
 onMounted(async () => {
-  re.value = await GetElementsInBasket();
+  for (let i = 0; i < store2.kosar.length; i++) {
+    re.value = JSON.parse(JSON.stringify(store2.kosar[i].darab));
+  }
   if (re.value[0] != null) {
     szendvicsNevData.value = re.value[0].etel_nev;
     szendvicsArData.value = re.value[0].ar;
@@ -92,7 +96,6 @@ const re2 = ref(null);
 onMounted(async () => {
   re2.value = await GetExtraInBasket();
   if (re2.value[0] != null) {
-    console.log("Szia extra");
     extraNevData.value = re2.value[0].etel_nev;
     extraArData.value = re2.value[0].ar;
   }
@@ -138,8 +141,8 @@ onMounted(async () => {
       <h2 class="mt-16 text-6xl text-[#554b4b] arnyek mb-6">Fizetési Mód</h2>
       <div class="flex justify-center gap-12">
         <div
-          @click="selectPayment('card')"
-          :class="['payment-option', { selected: paymentMethod === 'card' }]"
+          @click="selectPayment('1')"
+          :class="['payment-option', { selected: paymentMethod === '1' }]"
         >
           <img
             src="../assets/card.png"
@@ -150,8 +153,8 @@ onMounted(async () => {
         </div>
 
         <div
-          @click="selectPayment('cash')"
-          :class="['payment-option', { selected: paymentMethod === 'cash' }]"
+          @click="selectPayment('0')"
+          :class="['payment-option', { selected: paymentMethod === '0' }]"
         >
           <img
             src="../assets/cash.png"

@@ -1,7 +1,7 @@
 <script setup>
 import ExtraCard from "../components/ExtraCard.vue";
 import { routerKey, useRoute, useRouter } from "vue-router";
-import { AddElementsToBasket, Rendeles_Cucc } from "../config/lekerdezes.js";
+import { AddElementsToBasket, GetFormData} from "../config/lekerdezes.js";
 import { store } from "../config/store.js";
 import { defineModel } from "vue";
 import Navigation from "../components/navigation.vue";
@@ -20,11 +20,6 @@ function getSelected() {
   console.log(route.params.id);
   console.log(extraModel.value);
 
-  store.kosar.push({
-    termek_id: route.params.id,
-    extrak: extraModel.value,
-  });
-  console.log(store.kosar);
 }
 
 function getImageUrl() {
@@ -110,6 +105,7 @@ function IsHagymaTrue() {
 function AddToBasket() {
   const id = route.params.id;
   AddElementsToBasket(id, addMustar, addKetchup, addMajonez, addCsipos, addHagyma)
+  GetFormData()
 }
 
 

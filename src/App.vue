@@ -3,7 +3,6 @@ import { ref, computed } from "vue";
 import Rightside from "./components/Rightside.vue";
 import { RouterView, RouterLink } from "vue-router";
 import { store } from "./config/store.js";
-import { GetBasketCount2 } from "./config/lekerdezes.js";
 
 const time = ref(new Date());
 
@@ -22,8 +21,6 @@ function navBack() {
   history.back();
 }
 
-let countRegi = GetBasketCount2()
-console.log("Ez cucuc: " + countRegi)
 
 </script>
 
@@ -40,7 +37,7 @@ console.log("Ez cucuc: " + countRegi)
       src="./assets/shoppingcart.svg"
       alt=""
       />
-      <p>{{ countRegi }}</p>
+      <p>{{ store.kosar[0].darab }}</p>
   </RouterLink>
   <div
     class="h-10 w-20 absolute right-12 top-6 bg-[#F7F2FA] drop-shadow-lg text-3xl flex justify-center items-center rounded-xl font-sans"
