@@ -60,6 +60,7 @@ export function AddElementsToBasket(id, mustar, ketchup, majonez, csipos, hagyma
 
 export function GetElementsInBasket() {
   let id = GetFormData();
+  let idextra = GetFormData2();
   var requestOptions = {  
     method: 'GET',
   };
@@ -112,7 +113,21 @@ export async function GetFormData() {
       basketData.delete("hagyma")
     }
   }
+}
 
+export async function GetFormData2() {
+  let count = 0;
+  let e = "";
+  for (const element of basketData.getAll("egyeb")) {
+    count++
+    console.log()
+  }
+  store2.kosar = [];
+  for (let i = 0; i < count; i++) {
+    store2.kosarExtra.push({
+      darab: await termekLekerdezes(e)
+    })
+  }
 }
 
 export function GetExtraInBasket() {
