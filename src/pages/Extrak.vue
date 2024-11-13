@@ -7,7 +7,6 @@ import { defineModel } from "vue";
 import Navigation from "../components/navigation.vue";
 import { termekLekerdezes } from '../config/lekerdezes.js';
 import { ref, onMounted } from 'vue';
-import { store } from "../config/store.js";
 
 function navBack() {
   history.back();
