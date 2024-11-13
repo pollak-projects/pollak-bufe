@@ -7,6 +7,11 @@ import { defineModel } from "vue";
 import Navigation from "../components/navigation.vue";
 import { termekLekerdezes } from '../config/lekerdezes.js';
 import { ref, onMounted } from 'vue';
+import { store } from "../config/store.js";
+
+function navBack() {
+  history.back();
+}
 
 
 const route = useRoute();
@@ -122,6 +127,20 @@ function openModal() {
 </script>
 
 <template>
+  <img
+    src="../assets/arrow_left.svg"
+    alt=""
+    class="h-8 w-8 absolute left-2 top-2"
+    @click="navBack()"
+  />
+  <RouterLink to="/kosar" class="h-8 w-8 absolute right-36 top-8 flex items-baseline">
+    <img
+      id="kosar"
+      src="../assets/shoppingcart.svg"
+      alt=""
+      />
+      <p>{{ store.kosar[0].darab }}</p>
+  </RouterLink>
   <div class="bg"></div>
   <div class="w-full h-screen max-h-screen p-4">
     <h1 class="text-[#554B4B] drop-shadow-lg text-6xl mb-20 ms-10">

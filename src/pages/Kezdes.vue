@@ -6,7 +6,7 @@ import { RouterLink } from "vue-router";
   <div class="h-screen">
     <img class="logo w-screen absolute move" src="/public/logo.png" alt="">
     <h1 class="w-screen h-1/3 flex justify-center items-end drop-shadow-2xl move">Pollák Büfé</h1>
-    <div class="w-screen h-2/3 flex justify-center items-sta rt pt-28 move"> 
+    <div id="gomb" class="w-screen h-2/3 flex justify-center items-sta rt pt-28 move"> 
       <RouterLink to="/szendvicsek">
         <button class="blink-button px-8 py-4 border-2 border-solid rounded-xl drop-shadow-2xl">  
           Kezdés
@@ -17,6 +17,10 @@ import { RouterLink } from "vue-router";
 </template>
 
 <style scoped>
+#gomb {
+  height: fit-content;
+}
+
 button {
   opacity: 80%;
   border-color: black;
