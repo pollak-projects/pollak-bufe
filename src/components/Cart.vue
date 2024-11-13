@@ -6,8 +6,8 @@ const props = defineProps({
 import { ref, computed, onMounted } from "vue";
 import { store } from "../config/store";
 import { store2 } from "../config/store";
+import { storeExtra } from "../config/store";
 import {
-  GetElementsInBasket,
   Rendeles_Cucc2,
   GetExtraInBasket,
   SzunetLekerdezes,
@@ -85,7 +85,7 @@ const rendelesleadas = () => {
 const re = ref(null);
 onMounted(async () => {
   for (let i = 0; i < store2.kosar.length; i++) {
-    re.value = JSON.parse(JSON.stringify(store2.kosar[i].darab));
+    re.value = JSON.parse(JSON.stringify(store2.kosarExtra[i].darab));
   }
   if (re.value[0] != null) {
     szendvicsNevData.value = re.value[0].etel_nev;
@@ -121,14 +121,15 @@ onMounted(async () => {
       :ar="n.darab[0].ar"
       :kep="n.darab[0].kep"
     />
-
     <Card
-      v-for="n in store2.kosarExtra"
-      :id = "n.darab[0].id"
-      :nev="n.darab[0].etel_nev"
-      :ar="n.darab[0].ar"
-      :kep="n.darab[0].kep"
+      v-for="g in storeExtra.kosarExtra"
+      :id = "g.darabExtra[0].id"
+      :nev="g.darabExtra[0].etel_nev"
+      :ar="g.darabExtra[0].ar"
+      :kep="g.darabExtra[0].kep"
     />
+
+   
     </div>
 
     <div class="mt-36 text-center mb-5">

@@ -10,8 +10,10 @@ export const store2 = reactive({
     kosar: [{
         darab: "",
     }],
-    kosarExtra: [{
-        darab: "",
-    }],
     szoszok: []
+})
+export const storeExtra = reactive({
+    kosarExtra: [{
+        darabExtra: "",
+    }],
 })

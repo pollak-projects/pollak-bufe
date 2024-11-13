@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { RouterLink } from "vue-router";
-import { AddItalToBasket} from '../config/lekerdezes';
+import { AddItalToBasket, GetFormData2} from '../config/lekerdezes';
 
 const props = defineProps({
   id: Number,
@@ -34,6 +34,7 @@ function RedirectToExtras(id) {
 function AddToBasket(ital) {
   if(ital == 1){
     AddItalToBasket(props.extra, props.id)
+    
   }
 
 }

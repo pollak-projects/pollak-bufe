@@ -1,5 +1,5 @@
 import { callWithAsyncErrorHandling, ref } from "vue";
-import { store } from "../config/store.js";
+import { store, storeExtra } from "../config/store.js";
 import { store2 } from "../config/store.js";
 
 export async function Burgercucc(termek) {
@@ -60,7 +60,6 @@ export function AddElementsToBasket(id, mustar, ketchup, majonez, csipos, hagyma
 
 export function GetElementsInBasket() {
   let id = GetFormData();
-  let idextra = GetFormData2();
   var requestOptions = {  
     method: 'GET',
   };
@@ -120,18 +119,20 @@ export async function GetFormData2() {
   let e = "";
   for (const element of basketData.getAll("egyeb")) {
     count++
-    console.log()
   }
-  store2.kosar = [];
+  storeExtra.kosarExtra = [];
   for (let i = 0; i < count; i++) {
-    store2.kosarExtra.push({
-      darab: await termekLekerdezes(e)
+    e = basketData.getAll("egyeb")[i];
+    storeExtra.kosarExtra.push({
+      darabExtra: await termekLekerdezes(e)
     })
   }
+
+
 }
 
 export function GetExtraInBasket() {
-  let id = basketData.get("egyeb");
+  let id = GetFormData2();
   var requestOptions = {  
     method: 'GET',
   };
@@ -140,7 +141,7 @@ export function GetExtraInBasket() {
       .then(async (result) => {
         const res = await result.text()
         const valasz = JSON.parse(res)
-        console.log(store.kosar[0].darab)
+        console.log(valasz)
         resolve(valasz)
     }).catch(error => console.log('error', error));
   })
@@ -152,11 +153,12 @@ export function Rendeles_Cucc2(szunet, bankkartya) {
   for (let i = 0; i < store2.kosar.length; i++) {
     const data = JSON.parse(JSON.stringify(store2.kosar[i].darab))
     const dataszosz = JSON.parse(JSON.stringify(store2.szoszok[i]))
-
+    let ital = basketData.getAll("egyeb")
     Rendeles_Cucc(data[0].id, dataszosz.mustar, dataszosz.ketchup, dataszosz.majonez, dataszosz.csipos, dataszosz.hagyma)
+    basketData.delete("egyeb")
+    basketData.append("egyeb", ital[i])
   }
   location.replace("http://localhost:5173/kezdes")
-
 }
 
 
@@ -167,6 +169,7 @@ async function Rendeles_Cucc(szendvicsId, mustar,ketchup,majonez,csipos,hagyma) 
   basketData.append("majonez",majonez)
   basketData.append("csipos",csipos)
   basketData.append("hagyma",hagyma)
+  console.log(basketData.getAll("egyeb"))
     var requestOptions = {  
     method: 'POST',
     body: basketData
@@ -189,6 +192,7 @@ export function AddItalToBasket(extra, id) {
   if(extra == 0){
     basketData.append("egyeb", id)
   }
+  GetFormData2()
   console.log(GetItalCountInBasket())
   GetBasketCount()
 }
