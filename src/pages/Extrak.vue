@@ -23,7 +23,7 @@ function getSelected() {
 }
 
 function getImageUrl() {
-  return new URL(`../assets/sajtoshambi.png`, import.meta.url);
+  return new URL(`../assets/${ kep.value ? kep.value : " " }`, import.meta.url);
 }
 
 const props = defineProps({
@@ -36,8 +36,12 @@ const props = defineProps({
 
 
 const re = ref(null);
+const kep = ref(null);
+
 onMounted(async () => {
   re.value = await termekLekerdezes(route.params.id);
+  kep.value = re.value[0].kep
+  console.log(re.value[0].kep)
 });
 
 const ketchupActive = ref(false);
