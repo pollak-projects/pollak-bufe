@@ -4,25 +4,40 @@ const props = defineProps({
 });
 
 import { ref, computed, onMounted } from "vue";
-import { store } from "../config/store";
+import { store, storeszunet } from "../config/store";
 import { store2 } from "../config/store";
 import { storeExtra } from "../config/store";
 import {
   Rendeles_Cucc2,
   GetExtraInBasket,
   SzunetLekerdezes,
+  DeleteFromBasket,
+  DeleteExtra,
+  AktualisSzunetLekerdezes,
+  DeleteSzendvics,
 } from "../config/lekerdezes";
 import Card from "./Card.vue";
 
-const selectedIndex = ref(3);
+let szunet = storeszunet.elsoszunet[0].elsoszunet
+let kivalasztottSzunet = storeszunet.elsoszunet[0].elsoszunet
+const szunetek = ref(null);
+let elsoszunet = ref(null);
+onMounted(async () => {
+  elsoszunet.value = await AktualisSzunetLekerdezes()
+  elsoszunet.value = elsoszunet.value[0].id 
+  szunetek.value = await SzunetLekerdezes();
+});
+
+const selectedIndex = ref(szunet-1);
 const options = ref([
-  "1.szünet",
-  "2.szünet",
-  "3.szünet",
-  "4.szünet",
-  "5.szünet",
-  "6.szünet",
-  "7.szünet",
+  "1.Szünet",
+  "2.Szünet",
+  "3.Szünet",
+  "4.Szünet",
+  "5.Szünet",
+  "6.Szünet",
+  "7.Szünet",
+
 ]);
 
 const trackStyle = computed(() => {
@@ -37,13 +52,6 @@ const trackStyle = computed(() => {
   };
 });
 
-let szendvicsNevData = ref(null);
-let szendvicsArData = ref(null);
-
-let extraNevData = ref(null);
-let extraArData = ref(null);
-
-let szunet = 4;
 
 const paymentMethod = ref("");
 const selectPayment = (method) => {
@@ -53,17 +61,17 @@ const selectPayment = (method) => {
 const nextOption = () => {
   if (selectedIndex.value < options.value.length - 1) {
     selectedIndex.value++;
+    kivalasztottSzunet = kivalasztottSzunet + 1;
+    console.log(kivalasztottSzunet)
   }
-
-  szunet = selectedIndex.value + 1;
 };
 
 const prevOption = () => {
-  if (selectedIndex.value > 0) {
+  if (selectedIndex.value >= storeszunet.elsoszunet[0].elsoszunet) {
     selectedIndex.value--;
+    kivalasztottSzunet = kivalasztottSzunet - 1;
+    console.log(kivalasztottSzunet)
   }
-
-  szunet = selectedIndex.value + 1;
 };
 
 const rendelesleadas = () => {
@@ -78,60 +86,37 @@ const rendelesleadas = () => {
       paymentMethod.value === "1" ? "Bankkártya" : "Készpénz"
     }`
   );
-  Rendeles_Cucc2(szunet, paymentMethod.value);
+  Rendeles_Cucc2(kivalasztottSzunet, paymentMethod.value);
 };
 
-
-const re = ref(null);
-onMounted(async () => {
-  for (let i = 0; i < store2.kosar.length; i++) {
-    re.value = JSON.parse(JSON.stringify(store2.kosarExtra[i].darab));
-  }
-  if (re.value[0] != null) {
-    szendvicsNevData.value = re.value[0].etel_nev;
-    szendvicsArData.value = re.value[0].ar;
-  }
-});
-
-const re2 = ref(null);
-onMounted(async () => {
-  re2.value = await GetExtraInBasket();
-  if (re2.value[0] != null) {
-    extraNevData.value = re2.value[0].etel_nev;
-    extraArData.value = re2.value[0].ar;
-  }
-});
-
-const szunetek = ref(null);
-onMounted(async () => {
-  szunetek.value = await SzunetLekerdezes();
-});
 </script>
 
 <template>
   <div>
     
-    <h1 class="text-[#554b4b] arnyek text-7xl mb-10 mt-10 text-center">{{ title }}</h1>
+    <h1 @click="DeleteSzendvics(0)" class="text-[#554b4b] arnyek text-7xl mb-10 mt-10 text-center">{{ title }}</h1>
 
     <div class="flex gap-10 mb-8 justify-center">
-      <Card
-      v-for="n in store2.kosar"
-      :id = "n.darab[0].id"
-      :nev="n.darab[0].etel_nev"
-      :ar="n.darab[0].ar"
-      :kep="n.darab[0].kep"
-    />
-    <Card
+        <Card v-if="store2.kosar.length > 0"
+           v-for="(n, index) in store2.kosar"
+          :id = "n.darab[0].id"
+          :nev="n.darab[0].etel_nev"
+          :ar="n.darab[0].ar"
+          :kep="n.darab[0].kep"
+          :ketchup ="store2.szoszok[index].ketchup"
+          :mustar ="store2.szoszok[index].mustar"
+          :majonez ="store2.szoszok[index].majonez"
+          :csipos ="store2.szoszok[index].csipos  "
+        />
+    <Card v-if="storeExtra.kosarExtra.length > 0"
       v-for="g in storeExtra.kosarExtra"
       :id = "g.darabExtra[0].id"
       :nev="g.darabExtra[0].etel_nev"
       :ar="g.darabExtra[0].ar"
-      :kep="g.darabExtra[0].kep"
+      :kep="g.darabExtra[0].kep"  
     />
-
-   
     </div>
-
+    
     <div class="mt-36 text-center mb-5">
       <h2 class="mt-16 text-6xl text-[#554b4b] arnyek mb-6">Fizetési Mód</h2>
       <div class="flex justify-center gap-12">
@@ -165,7 +150,7 @@ onMounted(async () => {
       Melyik szünetre kéred?:
     </div>
 
-    <div class="date-slider-container text-4xl">
+    <div class="date-slider-container text-4xl" v-if="storeszunet.elsoszunet[0].elsoszunet != 0">
       <button @click="prevOption" class="slider-btn">◄</button>
       <div class="date-slider">
         <div class="slider-track" :style="trackStyle">
@@ -180,9 +165,12 @@ onMounted(async () => {
       </div>
       <button @click="nextOption(index)" class="slider-btn">►</button>
     </div>
+    <div v-if="storeszunet.elsoszunet[0].elsoszunet == 0">
+      <h1 class="text-center text-4xl text-[#554b4b] mt-4">Sajnos mára már nem tudsz rendelni!</h1>
+    </div>
   </div>
 
-  <div class="absolute mt-20 mr-20 right-10 mx-6 text-right">
+  <div class="absolute mt-20 mr-20 right-10 mx-6 text-right" v-if="storeszunet.elsoszunet[0].elsoszunet != 0 && store.kosar[0].darab != 0">
       <button
         class="border rounded-full border-black bg-gradient-to-r from-[#d8dcff] to-[#737edf] p-3 px-12 text-[#554b4b] text-6xl h-28 shadow-lg drop-shadow-lg focus:outline-none"
         @click="rendelesleadas"

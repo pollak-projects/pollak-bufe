@@ -1,22 +1,29 @@
 <script setup>
 import { RouterLink, useRouter } from "vue-router"; 
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
+import { JelenlegiSorszam } from "../config/lekerdezes";
 
 const router = useRouter();
-
-onMounted(() => {
+let sorszam = ref(0)
+onMounted(async() => {
+  sorszam = await JelenlegiSorszam();
   setTimeout(() => {
     router.push('/Kezdes');
   }, 5000); 
 });
+
+
+const div = document.getElementById("sorszamDiv")
+
 </script>
 <template>
      <div class="h-screen flex flex-col items-center">
+        <h1 class="w-screen h-1/3 flex justify-center items-end drop-shadow-2xl move">Sikeres rendelés:</h1>
         <h1 class="w-screen h-1/3 flex justify-center items-end drop-shadow-2xl move">A sorszámod:</h1>
         <div class="flex justify-center items-center h-7/16">
             <div class="kulsonegy flex justify-center items-center">
-                <div class="belsonegy flex justify-center items-center">
-                    123
+                <div class="belsonegy flex justify-center items-center" id="sorszamDiv">
+                  {{ sorszam }}
                 </div>
             </div>
         </div>

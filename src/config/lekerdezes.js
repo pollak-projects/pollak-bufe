@@ -1,5 +1,5 @@
 import { callWithAsyncErrorHandling, ref } from "vue";
-import { store, storeExtra } from "../config/store.js";
+import { store, storeExtra, storeszunet } from "../config/store.js";
 import { store2 } from "../config/store.js";
 
 export async function Burgercucc(termek) {
@@ -45,6 +45,35 @@ return new Promise((resolve, reject) => {
 })
 }
 
+export async function AktualisSzunetLekerdezes() {
+  var requestOptions = {  
+  method: 'GET',
+};
+return new Promise((resolve, reject) => {
+  fetch(`http://localhost/pollakbufe/nologin/aktualisSzunet`, requestOptions)
+    .then(async (result) => {
+      const res = await result.text()
+      const valasz = JSON.parse(res)
+      console.log(valasz)
+      resolve(valasz)
+  }).catch(error => console.log('error', error));
+})
+}
+
+async function UtolsoSorszam() {
+  var requestOptions = {  
+  method: 'GET',
+};
+return new Promise((resolve, reject) => {
+  fetch(`http://localhost/pollakbufe/nologin/UtolsoSorszam`, requestOptions)
+    .then(async (result) => {
+      const res = await result.text()
+      const valasz = JSON.parse(res)
+      resolve(valasz)
+  }).catch(error => console.log('error', error));
+})
+}
+
 let basketData = new FormData();
 
 export function AddElementsToBasket(id, mustar, ketchup, majonez, csipos, hagyma) {
@@ -74,15 +103,9 @@ export function GetElementsInBasket() {
   })
 }
 
-let count = 0;
-export function GetBasketCount() {
-  count++;
-  store.kosar.pop()
-  store.kosar.push({
-    darab: count
-  })
 
-  return count;
+export function GetBasketCount() {
+  store.kosar[0].darab++
 }
 
 export async function GetFormData() {
@@ -147,18 +170,70 @@ export function GetExtraInBasket() {
   })
 }
 
-export function Rendeles_Cucc2(szunet, bankkartya) {
+export function JelenlegiSorszam(utolsoSorszam) {
+  let sorszam = utolsoSorszam
+  return (sorszam+1)
+}
+
+export function ToBasket() {
+  if (store2.kosar[0] != undefined) {
+    if (store2.kosar[0].darab < 1) {
+      return ''
+    }else{
+      return '/kosar'
+    } 
+  }
+}
+
+export async function Rendeles_Cucc2(szunet, bankkartya) {
   basketData.append("szunet", szunet)
   basketData.append("bankkartya", bankkartya)
+  let utolsoSorszam = await UtolsoSorszam();
+  let ital = basketData.getAll("egyeb")
+  basketData.append("sorszam",(utolsoSorszam+1))
   for (let i = 0; i < store2.kosar.length; i++) {
     const data = JSON.parse(JSON.stringify(store2.kosar[i].darab))
     const dataszosz = JSON.parse(JSON.stringify(store2.szoszok[i]))
-    let ital = basketData.getAll("egyeb")
     Rendeles_Cucc(data[0].id, dataszosz.mustar, dataszosz.ketchup, dataszosz.majonez, dataszosz.csipos, dataszosz.hagyma)
+    console.log(ital.length)
     basketData.delete("egyeb")
-    basketData.append("egyeb", ital[i])
+    if(ital.length > 1){
+      basketData.append("egyeb", ital[i])
+    }
   }
-  location.replace("http://localhost:5173/kezdes")
+  location.replace("http://localhost:5173/sorszam")
+}
+
+export function DeleteFromBasket() {
+  const data = JSON.parse(JSON.stringify(store2.kosar[0].darab))
+  console.log(data)
+  store2.pop()
+  console.log(data)
+}
+
+export function DeleteExtra(index) {
+  basketData.delete("egyeb")
+  storeExtra.kosarExtra.splice(index,1)
+  for (let index = 0; index < storeExtra.kosarExtra.length; index++) {
+    const data = JSON.parse(JSON.stringify(storeExtra.kosarExtra[index].darabExtra))
+    console.log(data[0].id)
+    basketData.append("egyeb", data[0].id)
+  }
+}
+
+export function DeleteSzendvics(index) {
+  basketData.delete("szendvics")
+  store2.kosar.splice(index,1)
+  for (let index = 0; index < store2.kosar.length; index++) {
+    const data = JSON.parse(JSON.stringify(store2.kosar[index].darab))
+    const data2 = JSON.parse(JSON.stringify(store2.szoszok[index]))
+    console.log(data[0].id)
+  }
+  store.kosar[0].darab
+  store.kosar.pop()
+  store.kosar.push({
+    darab: store2.kosar.length
+  })
 }
 
 
@@ -195,4 +270,14 @@ export function AddItalToBasket(extra, id) {
   GetFormData2()
   console.log(GetItalCountInBasket())
   GetBasketCount()
+}
+
+export async function SzunetEltarolasa() {
+  let cucc = await AktualisSzunetLekerdezes()
+  if(cucc.length > 0){
+    storeszunet.elsoszunet.pop()
+    storeszunet.elsoszunet.push({
+      elsoszunet: cucc[0].id
+    })
+  }
 }

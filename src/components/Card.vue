@@ -10,6 +10,10 @@ const props = defineProps({
   extra: Number,
   kep: String,
   queryType: String,
+  ketchup: Number,
+  mustar: Number,
+  majonez: Number,
+  csipos: Number,
 });
 
 function getImageUrl() {
@@ -61,6 +65,10 @@ function AddToBasket(ital) {
       />
       <p class="font-sans h-[12%] leading-4">{{ nev }}</p>
       <p class="font-sans font-bold h-[8%]">{{ ar }} Ft</p>
+      <p v-if="ketchup == 1">van</p>
+      <p v-if="mustar == 1">van</p>
+      <p v-if="majonez == 1">van</p>
+      <p v-if="csipos == 1">van</p>
     </RouterLink>
   </div>
 </template>

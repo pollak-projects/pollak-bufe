@@ -31,6 +31,10 @@ onMounted(async () => {
       :ar="kajak.ar"
       :kep="kajak.kep"
       :extra="kajak.extra"
+      :ketchup ="0"
+      :mustar ="0"
+      :majonez ="0"
+      :csipos ="0"
     />
   </div>
 </template>

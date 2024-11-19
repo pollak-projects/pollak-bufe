@@ -13,7 +13,11 @@ export const store2 = reactive({
     szoszok: []
 })
 export const storeExtra = reactive({
-    kosarExtra: [{
-        darabExtra: "",
-    }],
+    kosarExtra: [],
+})
+
+export const storeszunet = reactive({
+    elsoszunet: [{
+        elsoszunet: 0,
+    }]
 })

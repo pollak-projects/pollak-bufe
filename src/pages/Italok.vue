@@ -2,6 +2,7 @@
 import Rightside from "../components/Rightside.vue";
 import Navigation from "../components/navigation.vue";
 import { store } from "../config/store.js";
+import { ToBasket } from "../config/lekerdezes.js";
 
 function navBack() {
   history.back();
@@ -15,7 +16,7 @@ function navBack() {
     class="h-8 w-8 absolute left-2 top-2"
     @click="navBack()"
   />
-  <RouterLink to="/kosar" class="h-8 w-8 absolute right-36 top-8 flex items-baseline">
+  <RouterLink :to="ToBasket()" class="h-8 w-8 absolute right-36 top-8 flex items-baseline">
     <img
       id="kosar"
       src="../assets/shoppingcart.svg"
