@@ -150,24 +150,21 @@ function openModal() {
       {{ re?re[0].etel_nev:"" }} 
     </h1>
     <div class="justify-center flex">
-      <img :src="getImageUrl()" alt="" class="w-4/5 h-4/5 mb-2" :class="{ active: isActive }" @click="toggleAnimation"/>
+      <img :src="getImageUrl()" alt="" class="w-3/5 h-3/5 mb-2" :class="{ active: isActive }" @click="toggleAnimation"/>
     </div>
     <div class="text-[#616161] drop-shadow-lg text-8xl mb-20 ms-10 justify-center flex">
       <h1>{{ re?re[0].ar:"" }} Ft</h1>
     </div>
-    <div class="text-[#616161] drop-shadow-lg text-5xl mb-20 ms-10 text-center flex leirasfont">
-      Leírás
-    </div>
-    <div class="h-[75%] flex gap-10">
+    <div class="flex gap-10">
       <div class="h-[50%] flex flex-wrap gap-10 p-5 mb-13 justify-center">
         <ExtraCard text="Ketchup" imgName="ketchup.png" v-model="extraModel"  @click="IsKetchupTrue()"/>
         <ExtraCard text="Mustár" imgName="must.png" v-model="extraModel" @click="IsMustarTrue()"/>
         <ExtraCard text="Majonéz" imgName="majo.png" v-model="extraModel" @click="IsMajonezTrue()"/>
         <ExtraCard text="Csípős" imgName="csip.png" v-model="extraModel" @click="IsCsiposTrue()"/>
-        <ExtraCard v-if="route.params.id >= 48" text="Lilahagyma" imgName="hagyma.png" v-model="extraModel" @click="IsHagymaTrue()" />
+        <ExtraCard text="Lilahagyma" imgName="hagyma.png" v-model="extraModel" @click="IsHagymaTrue()" />
       </div>
     </div>
-    <div class="absolute bottom-10 w-11/12 flex justify-between mx-6">
+    <div class="absolute bottom-20 w-11/12 flex justify-between mx-6">
       <button
         class="border rounded-full border-black bg-[#d8dcff] p-3 px-16 text-[#554b4b] text-5xl"
         @click="AddToBasket(), openModal()"

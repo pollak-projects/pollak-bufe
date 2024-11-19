@@ -6,6 +6,11 @@
   font-family: "Abril Fatface";
 }
 
+body {
+  margin:0;
+  padding: 0;
+  overflow: hidden;
+}
 .image {
   width: 200px;
   height: 200px;
