@@ -93,28 +93,29 @@ const rendelesleadas = () => {
 
 <template>
   <div>
-    
     <h1 @click="DeleteSzendvics(0)" class="text-[#554b4b] arnyek text-7xl mb-10 mt-10 text-center">{{ title }}</h1>
 
-    <div class="flex gap-10 mb-8 justify-center">
-        <Card v-if="store2.kosar.length > 0"
-           v-for="(n, index) in store2.kosar"
-          :id = "n.darab[0].id"
-          :nev="n.darab[0].etel_nev"
-          :ar="n.darab[0].ar"
-          :kep="n.darab[0].kep"
-          :ketchup ="store2.szoszok[index].ketchup"
-          :mustar ="store2.szoszok[index].mustar"
-          :majonez ="store2.szoszok[index].majonez"
-          :csipos ="store2.szoszok[index].csipos  "
-        />
-    <Card v-if="storeExtra.kosarExtra.length > 0"
-      v-for="g in storeExtra.kosarExtra"
-      :id = "g.darabExtra[0].id"
-      :nev="g.darabExtra[0].etel_nev"
-      :ar="g.darabExtra[0].ar"
-      :kep="g.darabExtra[0].kep"  
-    />
+    <div class="flex-container">
+      <Card v-if="store2.kosar.length > 0"
+         v-for="(n, index) in store2.kosar"
+        :key="n.darab[0].id"
+        :id="n.darab[0].id"
+        :nev="n.darab[0].etel_nev"
+        :ar="n.darab[0].ar"
+        :kep="n.darab[0].kep"
+        :ketchup="store2.szoszok[index].ketchup"
+        :mustar="store2.szoszok[index].mustar"
+        :majonez="store2.szoszok[index].majonez"
+        :csipos="store2.szoszok[index].csipos"
+      />
+      <Card v-if="storeExtra.kosarExtra.length > 0"
+        v-for="g in storeExtra.kosarExtra"
+        :key="g.darabExtra[0].id"
+        :id="g.darabExtra[0].id"
+        :nev="g.darabExtra[0].etel_nev"
+        :ar="g.darabExtra[0].ar"
+        :kep="g.darabExtra[0].kep"
+      />
     </div>
     
     <div class="mt-36 text-center mb-5">
@@ -166,7 +167,7 @@ const rendelesleadas = () => {
       <button @click="nextOption(index)" class="slider-btn">►</button>
     </div>
     <div v-if="storeszunet.elsoszunet[0].elsoszunet == 0">
-      <h1 class="text-center text-4xl text-[#554b4b] mt-4">Sajnos mára már nem tudsz rendelni!</h1>
+      <h1 class="text-center text-4xl text-[#554b4b] mt-4 pb-40">Sajnos mára már nem tudsz rendelni!</h1>
     </div>
   </div>
 
@@ -180,7 +181,7 @@ const rendelesleadas = () => {
     </div>
 </template>
 
-<style>
+<style scoped>
 .arnyek {
   text-shadow: 1px 5px 5px rgba(0, 0, 0, 0.3);
 }
@@ -212,7 +213,7 @@ const rendelesleadas = () => {
   display: flex;
   overflow: hidden;
   justify-content: center;
-  width: 400px;
+  width: 100%;
   position: relative;
 }
 
@@ -256,4 +257,38 @@ const rendelesleadas = () => {
 .slider-btn:hover {
   background: #f0f0f0;
 }
+
+/* Flex container for the cards (ensure they don't collapse) */
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;  /* Allow wrapping to next row */
+  justify-content: center; /* Center the items */
+  gap: 16px;  /* Space between items */
+}
+
+/* Card styles */
+.card {
+  min-width: 250px;  /* Prevent shrinking smaller than 250px */
+  max-width: 320px;  /* Set a max-width to avoid stretching too large */
+  flex: 1 1 auto;  /* Flex-grow and flex-shrink set to auto */
+  box-sizing: border-box;  /* Prevents padding from affecting width */
+  margin-bottom: 16px; /* Adds space between rows if wrapping */
+}
+
+/* For smaller screens, let the cards take full width */
+@media (max-width: 768px) {
+  .card {
+    min-width: 100%;  /* Cards take full width on small screens */
+    max-width: 100%;  /* Ensure no stretching */
+  }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+  .card {
+    min-width: 100%;  /* Full width for tiny screens */
+    max-width: 100%;  /* Full width for tiny screens */
+  }
+}
+
 </style>
