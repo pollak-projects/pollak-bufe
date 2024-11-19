@@ -95,7 +95,6 @@ const rendelesleadas = () => {
   <div>
     
     <h1 @click="DeleteSzendvics(0)" class="text-[#554b4b] arnyek text-7xl mb-10 mt-10 text-center">{{ title }}</h1>
-
     <div class="flex gap-10 mb-8 justify-center">
         <Card v-if="store2.kosar.length > 0"
            v-for="(n, index) in store2.kosar"
@@ -106,7 +105,8 @@ const rendelesleadas = () => {
           :ketchup ="store2.szoszok[index].ketchup"
           :mustar ="store2.szoszok[index].mustar"
           :majonez ="store2.szoszok[index].majonez"
-          :csipos ="store2.szoszok[index].csipos  "
+          :csipos ="store2.szoszok[index].csipos"
+          :index = index     
         />
     <Card v-if="storeExtra.kosarExtra.length > 0"
       v-for="g in storeExtra.kosarExtra"
