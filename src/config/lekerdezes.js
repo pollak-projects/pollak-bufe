@@ -224,11 +224,13 @@ export function DeleteExtra(index) {
 export function DeleteSzendvics(index) {
   basketData.delete("szendvics")
   store2.kosar.splice(index,1)
+  store2.szoszok.splice(index,1)
   for (let index = 0; index < store2.kosar.length; index++) {
     const data = JSON.parse(JSON.stringify(store2.kosar[index].darab))
-    const data2 = JSON.parse(JSON.stringify(store2.szoszok[index]))
     console.log(data[0].id)
   }
+  console.log(store2.szoszok)
+
   store.kosar[0].darab
   store.kosar.pop()
   store.kosar.push({
