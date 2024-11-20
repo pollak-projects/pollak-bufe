@@ -80,7 +80,7 @@ function AddToBasket(ital) {
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Elemek közötti távolság elosztása */
-  height: 20rem; /* Rögzített magasság */
+  height: 24rem; /* Rögzített magasság */
   width: 15rem; /* Példa szélesség */
   padding: 1rem;
   box-sizing: border-box; /* Biztosítsd, hogy a padding beleszámítson */
