@@ -1,6 +1,6 @@
 import { callWithAsyncErrorHandling, ref } from "vue";
 import { store, storeExtra, storeszunet } from "../config/store.js";
-import { store2 } from "../config/store.js";
+import { store2, store3 } from "../config/store.js";
 
 export async function Burgercucc(termek) {
     var requestOptions = {  
@@ -178,8 +178,9 @@ export function JelenlegiSorszam(utolsoSorszam) {
 export function ToBasket() {
   if (store2.kosar[0] != undefined) {
     if (store2.kosar[0].darab < 1) {
-      return ''
+      return '#'
     }else{
+    store3.van = true
       return '/kosar'
     } 
   }
@@ -219,6 +220,10 @@ export function DeleteExtra(index) {
     console.log(data[0].id)
     basketData.append("egyeb", data[0].id)
   }
+  store.kosar.pop()
+  store.kosar.push({
+    darab: store2.kosar.length + storeExtra.kosarExtra.length
+  })
 }
 
 export function DeleteSzendvics(index) {
@@ -231,11 +236,15 @@ export function DeleteSzendvics(index) {
   }
   console.log(store2.szoszok)
 
-  store.kosar[0].darab
   store.kosar.pop()
   store.kosar.push({
-    darab: store2.kosar.length
+    darab: store2.kosar.length + storeExtra.kosarExtra.length
   })
+
+  if (store2.kosar.length == 0) {
+    store3.van = false
+    console.log(store3.van)
+  }
 }
 
 

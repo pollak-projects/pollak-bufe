@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { RouterLink } from "vue-router";
-import { AddItalToBasket, DeleteSzendvics, GetFormData2} from '../config/lekerdezes';
+import { AddItalToBasket, DeleteExtra, DeleteSzendvics, GetFormData2} from '../config/lekerdezes';
 import Kosar from '../pages/Kosar.vue';
 
 const props = defineProps({
@@ -15,7 +15,8 @@ const props = defineProps({
   mustar: Number,
   majonez: Number,
   csipos: Number,
-  index: Number
+  index: Number,
+  italiksz: Number
 });
 
 function getImageUrl() {
@@ -37,26 +38,37 @@ function RedirectToExtras(id) {
 
 }
 
-function AddToBasket(ital) {
-  if(ital == 1){
+function openModal() {
+            const modal = document.getElementById("modal");
+            modal.style.display = "flex";
+            
+            setTimeout(() => {
+                modal.style.display = "none";
+            }, 800);
+        }
+
+function AddToBasket(ital, route) {
+  if(ital == 1 && route != '/kosar'){
     AddItalToBasket(props.extra, props.id)
-    
+    openModal()
   }
 
 }
+
 </script>
 
 <template>
   <div
     class="bg-white rounded-md border-[#9EA8FF] border-2 drop-shadow-lg p-3 w-60 min-h-80 h-[400px]"
-    id="app" @click="AddToBasket(ital)"
+    id="app" @click="AddToBasket(ital,$route.path)"
     >
-    <img v-if="$route.path === '/kosar'" class="iksz" src="/public/IKSZ.png" alt="iksz" @click="DeleteSzendvics(index)">
+    <img v-if="$route.path === '/kosar' && italiksz == 0"  class="iksz" src="/public/IKSZ.png" alt="iksz" @click="DeleteSzendvics(index)">
+    <img v-if="$route.path === '/kosar'&& italiksz == 1" class="iksz" src="/public/IKSZ.png" alt="iksz" @click="DeleteExtra(index)">
     <RouterLink :to="RedirectToExtras(id)">
       <img
         :src="getImageUrl()"
         alt=""
-        class="w-full h-3/5 mb-2"
+        class="w-full h-3/5 mb-2 mainImg"
         :class="{ active: isActive }"
         @click="toggleAnimation"
       />
@@ -71,10 +83,49 @@ function AddToBasket(ital) {
       </div>
     </RouterLink>
   </div>
+  <div class="modal-background" id="modal">
+        <div class="modal-content">
+            <h2>Sikeresen a kosárba helyezted!</h2>
+            
+        </div>
+    </div>
 </template>
 
 
 <style scoped>
+
+.mainImg{
+  width: 100%;
+  aspect-ratio: 4/4;
+  object-fit: contain;
+}
+
+.modal-background {
+            display: none; /* Kezdetben rejtve */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.445); /* Átlátszó fekete háttér */
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Legmagasabb prioritás */
+        }
+        
+        /* A modális tartalom */
+        .modal-content {
+            background-color: #17bd3b;
+            padding: 80px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 1000px;
+            width: 200%;
+            font-size: 60px;
+            font-family: "Abril Fatface";
+            color: #ffffff;
+        }
+
 
 .bg-white {
   display: flex;

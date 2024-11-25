@@ -21,3 +21,7 @@ export const storeszunet = reactive({
         elsoszunet: 0,
     }]
 })
+
+export const store3 = reactive({
+    van: false
+})

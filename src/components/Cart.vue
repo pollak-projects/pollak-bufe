@@ -108,6 +108,7 @@ const rendelesleadas = () => {
         :majonez="store2.szoszok[index].majonez"
         :csipos="store2.szoszok[index].csipos"
         :index = index
+        :italiksz = 0
       />
       <Card v-if="storeExtra.kosarExtra.length > 0"
         v-for="g in storeExtra.kosarExtra"
@@ -116,6 +117,7 @@ const rendelesleadas = () => {
         :nev="g.darabExtra[0].etel_nev"
         :ar="g.darabExtra[0].ar"
         :kep="g.darabExtra[0].kep"
+        :italiksz = 1
       />
     </div>
     
