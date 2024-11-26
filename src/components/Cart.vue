@@ -174,7 +174,7 @@ const rendelesleadas = () => {
     </div>
   </div>
 
-  <div class="absolute mt-20 mr-20 right-10 mx-6 text-right" v-if="storeszunet.elsoszunet[0].elsoszunet != 0 && store.kosar[0].darab != 0">
+  <div class="absolute mt-20 mr-20 right-10 mx-6 text-right" v-if="storeszunet.elsoszunet[0].elsoszunet != 0 && store.kosar[0].darab !== 0">
       <button
         class="border rounded-full border-black bg-gradient-to-r from-[#d8dcff] to-[#737edf] p-3 px-12 text-[#554b4b] text-6xl h-28 shadow-lg drop-shadow-lg focus:outline-none"
         @click="rendelesleadas"

@@ -35,7 +35,7 @@ function Teszt() {
     class="h-8 w-8 absolute left-2 top-2"
     @click="navBack()"
   />
-  <RouterLink @click="Teszt()"  :to="ToBasket()" class="h-8 w-8 absolute right-36 top-8 flex items-baseline">
+  <RouterLink  @click="Teszt()"  :to="ToBasket()" class="h-8 w-8 absolute right-36 top-8 flex items-baseline">
     <img
       id="kosar"
       src="../assets/shoppingcart.svg"
