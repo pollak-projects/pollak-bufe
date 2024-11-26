@@ -178,7 +178,7 @@ export function JelenlegiSorszam(utolsoSorszam) {
 export function ToBasket() {
   if (store2.kosar[0] != undefined) {
     if (store2.kosar[0].darab < 1) {
-      return '#'
+      return ''
     }else{
     store3.van = true
       return '/kosar'
