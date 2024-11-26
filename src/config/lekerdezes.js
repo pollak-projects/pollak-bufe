@@ -1,5 +1,5 @@
 import { callWithAsyncErrorHandling, ref } from "vue";
-import { store, storeExtra, storeszunet } from "../config/store.js";
+import { sorszam, store, storeExtra, storeszunet } from "../config/store.js";
 import { store2, store3 } from "../config/store.js";
 
 export async function Burgercucc(termek) {
@@ -65,11 +65,26 @@ export async function AktualisSzunetLekerdezes() {
 }
 
 async function UtolsoSorszam() {
+  var requestOptions = {  
+  method: 'GET',
+};
+return new Promise((resolve, reject) => {
+  fetch(`http://localhost/pollakbufe/nologin/UtolsoSorszam`, requestOptions)
+    .then(async (result) => {
+      const res = await result.text();
+      const valasz = JSON.parse(res);
+      resolve(valasz);
+    })
+    .catch((error) => console.log("error", error));
+})
+}
+
+export async function UtolsoNapiSorszam() {
   var requestOptions = {
     method: "GET",
   };
   return new Promise((resolve, reject) => {
-    fetch(`http://localhost/pollakbufe/nologin/UtolsoSorszam`, requestOptions)
+    fetch(`http://localhost/pollakbufe/nologin/NapiSorszam`, requestOptions)
       .then(async (result) => {
         const res = await result.text();
         const valasz = JSON.parse(res);
@@ -208,8 +223,9 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
   basketData.append("szunet", szunet);
   basketData.append("bankkartya", bankkartya);
   let utolsoSorszam = await UtolsoSorszam();
-  let ital = basketData.getAll("egyeb");
-  basketData.append("sorszam", utolsoSorszam + 1);
+  sorszam.sorszam = await UtolsoNapiSorszam();
+  let ital = basketData.getAll("egyeb")
+  basketData.append("sorszam",(utolsoSorszam+1))
   for (let i = 0; i < store2.kosar.length; i++) {
     const data = JSON.parse(JSON.stringify(store2.kosar[i].darab));
     const dataszosz = JSON.parse(JSON.stringify(store2.szoszok[i]));
@@ -227,7 +243,8 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
       basketData.append("egyeb", ital[i]);
     }
   }
-  location.replace("http://localhost:5173/sorszam");
+  console.log(sorszam.sorszam);
+  location.replace("http://localhost:5173/sorszam")
 }
 
 export function DeleteFromBasket() {
