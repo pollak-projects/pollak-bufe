@@ -32,10 +32,10 @@ function Teszt() {
   <img
     src="../assets/arrow_left.svg"
     alt=""
-    class="h-8 w-8 absolute left-2 top-2"
+    class="h-8 w-8 absolute left-16 top-20"
     @click="navBack()"
   />
-  <RouterLink @click="Teszt()"  :to="ToBasket()" class="h-8 w-8 absolute right-36 top-8 flex items-baseline">
+  <RouterLink @click="Teszt()"  :to="ToBasket()" class="h-14 w-14 absolute right-20 top-28 flex items-baseline">
     <img
       id="kosar"
       src="../assets/shoppingcart.svg"
@@ -44,8 +44,8 @@ function Teszt() {
       <p>{{ store.kosar[0].darab }}</p>
   </RouterLink>
   <Navigation />
-  <div class="w-full h-screen max-h-screen p-4">
-    <Rightside title="Hot-dogok" queryType="hotdogok" :elemek="hotdogok" />
+  <div class="w-full h-screen max-h-screen p-4 text-center mt-12 -ml-4">
+    <Rightside title="Hot~dogok" queryType="hotdogok" :elemek="hotdogok" />
   </div>
   <div class="modal-background" id="modalUres">
         <div class="modal-content">

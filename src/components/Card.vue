@@ -59,7 +59,32 @@ function AddToBasket(ital, route) {
 
 <template>
   <div
-    class="bg-white rounded-md border-[#9EA8FF] border-2 drop-shadow-lg p-3 w-60 min-h-80 h-[400px]"
+  v-if="$route.path === '/kosar'" class="bg-white bg-white1 rounded-md border-[#9EA8FF] border-2 drop-shadow-lg p-3 w-60 min-h-80 h-[400px]"
+    id="app" @click="AddToBasket(ital,$route.path)"
+    >
+    <img v-if="$route.path === '/kosar' && italiksz == 0"  class="iksz" src="/public/IKSZ.png" alt="iksz" @click="DeleteSzendvics(index)">
+    <img v-if="$route.path === '/kosar'&& italiksz == 1" class="iksz" src="/public/IKSZ.png" alt="iksz" @click="DeleteExtra(index)">
+    <RouterLink :to="RedirectToExtras(id)">
+      <img
+        :src="getImageUrl()"
+        alt=""
+        class="w-full h-3/5 mb-2 mainImg"
+        :class="{ active: isActive }"
+        @click="toggleAnimation"
+      />
+      <p class="font-sans h-[12%] leading-4">{{ nev }}</p>
+      <p class="font-sans font-bold h-[8%]">{{ ar }} Ft</p>
+
+      <div v-if="ketchup == 1 || mustar == 1 || majonez == 1 || csipos == 1" class="extra-icons">
+        <p v-if="ketchup == 1"><img src="../assets/ketchup.png" alt="Ketchup" ></p>
+        <p v-if="mustar == 1"><img src="../assets/majo.png" alt="Mayonnaise" ></p>
+        <p v-if="majonez == 1"><img src="../assets/must.png" alt="Mustard" ></p>
+        <p v-if="csipos == 1"><img src="../assets/csip.png" alt="Chili" ></p>
+      </div>
+    </RouterLink>
+  </div>
+  <div
+  v-if="$route.path != '/kosar'" class="bg-white rounded-md border-[#9EA8FF] border-2 drop-shadow-lg p-3 w-60 h-[400px]"
     id="app" @click="AddToBasket(ital,$route.path)"
     >
     <img v-if="$route.path === '/kosar' && italiksz == 0"  class="iksz" src="/public/IKSZ.png" alt="iksz" @click="DeleteSzendvics(index)">
@@ -128,6 +153,16 @@ function AddToBasket(ital, route) {
 
 
 .bg-white {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Elemek közötti távolság elosztása */
+  height: 16rem; /* Rögzített magasság */
+  width: 15rem; /* Példa szélesség */
+  padding: 1rem;
+  box-sizing: border-box; /* Biztosítsd, hogy a padding beleszámítson */
+}
+
+.bg-white1 {
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Elemek közötti távolság elosztása */

@@ -133,10 +133,11 @@ function openModal() {
   <img
     src="../assets/arrow_left.svg"
     alt=""
-    class="h-8 w-8 absolute left-2 top-2"
+    class="h-8 w-8 absolute left-16 top-20"
+    style="z-index: 9999;" szia zete semi baj tesám
     @click="navBack()"
   />
-  <RouterLink to="/kosar" class="h-8 w-8 absolute right-36 top-8 flex items-baseline">
+  <RouterLink to="/kosar" class="h-14 w-14 absolute right-20 top-28 flex items-baseline ">
     <img
       id="kosar"
       src="../assets/shoppingcart.svg"
@@ -146,7 +147,7 @@ function openModal() {
   </RouterLink>
   <div class="bg"></div>
   <div class="w-full h-screen max-h-screen p-4">
-    <h1 class="text-[#554B4B] drop-shadow-lg text-6xl mb-20 ms-10">
+    <h1 class="text-[#554B4B] drop-shadow-lg text-6xl mb-20 ms-10 text-center mt-12 -ml-4">
       {{ re?re[0].etel_nev:"" }} 
     </h1>
     <div class="justify-center flex">
@@ -161,7 +162,7 @@ function openModal() {
         <ExtraCard text="Mustár" imgName="must.png" v-model="extraModel" @click="IsMustarTrue()"/>
         <ExtraCard text="Majonéz" imgName="majo.png" v-model="extraModel" @click="IsMajonezTrue()"/>
         <ExtraCard text="Csípős" imgName="csip.png" v-model="extraModel" @click="IsCsiposTrue()"/>
-        <ExtraCard text="Lilahagyma" imgName="hagyma.png" v-model="extraModel" @click="IsHagymaTrue()" />
+        <!-- <ExtraCard text="Lilahagyma" imgName="hagyma.png" v-model="extraModel" @click="IsHagymaTrue()" /> -->
       </div>
     </div>
     <div class="absolute bottom-20 w-11/12 flex justify-between mx-6">
