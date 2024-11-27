@@ -3,6 +3,8 @@ import { ref } from "vue";
 
 // Reaktív változó a jelszó láthatóságának kezeléséhez
 const isPasswordVisible = ref(false);
+
+
 </script>
 
 <template>
