@@ -134,7 +134,7 @@ function openModal() {
     src="../assets/arrow_left.svg"
     alt=""
     class="h-8 w-8 absolute left-16 top-20"
-    style="z-index: 9999;" szia zete semi baj tesám
+    style="z-index: 9999;"
     @click="navBack()"
   />
   <RouterLink to="/kosar" class="h-14 w-14 absolute right-20 top-28 flex items-baseline ">
