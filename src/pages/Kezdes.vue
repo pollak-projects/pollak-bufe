@@ -8,9 +8,11 @@ import { SzunetEltarolasa } from "../config/lekerdezes";
     <img class="logo w-screen absolute move" src="/public/logo.png" alt="">
     <h1 class="w-screen h-1/3 flex justify-center items-end drop-shadow-2xl move">Pollák Büfé</h1>
     <div id="gomb" class="w-screen h-2/3 flex justify-center items-sta rt pt-28 move"> 
+      <RouterLink to="/szendvicsek">
         <button @click="SzunetEltarolasa()" class="blink-button px-8 py-4 border-2 border-solid rounded-xl drop-shadow-2xl">  
           Kezdés
         </button> 
+      </RouterLink>
     </div>
   </div>
 </template>
