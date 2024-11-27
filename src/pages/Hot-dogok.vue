@@ -25,7 +25,7 @@ function openModal() {
 
 function Teszt() {
   console.log("Kosár állapota:", store.kosar, store3.van); // Ellenőrzés
-  if (!store3.van && store.kosar[0]?.darab === 0) {
+  if (!store3.van) {
     // Ha nincs van állapot és a kosár üres
     setTimeout(() => {
       openModal(); // Modál megnyitása
