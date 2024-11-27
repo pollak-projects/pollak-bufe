@@ -1,5 +1,5 @@
 import { callWithAsyncErrorHandling, ref } from "vue";
-import { sorszam, store, store_login, storeExtra, storeszunet } from "../config/store.js";
+import { sorszam, store, storeExtra, storeszunet } from "../config/store.js";
 import { store2, store3 } from "../config/store.js";
 
 export async function Burgercucc(termek) {
