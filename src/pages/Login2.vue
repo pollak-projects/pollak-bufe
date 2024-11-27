@@ -1,13 +1,7 @@
 <script setup>
 import { RouterLink } from "vue-router";
 
-export default {
-  data() {
-    return {
-      isPasswordVisible: false,
-    };
-  },
-};
+
 </script>
 <template>
   <div class="login-container">
