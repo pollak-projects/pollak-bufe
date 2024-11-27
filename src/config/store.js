@@ -25,3 +25,8 @@ export const storeszunet = reactive({
 export const store3 = reactive({
     van: false
 })
+
+
+export const sorszam = reactive({
+  sorszam: 0
+});

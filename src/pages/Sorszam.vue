@@ -1,16 +1,18 @@
 <script setup>
 import { RouterLink, useRouter } from "vue-router"; 
 import { ref, onMounted } from "vue";
-import { JelenlegiSorszam } from "../config/lekerdezes";
+import { JelenlegiSorszam, UtolsoNapiSorszam } from "../config/lekerdezes";
+import { sorszam } from "../config/store";
 
 const router = useRouter();
-let sorszam = ref(0)
-onMounted(async() => {
-  sorszam = await JelenlegiSorszam();
+const re = ref(0);
+onMounted(async () => {
+  re.value = await UtolsoNapiSorszam();
   setTimeout(() => {
     router.push('/Kezdes');
   }, 5000); 
 });
+
 
 
 const div = document.getElementById("sorszamDiv")
@@ -23,7 +25,7 @@ const div = document.getElementById("sorszamDiv")
         <div class="flex justify-center items-center h-7/16">
             <div class="kulsonegy flex justify-center items-center">
                 <div class="belsonegy flex justify-center items-center" id="sorszamDiv">
-                  {{ sorszam }}
+                  {{ re }}
                 </div>
             </div>
         </div>
