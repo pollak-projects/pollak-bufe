@@ -1,7 +1,7 @@
 <script setup>
 import Rightside from "../components/Rightside.vue";
 import Navigation from "../components/navigation.vue";
-import { store, store3 } from "../config/store.js";
+import { store, store2, store3 } from "../config/store.js";
 import { ToBasket } from "../config/lekerdezes.js";
 
 function navBack() {
@@ -44,6 +44,7 @@ function Teszt() {
   />
   <RouterLink @click.prevent="Teszt()" :to="ToBasket()" class="h-14 w-14 absolute right-20 top-28 flex items-baseline">
     <img
+     @click.prevent="Teszt()"
       id="kosar"
       src="../assets/shoppingcart.svg"
       alt=""
