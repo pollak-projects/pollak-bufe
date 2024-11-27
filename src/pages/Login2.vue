@@ -1,8 +1,10 @@
 <script setup>
-import { RouterLink } from "vue-router";
+import { ref } from "vue";
 
-
+// Reaktív változó a jelszó láthatóságának kezeléséhez
+const isPasswordVisible = ref(false);
 </script>
+
 <template>
   <div class="login-container">
     <form class="login-form">
@@ -14,17 +16,15 @@ import { RouterLink } from "vue-router";
       <input :type="isPasswordVisible ? 'text' : 'password'" id="password" />
 
       <div class="show-password">
-        <input
-          type="checkbox"
-          id="togglePassword"
-          v-model="isPasswordVisible"
-        />
+        <input type="checkbox" id="togglePassword" v-model="isPasswordVisible" />
+        <label for="togglePassword"></label>
       </div>
 
       <button type="submit">Login</button>
     </form>
   </div>
 </template>
+
 <style scoped>
 .login-container {
   width: 100vw;
@@ -36,6 +36,8 @@ import { RouterLink } from "vue-router";
 }
 
 .login-form {
+  align-items: center;
+  height: 600px;
   background: white;
   padding: 2rem;
   border-radius: 8px;
@@ -47,11 +49,12 @@ import { RouterLink } from "vue-router";
 
 h1 {
   margin-bottom: 1.5rem;
-  font-size: 1.5rem;
+  font-size: 40px;
   color: #333;
 }
 
 label {
+  font-size: 30px;
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
@@ -60,8 +63,7 @@ label {
 }
 
 input[type="text"],
-input[type="password"],
-input[type="checkbox"] {
+input[type="password"] {
   width: 100%;
   padding: 0.75rem;
   margin-bottom: 1rem;
@@ -71,7 +73,6 @@ input[type="checkbox"] {
 }
 
 .show-password {
-  float: right;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -87,7 +88,7 @@ button {
   color: white;
   border: none;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 30px ;
   cursor: pointer;
 }
 
