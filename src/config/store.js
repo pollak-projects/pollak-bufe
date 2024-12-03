@@ -30,3 +30,7 @@ export const store3 = reactive({
 export const sorszam = reactive({
   sorszam: 0
 });
+
+export const store_login = reactive({
+    loggedIn : false
+})
