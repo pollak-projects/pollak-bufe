@@ -1,10 +1,23 @@
 <script setup>
 import { ref } from "vue";
 
-// Reaktív változó a jelszó láthatóságának kezeléséhez
+const username = ref("");
+const password = ref("");
+
 const isPasswordVisible = ref(false);
 
+function bejelentkezes() {
+  console.log(username.value);
+  console.log(password.value);
 
+  fetch("http://localhost:3300/user/login", {
+    method: "POST",
+    body: {
+      username: username.value,
+      password: password.value,
+    },
+  });
+}
 </script>
 
 <template>
@@ -12,17 +25,27 @@ const isPasswordVisible = ref(false);
     <form class="login-form">
       <h1>Login</h1>
       <label for="username">Felhasználónév</label>
-      <input type="text" id="username" />
+      <input type="text" id="username" v-model="username" />
 
       <label for="password">Jelszó</label>
-      <input :type="isPasswordVisible ? 'text' : 'password'" id="password" />
+      <input
+        :type="isPasswordVisible ? 'text' : 'password'"
+        id="password"
+        v-model="password"
+      />
 
       <div class="show-password">
-        <input type="checkbox" id="togglePassword" v-model="isPasswordVisible" />
-        <label for="togglePassword"></label>
+        <input
+          type="checkbox"
+          id="togglePassword"
+          v-model="isPasswordVisible"
+        />
+        <label for="togglePassword">Jelszó megjelenítése</label>
       </div>
 
-      <button type="submit">Login</button>
+      <button type="submit" @click.prevent="bejelentkezes">
+        Bejelentkezés
+      </button>
     </form>
   </div>
 </template>
@@ -90,7 +113,7 @@ button {
   color: white;
   border: none;
   border-radius: 4px;
-  font-size: 30px ;
+  font-size: 30px;
   cursor: pointer;
 }
 
