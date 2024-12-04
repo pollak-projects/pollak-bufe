@@ -7,7 +7,7 @@ export async function Burgercucc(termek) {
     method: "GET",
   };
   return new Promise((resolve, reject) => {
-    fetch(`http://localhost/pollakbufe/nologin/${termek}`, requestOptions)
+    fetch(`https://pollakbufe.hu/noLogin/${termek}`, requestOptions)
       .then(async (result) => {
         const res = await result.text();
         const valasz = JSON.parse(res);
@@ -22,7 +22,7 @@ export async function termekLekerdezes(id) {
     method: "GET",
   };
   return new Promise((resolve, reject) => {
-    fetch(`http://localhost/pollakbufe/nologin/id/${id}`, requestOptions)
+    fetch(`https://pollakbufe.hu/noLogin/id/${id}`, requestOptions)
       .then(async (result) => {
         const res = await result.text();
         const valasz = JSON.parse(res);
@@ -37,7 +37,7 @@ export async function SzunetLekerdezes() {
     method: "GET",
   };
   return new Promise((resolve, reject) => {
-    fetch(`http://localhost/pollakbufe/nologin/szunet`, requestOptions)
+    fetch(`https://pollakbufe.hu/noLogin/szunet`, requestOptions)
       .then(async (result) => {
         const res = await result.text();
         const valasz = JSON.parse(res);
@@ -53,7 +53,7 @@ export async function AktualisSzunetLekerdezes() {
     method: "GET",
   };
   return new Promise((resolve, reject) => {
-    fetch(`http://localhost/pollakbufe/nologin/aktualisSzunet`, requestOptions)
+    fetch(`https://pollakbufe.hu/noLogin/aktualisSzunet`, requestOptions)
       .then(async (result) => {
         const res = await result.text();
         const valasz = JSON.parse(res);
@@ -65,18 +65,18 @@ export async function AktualisSzunetLekerdezes() {
 }
 
 async function UtolsoSorszam() {
-  var requestOptions = {  
-  method: 'GET',
-};
-return new Promise((resolve, reject) => {
-  fetch(`http://localhost/pollakbufe/nologin/UtolsoSorszam`, requestOptions)
-    .then(async (result) => {
-      const res = await result.text();
-      const valasz = JSON.parse(res);
-      resolve(valasz);
-    })
-    .catch((error) => console.log("error", error));
-})
+  var requestOptions = {
+    method: "GET",
+  };
+  return new Promise((resolve, reject) => {
+    fetch(`https://pollakbufe.hu/noLogin/UtolsoSorszam`, requestOptions)
+      .then(async (result) => {
+        const res = await result.text();
+        const valasz = JSON.parse(res);
+        resolve(valasz);
+      })
+      .catch((error) => console.log("error", error));
+  });
 }
 
 export async function UtolsoNapiSorszam() {
@@ -84,7 +84,7 @@ export async function UtolsoNapiSorszam() {
     method: "GET",
   };
   return new Promise((resolve, reject) => {
-    fetch(`http://localhost/pollakbufe/nologin/NapiSorszam`, requestOptions)
+    fetch(`https://pollakbufe.hu/noLogin/NapiSorszam`, requestOptions)
       .then(async (result) => {
         const res = await result.text();
         const valasz = JSON.parse(res);
@@ -120,7 +120,7 @@ export function GetElementsInBasket() {
     method: "GET",
   };
   return new Promise((resolve, reject) => {
-    fetch(`http://localhost/pollakbufe/nologin/id/${id}`, requestOptions)
+    fetch(`https://pollakbufe.hu/noLogin/id/${id}`, requestOptions)
       .then(async (result) => {
         const res = await result.text();
         const valasz = JSON.parse(res);
@@ -185,7 +185,7 @@ export function GetExtraInBasket() {
     method: "GET",
   };
   return new Promise((resolve, reject) => {
-    fetch(`http://localhost/pollakbufe/nologin/id/${id}`, requestOptions)
+    fetch(`https://pollakbufe.hu/noLogin/id/${id}`, requestOptions)
       .then(async (result) => {
         const res = await result.text();
         const valasz = JSON.parse(res);
@@ -224,8 +224,8 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
   basketData.append("bankkartya", bankkartya);
   let utolsoSorszam = await UtolsoSorszam();
   sorszam.sorszam = await UtolsoNapiSorszam();
-  let ital = basketData.getAll("egyeb")
-  basketData.append("sorszam",(utolsoSorszam+1))
+  let ital = basketData.getAll("egyeb");
+  basketData.append("sorszam", utolsoSorszam + 1);
   for (let i = 0; i < store2.kosar.length; i++) {
     const data = JSON.parse(JSON.stringify(store2.kosar[i].darab));
     const dataszosz = JSON.parse(JSON.stringify(store2.szoszok[i]));
@@ -244,7 +244,7 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
     }
   }
   console.log(sorszam.sorszam);
-  location.replace("http://localhost:5173/sorszam")
+  // location.replace("http://localhost:5173/sorszam");
 }
 
 export function DeleteFromBasket() {
@@ -306,15 +306,18 @@ async function Rendeles_Cucc(
   basketData.append("csipos", csipos);
   basketData.append("hagyma", hagyma);
   console.log(basketData.getAll("egyeb"));
+  console.log(basketData.getAll("szendvics"));
   var requestOptions = {
     method: "POST",
     body: basketData,
   };
   new Promise((resolve, reject) => {
-    fetch(
-      `http://localhost/pollakbufe/nologin/ujrendeles`,
-      requestOptions
-    ).catch((error) => console.log("error", error));
+    fetch(`https://pollakbufe.hu/noLogin/ujrendeles`, requestOptions)
+      .then(async (result) => {
+        const res = await result.text();
+        console.log(res);
+      })
+      .catch((error) => console.log("error", error));
   });
 }
 
@@ -345,3 +348,24 @@ export async function SzunetEltarolasa() {
   }
 }
 
+export async function Login(username, password) {
+  return new Promise((resolve, reject) => {
+    fetch(`https://auth.pollak.info/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+      .then(async (result) => {
+        const res = await result.text();
+        const valasz = JSON.parse(res);
+        console.log(valasz);
+        resolve(valasz);
+      })
+      .catch((error) => console.log("error", error));
+  });
+}

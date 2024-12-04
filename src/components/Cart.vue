@@ -18,17 +18,17 @@ import {
 } from "../config/lekerdezes";
 import Card from "./Card.vue";
 
-let szunet = storeszunet.elsoszunet[0].elsoszunet
-let kivalasztottSzunet = storeszunet.elsoszunet[0].elsoszunet
+let szunet = storeszunet.elsoszunet[0].elsoszunet;
+let kivalasztottSzunet = storeszunet.elsoszunet[0].elsoszunet;
 const szunetek = ref(null);
 let elsoszunet = ref(null);
 onMounted(async () => {
-  elsoszunet.value = await AktualisSzunetLekerdezes()
-  elsoszunet.value = elsoszunet.value[0].id 
+  elsoszunet.value = await AktualisSzunetLekerdezes();
+  elsoszunet.value = elsoszunet.value[0].id;
   szunetek.value = await SzunetLekerdezes();
 });
 
-const selectedIndex = ref(szunet-1);
+const selectedIndex = ref(szunet - 1);
 const options = ref([
   "1.Szünet",
   "2.Szünet",
@@ -37,7 +37,6 @@ const options = ref([
   "5.Szünet",
   "6.Szünet",
   "7.Szünet",
-
 ]);
 
 const trackStyle = computed(() => {
@@ -52,7 +51,6 @@ const trackStyle = computed(() => {
   };
 });
 
-
 const paymentMethod = ref("");
 const selectPayment = (method) => {
   paymentMethod.value = method;
@@ -62,7 +60,7 @@ const nextOption = () => {
   if (selectedIndex.value < options.value.length - 1) {
     selectedIndex.value++;
     kivalasztottSzunet = kivalasztottSzunet + 1;
-    console.log(kivalasztottSzunet)
+    console.log(kivalasztottSzunet);
   }
 };
 
@@ -70,7 +68,7 @@ const prevOption = () => {
   if (selectedIndex.value >= storeszunet.elsoszunet[0].elsoszunet) {
     selectedIndex.value--;
     kivalasztottSzunet = kivalasztottSzunet - 1;
-    console.log(kivalasztottSzunet)
+    console.log(kivalasztottSzunet);
   }
 };
 
@@ -88,16 +86,18 @@ const rendelesleadas = () => {
   );
   Rendeles_Cucc2(kivalasztottSzunet, paymentMethod.value);
 };
-
 </script>
 
 <template>
   <div>
-    <h1 class="text-[#554b4b] arnyek text-7xl mb-10 mt-10 text-center">{{ title }}</h1>
+    <h1 class="text-[#554b4b] arnyek text-7xl mb-10 mt-10 text-center">
+      {{ title }}
+    </h1>
 
     <div class="flex-container">
-      <Card v-if="store2.kosar.length > 0"
-         v-for="(n, index) in store2.kosar"
+      <Card
+        v-if="store2.kosar.length > 0"
+        v-for="(n, index) in store2.kosar"
         :key="n.darab[0].id"
         :id="n.darab[0].id"
         :nev="n.darab[0].etel_nev"
@@ -107,20 +107,21 @@ const rendelesleadas = () => {
         :mustar="store2.szoszok[index].mustar"
         :majonez="store2.szoszok[index].majonez"
         :csipos="store2.szoszok[index].csipos"
-        :index = index
-        :italiksz = 0
+        :index="index"
+        :italiksz="0"
       />
-      <Card v-if="storeExtra.kosarExtra.length > 0"
+      <Card
+        v-if="storeExtra.kosarExtra.length > 0"
         v-for="g in storeExtra.kosarExtra"
         :key="g.darabExtra[0].id"
         :id="g.darabExtra[0].id"
         :nev="g.darabExtra[0].etel_nev"
         :ar="g.darabExtra[0].ar"
         :kep="g.darabExtra[0].kep"
-        :italiksz = 1
+        :italiksz="1"
       />
     </div>
-    
+
     <div class="mt-36 text-center mb-5">
       <h2 class="mt-16 text-6xl text-[#554b4b] arnyek mb-6">Fizetési Mód</h2>
       <div class="flex justify-center gap-12">
@@ -154,7 +155,10 @@ const rendelesleadas = () => {
       Melyik szünetre kéred?:
     </div>
 
-    <div class="date-slider-container text-4xl" v-if="storeszunet.elsoszunet[0].elsoszunet != 0">
+    <div
+      class="date-slider-container text-4xl"
+      v-if="storeszunet.elsoszunet[0].elsoszunet != 0"
+    >
       <button @click="prevOption" class="slider-btn">◄</button>
       <div class="date-slider">
         <div class="slider-track" :style="trackStyle">
@@ -170,18 +174,23 @@ const rendelesleadas = () => {
       <button @click="nextOption(index)" class="slider-btn">►</button>
     </div>
     <div v-if="storeszunet.elsoszunet[0].elsoszunet == 0">
-      <h1 class="text-center text-4xl text-[#554b4b] mt-4 pb-40">Sajnos mára már nem tudsz rendelni!</h1>
+      <h1 class="text-center text-4xl text-[#554b4b] mt-4 pb-40">
+        Sajnos mára már nem tudsz rendelni!
+      </h1>
     </div>
   </div>
 
-  <div class="absolute mt-20 mr-20 left-60 mx-6 text-right" v-if="storeszunet.elsoszunet[0].elsoszunet != 0 && store.kosar[0].darab !== 0">
-      <button
-        class="border rounded-full border-black bg-gradient-to-r from-[#d8dcff] to-[#737edf] p-3 px-12 text-[#554b4b] text-6xl h-28 shadow-lg drop-shadow-lg focus:outline-none"
-        @click="rendelesleadas"
-      >
-        Rendelés leadása
-      </button>
-    </div>
+  <div
+    class="absolute mt-20 mr-20 left-60 mx-6 text-right"
+    v-if="storeszunet.elsoszunet[0].elsoszunet != 0"
+  >
+    <button
+      class="border rounded-full border-black bg-gradient-to-r from-[#d8dcff] to-[#737edf] p-3 px-12 text-[#554b4b] text-6xl h-28 shadow-lg drop-shadow-lg focus:outline-none"
+      @click="rendelesleadas"
+    >
+      Rendelés leadása
+    </button>
+  </div>
 </template>
 
 <style scoped>
@@ -264,34 +273,33 @@ const rendelesleadas = () => {
 /* Flex container for the cards (ensure they don't collapse) */
 .flex-container {
   display: flex;
-  flex-wrap: wrap;  /* Allow wrapping to next row */
+  flex-wrap: wrap; /* Allow wrapping to next row */
   justify-content: center; /* Center the items */
-  gap: 16px;  /* Space between items */
+  gap: 16px; /* Space between items */
 }
 
 /* Card styles */
 .card {
-  min-width: 250px;  /* Prevent shrinking smaller than 250px */
-  max-width: 320px;  /* Set a max-width to avoid stretching too large */
-  flex: 1 1 auto;  /* Flex-grow and flex-shrink set to auto */
-  box-sizing: border-box;  /* Prevents padding from affecting width */
+  min-width: 250px; /* Prevent shrinking smaller than 250px */
+  max-width: 320px; /* Set a max-width to avoid stretching too large */
+  flex: 1 1 auto; /* Flex-grow and flex-shrink set to auto */
+  box-sizing: border-box; /* Prevents padding from affecting width */
   margin-bottom: 16px; /* Adds space between rows if wrapping */
 }
 
 /* For smaller screens, let the cards take full width */
 @media (max-width: 768px) {
   .card {
-    min-width: 100%;  /* Cards take full width on small screens */
-    max-width: 100%;  /* Ensure no stretching */
+    min-width: 100%; /* Cards take full width on small screens */
+    max-width: 100%; /* Ensure no stretching */
   }
 }
 
 /* For very small screens */
 @media (max-width: 480px) {
   .card {
-    min-width: 100%;  /* Full width for tiny screens */
-    max-width: 100%;  /* Full width for tiny screens */
+    min-width: 100%; /* Full width for tiny screens */
+    max-width: 100%; /* Full width for tiny screens */
   }
 }
-
 </style>

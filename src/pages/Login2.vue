@@ -1,10 +1,21 @@
 <script setup>
 import { ref } from "vue";
+import { Login } from "../config/lekerdezes";
 
 // Reaktív változó a jelszó láthatóságának kezeléséhez
 const isPasswordVisible = ref(false);
 
+const username = ref("");
+const password = ref("");
 
+const login = async () => {
+  try {
+    const response = await Login(username.value.value, password.value.value);
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+  }
+};
 </script>
 
 <template>
@@ -12,17 +23,25 @@ const isPasswordVisible = ref(false);
     <form class="login-form">
       <h1>Login</h1>
       <label for="username">Felhasználónév</label>
-      <input type="text" id="username" />
+      <input type="text" id="username" ref="username" />
 
       <label for="password">Jelszó</label>
-      <input :type="isPasswordVisible ? 'text' : 'password'" id="password" />
+      <input
+        :type="isPasswordVisible ? 'text' : 'password'"
+        id="password"
+        ref="password"
+      />
 
       <div class="show-password">
-        <input type="checkbox" id="togglePassword" v-model="isPasswordVisible" />
+        <input
+          type="checkbox"
+          id="togglePassword"
+          v-model="isPasswordVisible"
+        />
         <label for="togglePassword"></label>
       </div>
 
-      <button type="submit">Login</button>
+      <button type="submit" @click.prevent="login()">Login</button>
     </form>
   </div>
 </template>
@@ -90,7 +109,7 @@ button {
   color: white;
   border: none;
   border-radius: 4px;
-  font-size: 30px ;
+  font-size: 30px;
   cursor: pointer;
 }
 
