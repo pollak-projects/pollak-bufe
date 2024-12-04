@@ -5,9 +5,9 @@ import { store_login } from "../config/store.js";
 
 const router = useRouter();
 
-// if (store_login != true) {
-//     router.push('/login');
-// }
+if (store_login.loggedIn != true) {
+  router.push("/login");
+}
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 import { callWithAsyncErrorHandling, ref } from "vue";
 import { sorszam, store, storeExtra, storeszunet } from "../config/store.js";
-import { store2, store3 } from "../config/store.js";
+import { store2, store3, store_login } from "../config/store.js";
 
 export async function Burgercucc(termek) {
   var requestOptions = {
@@ -299,12 +299,19 @@ async function Rendeles_Cucc(
   csipos,
   hagyma
 ) {
+  const paredJwt = parseJwt(store_login.access_token);
+
+  console.log(paredJwt);
+
   basketData.append("szendvics", szendvicsId);
   basketData.append("mustar", mustar);
   basketData.append("ketchup", ketchup);
   basketData.append("majonez", majonez);
   basketData.append("csipos", csipos);
   basketData.append("hagyma", hagyma);
+  basketData.append("access_token", store_login.access_token);
+  basketData.append("sub", paredJwt.sub);
+  basketData.append("group", paredJwt.userGroup);
   console.log(basketData.getAll("egyeb"));
   console.log(basketData.getAll("szendvics"));
   var requestOptions = {
@@ -319,6 +326,11 @@ async function Rendeles_Cucc(
       })
       .catch((error) => console.log("error", error));
   });
+}
+
+function parseJwt(token) {
+  let tokens = token.split(".");
+  return JSON.parse(atob(tokens[1]));
 }
 
 function GetItalCountInBasket() {

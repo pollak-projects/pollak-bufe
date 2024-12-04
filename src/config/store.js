@@ -1,36 +1,43 @@
 import { reactive } from "vue";
 
 export const store = reactive({
-    kosar: [{
-        darab: 0,
-    }]
-})
+  kosar: [
+    {
+      darab: 0,
+    },
+  ],
+});
 
 export const store2 = reactive({
-    kosar: [{
-        darab: "",
-    }],
-    szoszok: []
-})
+  kosar: [
+    {
+      darab: "",
+    },
+  ],
+  szoszok: [],
+});
 export const storeExtra = reactive({
-    kosarExtra: [],
-})
+  kosarExtra: [],
+});
 
 export const storeszunet = reactive({
-    elsoszunet: [{
-        elsoszunet: 0,
-    }]
-})
+  elsoszunet: [
+    {
+      elsoszunet: 0,
+    },
+  ],
+});
 
 export const store3 = reactive({
-    van: false
-})
-
+  van: false,
+});
 
 export const sorszam = reactive({
-  sorszam: 0
+  sorszam: 0,
 });
 
 export const store_login = reactive({
-    loggedIn : false
-})
+  loggedIn: false,
+  access_token: "",
+  refresh_token: "",
+});
