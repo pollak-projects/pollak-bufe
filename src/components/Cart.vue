@@ -17,6 +17,7 @@ import {
   DeleteSzendvics,
 } from "../config/lekerdezes";
 import Card from "./Card.vue";
+import { useRouter } from "vue-router";
 
 let szunet = storeszunet.elsoszunet[0].elsoszunet;
 let kivalasztottSzunet = storeszunet.elsoszunet[0].elsoszunet;
@@ -38,6 +39,8 @@ const options = ref([
   "6.Szünet",
   "7.Szünet",
 ]);
+
+const router = useRouter();
 
 const trackStyle = computed(() => {
   const itemWidth = 140;
@@ -79,12 +82,14 @@ const rendelesleadas = () => {
   }
 
   store.kosar = [];
-  alert(
-    `Rendelés leadva! Fizetési mód: ${
-      paymentMethod.value === "1" ? "Bankkártya" : "Készpénz"
-    }`
-  );
-  Rendeles_Cucc2(kivalasztottSzunet, paymentMethod.value);
+  // alert(
+  //   `Rendelés leadva! Fizetési mód: ${
+  //     paymentMethod.value === "1" ? "Bankkártya" : "Készpénz"
+  //   }`
+  // );
+  Rendeles_Cucc2(kivalasztottSzunet, paymentMethod.value).then(() => {
+    router.push("/sorszam");
+  });
 };
 </script>
 
