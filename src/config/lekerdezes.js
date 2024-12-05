@@ -371,6 +371,7 @@ export async function Login(username, password) {
         username: username,
         password: password,
       }),
+      credentials: "include",
     })
       .then(async (result) => {
         const res = await result.text();
