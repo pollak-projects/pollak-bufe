@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
 import { store_login } from "../config/store";
 
 const router = createRouter({
@@ -62,11 +62,14 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach(async (to, from)=> {
-  const accessToken = document.cookie.split('; ').find(row => row.startsWith('access_token='));
-  if (!accessToken && to.name !== 'Login') {
-    return { name: 'Login' };
+router.beforeEach(async (to, from) => {
+  const accessToken = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("access_token="));
+  console.log("token", accessToken);
+  if (!accessToken && to.name !== "Login") {
+    return { name: "Login" };
   }
-})
+});
 
 export default router;
