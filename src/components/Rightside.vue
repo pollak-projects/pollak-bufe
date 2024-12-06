@@ -22,19 +22,19 @@ onMounted(async () => {
     {{ title }}
   </h1>
   <div
-    class="flex gap-10 h-[calc(100%-7rem)] justify-center flex-wrap content-start overflow-x-hidden overflow-y-auto pb-10"
+    class="flex gap-10 h-[calc(100%-7rem)] justify-center flex-wrap content-start overflow-x-hidden overflow-y-auto pb-20"
   >
     <Card
       v-for="kajak in re"
-      :id = "kajak.id"
+      :id="kajak.id"
       :nev="kajak.etel_nev"
       :ar="kajak.ar"
       :kep="kajak.kep"
       :extra="kajak.extra"
-      :ketchup ="0"
-      :mustar ="0"
-      :majonez ="0"
-      :csipos ="0"
+      :ketchup="0"
+      :mustar="0"
+      :majonez="0"
+      :csipos="0"
     />
   </div>
 </template>
