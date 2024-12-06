@@ -16,9 +16,9 @@ const login = async () => {
   try {
     const response = await Login(username.value.value, password.value.value);
     console.log(response);
-    store_login.access_token = response.access_token;
-    store_login.refresh_token = response.refresh_token;
-    store_login.loggedIn = true;
+    // store_login.access_token = response.access_token;
+    // store_login.refresh_token = response.refresh_token;
+    // store_login.loggedIn = true;
     router.push("/kezdes");
   } catch (error) {
     console.error(error);

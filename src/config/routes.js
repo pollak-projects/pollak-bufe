@@ -63,8 +63,9 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from)=> {
-  if(store_login.loggedIn != true && to.name !== 'Login') {
-    return { name: 'Login'}
+  const accessToken = document.cookie.split('; ').find(row => row.startsWith('access_token='));
+  if (!accessToken && to.name !== 'Login') {
+    return { name: 'Login' };
   }
 })
 
