@@ -1,13 +1,6 @@
 <script setup>
-import { RouterLink, useRouter } from "vue-router";
+import { RouterLink } from "vue-router";
 import { SzunetEltarolasa } from "../config/lekerdezes";
-import { store_login } from "../config/store.js";
-
-const router = useRouter();
-
-if (store_login.loggedIn != true) {
-  router.push("/login");
-}
 </script>
 
 <template>
