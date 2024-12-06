@@ -68,6 +68,11 @@ router.beforeEach(async (to, from) => {
     .find((row) => row.startsWith("access_token="));
   console.log("token", accessToken);
   console.log("is authenticated", !accessToken && to.name !== "Login");
+
+  if (to.name === "Login" && accessToken) {
+    return { name: "Kezdés" };
+  }
+
   if (!accessToken && to.name !== "Login") {
     return { name: "Login" };
   }
