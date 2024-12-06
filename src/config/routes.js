@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { store_login } from "../config/store";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -60,5 +61,11 @@ const router = createRouter({
     },
   ],
 });
+
+router.beforeEach(async (to, from)=> {
+  if(store_login.loggedIn != true && to.name !== 'Login') {
+    return { name: 'Login'}
+  }
+})
 
 export default router;
