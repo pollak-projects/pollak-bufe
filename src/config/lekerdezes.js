@@ -309,14 +309,16 @@ async function Rendeles_Cucc(
   basketData.append("majonez", majonez);
   basketData.append("csipos", csipos);
   basketData.append("hagyma", hagyma);
-  basketData.append("access_token", store_login.access_token);
-  basketData.append("sub", paredJwt.sub);
-  basketData.append("group", paredJwt.userGroup);
-  console.log(basketData.getAll("egyeb"));
-  console.log(basketData.getAll("szendvics"));
+  // TODO:Need to send and accept cookies
+  // basketData.append("access_token", store_login.access_token);
+  // basketData.append("sub", paredJwt.sub);
+  // basketData.append("group", paredJwt.userGroup);
+  // console.log(basketData.getAll("egyeb"));
+  // console.log(basketData.getAll("szendvics"));
   var requestOptions = {
     method: "POST",
     body: basketData,
+    credentials: "include",
   };
   new Promise((resolve, reject) => {
     fetch(`https://pollakbufe.hu/noLogin/ujrendeles`, requestOptions)
