@@ -81,13 +81,17 @@ const rendelesleadas = () => {
     return;
   }
 
-  store.kosar = [];
   // alert(
   //   `Rendelés leadva! Fizetési mód: ${
   //     paymentMethod.value === "1" ? "Bankkártya" : "Készpénz"
   //   }`
   // );
   Rendeles_Cucc2(kivalasztottSzunet, paymentMethod.value).then(() => {
+    store.kosar = [
+      {
+        darab: 0,
+      },
+    ];
     router.push("/sorszam");
   });
 };
