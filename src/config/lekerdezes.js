@@ -225,27 +225,25 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
   let utolsoSorszam = await UtolsoSorszam();
   sorszam.sorszam = await UtolsoNapiSorszam();
   let ital = basketData.getAll("egyeb");
-  console.log(ital);
   basketData.append("sorszam", utolsoSorszam + 1);
-  for (let i = 0; i < store2.kosar.length; i++) {
-    const data = JSON.parse(JSON.stringify(store2.kosar[i].darab));
-    const dataszosz = JSON.parse(JSON.stringify(store2.szoszok[i]));
-    Rendeles_Cucc(
-      data[0].id,
-      dataszosz.mustar,
-      dataszosz.ketchup,
-      dataszosz.majonez,
-      dataszosz.csipos,
-      dataszosz.hagyma
-    );
+  console.log(store.kosar[0].darab);
+  for (let i = 0; i < store.kosar[0].darab; i++) {
+    if (store2.kosar[i].darab != undefined) {
+      const data = JSON.parse(JSON.stringify(store2.kosar[i].darab));
+      const dataszosz = JSON.parse(JSON.stringify(store2.szoszok[i]));
+      Rendeles_Cucc(
+        data[0].id,
+        dataszosz.mustar,
+        dataszosz.ketchup,
+        dataszosz.majonez,
+        dataszosz.csipos,
+        dataszosz.hagyma
+      );
+    }
     console.log(ital.length);
     basketData.delete("egyeb");
-    // if (ital.length > 1) {
-    //   basketData.append("egyeb", ital[i]);
-    // }
-
-    for (let index = 0; index < ital.length; index++) {
-      basketData.append("egyeb", ital[index]);
+    if (ital.length >= 1) {
+      basketData.append("egyeb", ital[i]);
     }
   }
   console.log(sorszam.sorszam);
