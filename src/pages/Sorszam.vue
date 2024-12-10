@@ -14,7 +14,7 @@ onMounted(async () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        order_number: sorszam,
+        order_number: sorszam.sorszam,
       }),
     })
     .then(async (result) => {
