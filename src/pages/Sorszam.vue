@@ -44,7 +44,7 @@ onMounted(async () => {
     <div class="flex justify-center items-center h-7/16">
       <div class="kulsonegy flex justify-center items-center">
         <div class="belsonegy flex justify-center items-center" id="sorszamDiv">
-          {{ re }}
+          {{ re + 1 }}
         </div>
       </div>
     </div>
