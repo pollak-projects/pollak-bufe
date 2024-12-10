@@ -228,23 +228,25 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
   basketData.append("sorszam", utolsoSorszam + 1);
   console.log(store.kosar);
   for (let i = 0; i < 4; i++) {
+    let data;
+    let dataszosz;
     if (store2.kosar[i] != undefined) {
-      const data = JSON.parse(JSON.stringify(store2.kosar[i].darab));
-      const dataszosz = JSON.parse(JSON.stringify(store2.szoszok[i]));
-      Rendeles_Cucc(
-        data[0].id,
-        dataszosz.mustar,
-        dataszosz.ketchup,
-        dataszosz.majonez,
-        dataszosz.csipos,
-        dataszosz.hagyma
-      );
+      data = JSON.parse(JSON.stringify(store2.kosar[i].darab));
+      dataszosz = JSON.parse(JSON.stringify(store2.szoszok[i]));
     }
     console.log(ital.length);
     basketData.delete("egyeb");
     if (ital.length >= 1) {
       basketData.append("egyeb", ital[i]);
     }
+    Rendeles_Cucc(
+      data[0].id,
+      dataszosz.mustar,
+      dataszosz.ketchup,
+      dataszosz.majonez,
+      dataszosz.csipos,
+      dataszosz.hagyma
+    );
   }
   console.log(sorszam.sorszam);
   // location.replace("http://localhost:5173/sorszam");
