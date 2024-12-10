@@ -225,9 +225,10 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
   let utolsoSorszam = await UtolsoSorszam();
   sorszam.sorszam = await UtolsoNapiSorszam();
   let ital = basketData.getAll("egyeb");
+  let szendvics = basketData.getAll("szendvics");
   basketData.append("sorszam", utolsoSorszam + 1);
   console.log(store.kosar);
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < ital+szendvics-1; i++) {
     let data;
     let dataszosz;
     if (store2.kosar[i] != undefined) {
