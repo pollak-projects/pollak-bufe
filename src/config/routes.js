@@ -66,8 +66,6 @@ router.beforeEach(async (to, from) => {
   const accessToken = document.cookie
     .split("; ")
     .find((row) => row.startsWith("access_token="));
-  console.log("token", accessToken);
-  console.log("is authenticated", !accessToken && to.name !== "Login");
 
   if (to.name === "Login" && accessToken) {
     return { name: "Kezdés" };
