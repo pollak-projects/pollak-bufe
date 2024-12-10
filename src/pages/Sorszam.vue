@@ -8,6 +8,23 @@ const router = useRouter();
 const re = ref(0);
 onMounted(async () => {
   re.value = await UtolsoNapiSorszam();
+  fetch(`https://localhost:5000/print`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        order_number: sorszam,
+      }),
+      credentials: "include",
+    })
+    .then(async (result) => {
+        const res = await result.text();
+        const valasz = JSON.parse(res);
+        console.log(valasz);
+        resolve(valasz);
+      })
+      .catch((error) => console.log("error", error));
   setTimeout(() => {
     router.push('/Kezdes');
   }, 5000); 
