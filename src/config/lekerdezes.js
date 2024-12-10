@@ -239,14 +239,18 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
     if (ital.length >= 1) {
       basketData.append("egyeb", ital[i]);
     }
-    Rendeles_Cucc(
-      data[0].id,
-      dataszosz.mustar,
-      dataszosz.ketchup,
-      dataszosz.majonez,
-      dataszosz.csipos,
-      dataszosz.hagyma
-    );
+    if (store2.kosar[i] != undefined)
+      Rendeles_Cucc(
+        data[0].id,
+        dataszosz.mustar,
+        dataszosz.ketchup,
+        dataszosz.majonez,
+        dataszosz.csipos,
+        dataszosz.hagyma
+      );
+    else {
+      Rendeles_Cucc(0, 0, 0, 0, 0, 0);
+    }
   }
   console.log(sorszam.sorszam);
   // location.replace("http://localhost:5173/sorszam");
