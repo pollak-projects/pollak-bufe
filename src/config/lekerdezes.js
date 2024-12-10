@@ -226,20 +226,22 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
   sorszam.sorszam = await UtolsoNapiSorszam();
   let ital = basketData.getAll("egyeb");
   basketData.append("sorszam", utolsoSorszam + 1);
-  for (let i = 0; i < store2.kosar.length; i++) {
-    const data = JSON.parse(JSON.stringify(store2.kosar[i].darab));
-    const dataszosz = JSON.parse(JSON.stringify(store2.szoszok[i]));
-    Rendeles_Cucc(
-      data[0].id,
-      dataszosz.mustar,
-      dataszosz.ketchup,
-      dataszosz.majonez,
-      dataszosz.csipos,
-      dataszosz.hagyma
-    );
+  for (let i = 0; i < store.kosar[0].darab; i++) {
+    if (store2.kosar[i].darab != undefined) {
+      const data = JSON.parse(JSON.stringify(store2.kosar[i].darab));
+      const dataszosz = JSON.parse(JSON.stringify(store2.szoszok[i]));
+      Rendeles_Cucc(
+        data[0].id,
+        dataszosz.mustar,
+        dataszosz.ketchup,
+        dataszosz.majonez,
+        dataszosz.csipos,
+        dataszosz.hagyma
+      );
+    }
     console.log(ital.length);
     basketData.delete("egyeb");
-    if (ital.length > 1) {
+    if (ital.length >= 1) {
       basketData.append("egyeb", ital[i]);
     }
   }
