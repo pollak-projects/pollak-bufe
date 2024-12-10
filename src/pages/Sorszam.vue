@@ -8,7 +8,7 @@ const router = useRouter();
 const re = ref(0);
 onMounted(async () => {
   re.value = await UtolsoNapiSorszam();
-  fetch(`https:localhost:5000`, {
+  fetch(`https://localhost:5000`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
