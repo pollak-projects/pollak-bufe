@@ -16,7 +16,6 @@ onMounted(async () => {
       body: JSON.stringify({
         order_number: sorszam,
       }),
-      credentials: "include",
     })
     .then(async (result) => {
         const res = await result.text();
