@@ -7,6 +7,7 @@ import { ToBasket } from "../config/lekerdezes.js";
 function navBack() {
   history.back();
 }
+
 function openModal() {
   const modal = document.getElementById("modalUres");
   console.log("Modal elem:", modal); // Ellenőrzéshez
@@ -21,7 +22,6 @@ function openModal() {
     modal.style.display = "none"; // 800ms után elrejtjük
   }, 800);
 }
-
 
 function Teszt() {
   console.log("Kosár állapota:", store.kosar, store3.van); // Ellenőrzés
@@ -42,7 +42,7 @@ function Teszt() {
     @click="navBack()"
   />
   <RouterLink
-   @click.prevent="Teszt()"
+    @click.prevent="Teszt()"
     :to="ToBasket()"
     class="h-14 w-14 absolute right-20 top-28 flex items-baseline"
   >
@@ -53,7 +53,7 @@ function Teszt() {
   <div class="w-full h-screen max-h-screen p-4 text-center mt-12 -ml-4">
     <Rightside title="Italok" queryType="italok" :elemek="italok" />
   </div>
-    <div class="ures-modal-background" id="modalUres">
+  <div class="ures-modal-background" id="modalUres">
     <div class="ures-modal-content">
       <h2>Először válassz ennivalót!</h2>
     </div>
