@@ -230,6 +230,12 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
   for (let i = 0; i < store2.kosar.length; i++) {
     const data = JSON.parse(JSON.stringify(store2.kosar[i].darab));
     const dataszosz = JSON.parse(JSON.stringify(store2.szoszok[i]));
+
+    basketData.delete("egyeb");
+    for (let index = 0; index < ital.length; index++) {
+      basketData.append("egyeb", ital[index]);
+    }
+
     Rendeles_Cucc(
       data[0].id,
       dataszosz.mustar,
@@ -239,14 +245,10 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
       dataszosz.hagyma
     );
     console.log(ital.length);
-    basketData.delete("egyeb");
+    // basketData.delete("egyeb");
     // if (ital.length > 1) {
     //   basketData.append("egyeb", ital[i]);
     // }
-
-    for (let index = 0; index < ital.length; index++) {
-      basketData.append("egyeb", ital[index]);
-    }
   }
   console.log(sorszam.sorszam);
   // location.replace("http://localhost:5173/sorszam");
