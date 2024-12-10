@@ -227,7 +227,7 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
   let ital = basketData.getAll("egyeb");
   let szendvics = basketData.getAll("szendvics");
   basketData.append("sorszam", utolsoSorszam + 1);
-  console.log("kosar:", store.kosar[0]);
+  console.log("kosar:", store.kosar);
   for (let i = 0; i < store.kosar[0].darab; i++) {
     let data;
     let dataszosz;
