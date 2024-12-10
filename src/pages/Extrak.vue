@@ -13,21 +13,6 @@ function navBack() {
   history.back();
 }
 
-function openModal() {
-  const modal = document.getElementById("modalUres");
-  console.log("Modal elem:", modal); // Ellenőrzéshez
-  if (!modal) {
-    console.error("A modális elem nem található a DOM-ban!");
-    return;
-  }
-
-  modal.style.display = "flex"; // Megjelenítjük a modált
-
-  setTimeout(() => {
-    modal.style.display = "none"; // 800ms után elrejtjük
-  }, 800);
-}
-
 function Teszt() {
   console.log("Kosár állapota:", store.kosar, store3.van); // Ellenőrzés
   if (!store3.van) {
