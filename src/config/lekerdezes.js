@@ -233,6 +233,7 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
 
     basketData.delete("egyeb");
     for (let index = 0; index < ital.length; index++) {
+      console.log(`ital: ${index}: ${ital[index]}`);
       basketData.append("egyeb", ital[index]);
     }
 
