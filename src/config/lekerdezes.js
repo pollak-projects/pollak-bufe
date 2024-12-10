@@ -222,13 +222,16 @@ export function ToBasket() {
 export async function Rendeles_Cucc2(szunet, bankkartya) {
   basketData.append("szunet", szunet);
   basketData.append("bankkartya", bankkartya);
+  let count = store.kosar[0]?.darab;
   let utolsoSorszam = await UtolsoSorszam();
   sorszam.sorszam = await UtolsoNapiSorszam();
   let ital = basketData.getAll("egyeb");
   let szendvics = basketData.getAll("szendvics");
   basketData.append("sorszam", utolsoSorszam + 1);
-  console.log("kosar:", store.kosar);
-  for (let i = 0; i < store.kosar[0].darab; i++) {
+  for (const element of basketData.getAll("egyeb")) {
+  }
+  console.log("------kosar count:", count);
+  for (let i = 0; i < count; i++) {
     let data;
     let dataszosz;
     if (store2.kosar[i] != undefined) {
