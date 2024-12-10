@@ -299,9 +299,8 @@ async function Rendeles_Cucc(
   csipos,
   hagyma
 ) {
-  const paredJwt = parseJwt(store_login.access_token);
-
-  console.log(paredJwt);
+  // const paredJwt = parseJwt(store_login.access_token);
+  // console.log(paredJwt);
 
   basketData.append("szendvics", szendvicsId);
   basketData.append("mustar", mustar);
