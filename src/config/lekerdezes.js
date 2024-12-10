@@ -239,8 +239,12 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
     );
     console.log(ital.length);
     basketData.delete("egyeb");
-    if (ital.length > 1) {
-      basketData.append("egyeb", ital[i]);
+    // if (ital.length > 1) {
+    //   basketData.append("egyeb", ital[i]);
+    // }
+
+    for (let index = 0; index < ital.length; index++) {
+      basketData.append("egyeb", ital[index]);
     }
   }
   console.log(sorszam.sorszam);
