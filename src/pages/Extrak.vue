@@ -2,7 +2,6 @@
 import ExtraCard from "../components/ExtraCard.vue";
 import { routerKey, useRoute, useRouter } from "vue-router";
 import { AddElementsToBasket, GetFormData } from "../config/lekerdezes.js";
-import { store } from "../config/store.js";
 import { defineModel } from "vue";
 import Navigation from "../components/navigation.vue";
 import { termekLekerdezes } from "../config/lekerdezes.js";
