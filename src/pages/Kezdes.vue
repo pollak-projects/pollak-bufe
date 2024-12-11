@@ -5,7 +5,11 @@ import { SzunetEltarolasa } from "../config/lekerdezes";
 
 <template>
   <div class="h-screen">
-    <img class="logo w-screen absolute move" src="/public/logo.png" alt="" />
+    <img
+      class="logo w-screen absolute move left-16 top-16"
+      src="/public/logo.png"
+      alt=""
+    />
     <h1
       class="w-screen h-1/3 flex justify-center items-end drop-shadow-2xl move"
     >
