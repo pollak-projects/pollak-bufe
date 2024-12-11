@@ -98,7 +98,7 @@ const rendelesleadas = () => {
 </script>
 
 <template>
-  <div class="overflow-y-auto">
+  <div class="overflow-y-auto max-h-screen">
     <div>
       <h1 class="text-[#554b4b] arnyek text-7xl mb-10 mt-10 text-center">
         {{ title }}
