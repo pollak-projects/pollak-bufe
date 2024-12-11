@@ -98,107 +98,111 @@ const rendelesleadas = () => {
 </script>
 
 <template>
-  <div>
-    <h1 class="text-[#554b4b] arnyek text-7xl mb-10 mt-10 text-center">
-      {{ title }}
-    </h1>
+  <div class="overflow-y-auto">
+    <div>
+      <h1 class="text-[#554b4b] arnyek text-7xl mb-10 mt-10 text-center">
+        {{ title }}
+      </h1>
 
-    <div class="flex-container">
-      <Card
-        v-if="store2.kosar.length > 0"
-        v-for="(n, index) in store2.kosar"
-        :key="n.darab[0].id"
-        :id="n.darab[0].id"
-        :nev="n.darab[0].etel_nev"
-        :ar="n.darab[0].ar"
-        :kep="n.darab[0].kep"
-        :ketchup="store2.szoszok[index].ketchup"
-        :mustar="store2.szoszok[index].mustar"
-        :majonez="store2.szoszok[index].majonez"
-        :csipos="store2.szoszok[index].csipos"
-        :index="index"
-        :italiksz="0"
-      />
-      <Card
-        v-if="storeExtra.kosarExtra.length > 0"
-        v-for="g in storeExtra.kosarExtra"
-        :key="g.darabExtra[0].id"
-        :id="g.darabExtra[0].id"
-        :nev="g.darabExtra[0].etel_nev"
-        :ar="g.darabExtra[0].ar"
-        :kep="g.darabExtra[0].kep"
-        :italiksz="1"
-      />
-    </div>
-
-    <div class="mt-36 text-center mb-5">
-      <h2 class="mt-16 text-6xl text-[#554b4b] arnyek mb-6">Fizetési Mód</h2>
-      <div class="flex justify-center gap-12">
-        <div
-          @click="selectPayment('1')"
-          :class="['payment-option', { selected: paymentMethod === '1' }]"
-        >
-          <img
-            src="../assets/card.png"
-            alt="Bankkártya"
-            class="w-64 h-64 mx-auto"
-          />
-          <p class="text-4xl text-[#554b4b] mt-2">Bankkártya</p>
-        </div>
-
-        <div
-          @click="selectPayment('0')"
-          :class="['payment-option', { selected: paymentMethod === '0' }]"
-        >
-          <img
-            src="../assets/cash.png"
-            alt="Készpénz"
-            class="w-64 h-64 mx-auto"
-          />
-          <p class="text-4xl text-[#554b4b] mt-2">Készpénz</p>
-        </div>
+      <div class="flex-container">
+        <Card
+          v-if="store2.kosar.length > 0"
+          v-for="(n, index) in store2.kosar"
+          :key="n.darab[0].id"
+          :id="n.darab[0].id"
+          :nev="n.darab[0].etel_nev"
+          :ar="n.darab[0].ar"
+          :kep="n.darab[0].kep"
+          :ketchup="store2.szoszok[index].ketchup"
+          :mustar="store2.szoszok[index].mustar"
+          :majonez="store2.szoszok[index].majonez"
+          :csipos="store2.szoszok[index].csipos"
+          :index="index"
+          :italiksz="0"
+        />
+        <Card
+          v-if="storeExtra.kosarExtra.length > 0"
+          v-for="g in storeExtra.kosarExtra"
+          :key="g.darabExtra[0].id"
+          :id="g.darabExtra[0].id"
+          :nev="g.darabExtra[0].etel_nev"
+          :ar="g.darabExtra[0].ar"
+          :kep="g.darabExtra[0].kep"
+          :italiksz="1"
+        />
       </div>
-    </div>
 
-    <div class="melyik_szunet text-[#554b4b] text-center arnyek text-6xl mt-36">
-      Melyik szünetre kéred?:
-    </div>
-
-    <div
-      class="date-slider-container text-4xl"
-      v-if="storeszunet.elsoszunet[0].elsoszunet != 0"
-    >
-      <button @click="prevOption" class="slider-btn">◄</button>
-      <div class="date-slider">
-        <div class="slider-track" :style="trackStyle">
+      <div class="mt-36 text-center mb-5">
+        <h2 class="mt-16 text-6xl text-[#554b4b] arnyek mb-6">Fizetési Mód</h2>
+        <div class="flex justify-center gap-12">
           <div
-            v-for="(option, index) in options"
-            :key="index"
-            :class="['date-item', { active: index === selectedIndex }]"
+            @click="selectPayment('1')"
+            :class="['payment-option', { selected: paymentMethod === '1' }]"
           >
-            {{ option }}
+            <img
+              src="../assets/card.png"
+              alt="Bankkártya"
+              class="w-64 h-64 mx-auto"
+            />
+            <p class="text-4xl text-[#554b4b] mt-2">Bankkártya</p>
+          </div>
+
+          <div
+            @click="selectPayment('0')"
+            :class="['payment-option', { selected: paymentMethod === '0' }]"
+          >
+            <img
+              src="../assets/cash.png"
+              alt="Készpénz"
+              class="w-64 h-64 mx-auto"
+            />
+            <p class="text-4xl text-[#554b4b] mt-2">Készpénz</p>
           </div>
         </div>
       </div>
-      <button @click="nextOption(index)" class="slider-btn">►</button>
-    </div>
-    <div v-if="storeszunet.elsoszunet[0].elsoszunet == 0">
-      <h1 class="text-center text-4xl text-[#554b4b] mt-4 pb-40">
-        Sajnos mára már nem tudsz rendelni!
-      </h1>
-    </div>
-  </div>
 
-  <div
-    class="absolute mt-20 mr-20 left-60 mx-6 text-right"
-    v-if="storeszunet.elsoszunet[0].elsoszunet != 0"
-  >
-    <button
-      class="border rounded-full border-black bg-gradient-to-r from-[#d8dcff] to-[#737edf] p-3 px-12 text-[#554b4b] text-6xl h-28 shadow-lg drop-shadow-lg focus:outline-none"
-      @click="rendelesleadas"
+      <div
+        class="melyik_szunet text-[#554b4b] text-center arnyek text-6xl mt-36"
+      >
+        Melyik szünetre kéred?:
+      </div>
+
+      <div
+        class="date-slider-container text-4xl"
+        v-if="storeszunet.elsoszunet[0].elsoszunet != 0"
+      >
+        <button @click="prevOption" class="slider-btn">◄</button>
+        <div class="date-slider">
+          <div class="slider-track" :style="trackStyle">
+            <div
+              v-for="(option, index) in options"
+              :key="index"
+              :class="['date-item', { active: index === selectedIndex }]"
+            >
+              {{ option }}
+            </div>
+          </div>
+        </div>
+        <button @click="nextOption(index)" class="slider-btn">►</button>
+      </div>
+      <div v-if="storeszunet.elsoszunet[0].elsoszunet == 0">
+        <h1 class="text-center text-4xl text-[#554b4b] mt-4 pb-40">
+          Sajnos mára már nem tudsz rendelni!
+        </h1>
+      </div>
+    </div>
+
+    <div
+      class="mt-20 mb-20 text-center"
+      v-if="storeszunet.elsoszunet[0].elsoszunet != 0"
     >
-      Rendelés leadása
-    </button>
+      <button
+        class="border rounded-full border-black bg-gradient-to-r from-[#d8dcff] to-[#737edf] p-3 px-12 text-[#554b4b] text-6xl h-28 shadow-lg drop-shadow-lg focus:outline-none"
+        @click="rendelesleadas"
+      >
+        Rendelés leadása
+      </button>
+    </div>
   </div>
 </template>
 
