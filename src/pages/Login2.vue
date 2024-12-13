@@ -17,8 +17,8 @@ const errorMsg = ref("");
 const login = async () => {
   try {
     const response = await Login(username.value.value, password.value.value);
-    if (response.data.message) {
-      errorMsg.value = response.data.message;
+    if (response.message) {
+      errorMsg.value = response.message;
     }
     router.push("/kezdes");
   } catch (error) {
