@@ -12,13 +12,14 @@ const router = useRouter();
 const username = ref("");
 const password = ref("");
 
+const errorMsg = ref("");
+
 const login = async () => {
   try {
     const response = await Login(username.value.value, password.value.value);
-    console.log(response);
-    // store_login.access_token = response.access_token;
-    // store_login.refresh_token = response.refresh_token;
-    // store_login.loggedIn = true;
+    if (response.data.message) {
+      errorMsg.value = response.data.message;
+    }
     router.push("/kezdes");
   } catch (error) {
     console.error(error);
@@ -46,7 +47,11 @@ const login = async () => {
           id="togglePassword"
           v-model="isPasswordVisible"
         />
-        <label for="togglePassword"></label>
+        <label for="togglePassword">Jelszó megjelenítése</label>
+      </div>
+
+      <div v-if="errorMsg" class="text-red-500 text-xs italic mb-5 mt-5">
+        {{ errorMsg }}
       </div>
 
       <button type="submit" @click.prevent="login()">Login</button>
