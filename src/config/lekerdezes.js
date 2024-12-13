@@ -219,7 +219,7 @@ export function ToBasket() {
   }
 }
 
-export async function Rendeles_Cucc2(szunet, bankkartya) {
+export async function Rendeles_Leadasa(szunet, bankkartya) {
   basketData.append("szunet", szunet);
   basketData.append("bankkartya", bankkartya);
   let utolsoSorszam = await UtolsoSorszam();
@@ -251,7 +251,7 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
       basketData.append("egyeb", ital[i]);
     }
     if (store2.kosar[i] != undefined)
-      Rendeles_Cucc(
+      Rendeles_Fetch(
         data[0].id,
         dataszosz.mustar,
         dataszosz.ketchup,
@@ -260,7 +260,7 @@ export async function Rendeles_Cucc2(szunet, bankkartya) {
         dataszosz.hagyma
       );
     else {
-      Rendeles_Cucc(0, 0, 0, 0, 0, 0);
+      Rendeles_Fetch(0, 0, 0, 0, 0, 0);
     }
   }
   console.log(sorszam.sorszam);
@@ -311,7 +311,7 @@ export function DeleteSzendvics(index) {
   }
 }
 
-async function Rendeles_Cucc(
+async function Rendeles_Fetch(
   szendvicsId,
   mustar,
   ketchup,
@@ -331,7 +331,6 @@ async function Rendeles_Cucc(
   basketData.append("majonez", majonez);
   basketData.append("csipos", csipos);
   basketData.append("hagyma", hagyma);
-  // TODO:Need to send and accept cookies
   basketData.append("access_token", accessToken.split("=")[1]);
   basketData.append("sub", parsedJwt.sub);
   basketData.append("group", parsedJwt.userGroup);
@@ -396,6 +395,25 @@ export async function Login(username, password) {
         password: password,
       }),
       credentials: "include",
+    })
+      .then(async (result) => {
+        const res = await result.text();
+        const valasz = JSON.parse(res);
+        console.log(valasz);
+        resolve(valasz);
+      })
+      .catch((error) => console.log("error", error));
+  });
+}
+
+export async function SendImage(image) {
+  return new Promise((resolve, reject) => {
+    fetch(`https://api-selfie.pollak.info/api/sender/send`, {
+      method: "POST",
+      body: JSON.stringify({
+        image: image,
+        path: "bufe-rendelesek",
+      }),
     })
       .then(async (result) => {
         const res = await result.text();

@@ -1,33 +1,28 @@
 <script setup>
-const props = defineProps({
-  title: String,
-});
-
 import { ref, computed, onMounted } from "vue";
 import { store, storeszunet } from "../config/store";
 import { store2 } from "../config/store";
 import { storeExtra } from "../config/store";
 import {
-  Rendeles_Cucc2,
-  GetExtraInBasket,
+  Rendeles_Leadasa,
   SzunetLekerdezes,
-  DeleteFromBasket,
-  DeleteExtra,
   AktualisSzunetLekerdezes,
-  DeleteSzendvics,
+  SendImage,
 } from "../config/lekerdezes";
 import Card from "./Card.vue";
 import { useRouter } from "vue-router";
 
+const props = defineProps({
+  title: String,
+});
+
 let szunet = storeszunet.elsoszunet[0].elsoszunet;
 let kivalasztottSzunet = storeszunet.elsoszunet[0].elsoszunet;
-const szunetek = ref(null);
 let elsoszunet = ref(null);
-onMounted(async () => {
-  elsoszunet.value = await AktualisSzunetLekerdezes();
-  elsoszunet.value = elsoszunet.value[0].id;
-  szunetek.value = await SzunetLekerdezes();
-});
+let image_data_url = "";
+const szunetek = ref(null);
+const video = ref(null);
+const canvas = ref(null);
 
 const selectedIndex = ref(szunet - 1);
 const options = ref([
@@ -41,6 +36,31 @@ const options = ref([
 ]);
 
 const router = useRouter();
+
+onMounted(async () => {
+  elsoszunet.value = await AktualisSzunetLekerdezes();
+  elsoszunet.value = elsoszunet.value[0].id;
+  szunetek.value = await SzunetLekerdezes();
+
+  // Get the video element
+  navigator.mediaDevices
+    .getUserMedia({ video: { width: 1920, height: 1080 }, audio: false })
+    .then((stream) => {
+      video.value.srcObject = stream;
+      video.value.play();
+
+      // Set video width and height to canvas
+      video.value.addEventListener("loadedmetadata", () => {
+        canvas.value.width = video.value.videoWidth;
+        canvas.value.height = video.value.videoHeight;
+        console.log(video.value.videoWidth, video.value.videoHeight);
+      });
+    })
+    .catch((err) => {
+      console.error("Error accessing media devices.", err);
+    });
+  video.value.addEventListener("playing", () => {});
+});
 
 const trackStyle = computed(() => {
   const itemWidth = 140;
@@ -81,20 +101,33 @@ const rendelesleadas = () => {
     return;
   }
 
-  // alert(
-  //   `Rendelés leadva! Fizetési mód: ${
-  //     paymentMethod.value === "1" ? "Bankkártya" : "Készpénz"
-  //   }`
-  // );
-  Rendeles_Cucc2(kivalasztottSzunet, paymentMethod.value).then(() => {
+  Rendeles_Leadasa(kivalasztottSzunet, paymentMethod.value).then(() => {
+    // Clear the cart
     store.kosar = [
       {
         darab: 0,
       },
     ];
+    takePicture();
+    SendImage(image_data_url);
+    // Forward to the next page
     router.push("/sorszam");
   });
 };
+
+function takePicture() {
+  if (video.value && video.value.readyState === 4) {
+    // Check if video is ready
+    canvas.value
+      .getContext("2d")
+      .drawImage(video.value, 0, 0, canvas.value.width, canvas.value.height);
+
+    image_data_url = canvas.value.toDataURL();
+    console.log(canvas.value.width, canvas.value.height);
+  } else {
+    console.warn("Video is not ready yet.");
+  }
+}
 </script>
 
 <template>
@@ -283,36 +316,32 @@ const rendelesleadas = () => {
   background: #f0f0f0;
 }
 
-/* Flex container for the cards (ensure they don't collapse) */
 .flex-container {
   display: flex;
-  flex-wrap: wrap; /* Allow wrapping to next row */
-  justify-content: center; /* Center the items */
-  gap: 16px; /* Space between items */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
 }
 
-/* Card styles */
 .card {
-  min-width: 250px; /* Prevent shrinking smaller than 250px */
-  max-width: 320px; /* Set a max-width to avoid stretching too large */
-  flex: 1 1 auto; /* Flex-grow and flex-shrink set to auto */
-  box-sizing: border-box; /* Prevents padding from affecting width */
-  margin-bottom: 16px; /* Adds space between rows if wrapping */
+  min-width: 250px;
+  max-width: 320px;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  margin-bottom: 16px;
 }
 
-/* For smaller screens, let the cards take full width */
 @media (max-width: 768px) {
   .card {
-    min-width: 100%; /* Cards take full width on small screens */
-    max-width: 100%; /* Ensure no stretching */
+    min-width: 100%;
+    max-width: 100%;
   }
 }
 
-/* For very small screens */
 @media (max-width: 480px) {
   .card {
-    min-width: 100%; /* Full width for tiny screens */
-    max-width: 100%; /* Full width for tiny screens */
+    min-width: 100%;
+    max-width: 100%;
   }
 }
 </style>
