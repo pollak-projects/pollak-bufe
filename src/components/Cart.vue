@@ -59,7 +59,6 @@ onMounted(async () => {
     .catch((err) => {
       console.error("Error accessing media devices.", err);
     });
-  video.value.addEventListener("playing", () => {});
 });
 
 const trackStyle = computed(() => {
@@ -139,8 +138,8 @@ function takePicture() {
 
       <div class="flex-container">
         <Card
-          v-if="store2.kosar.length > 0"
           v-for="(n, index) in store2.kosar"
+          v-if="store2.kosar.length > 0 && n.darab[0]"
           :key="n.darab[0].id"
           :id="n.darab[0].id"
           :nev="n.darab[0].etel_nev"
@@ -237,6 +236,12 @@ function takePicture() {
       </button>
     </div>
   </div>
+  <video
+    autoplay="true"
+    ref="video"
+    class="rounded-md w-[960px] hidden"
+  ></video>
+  <canvas ref="canvas" class="rounded-md absolute hidden"></canvas>
 </template>
 
 <style scoped>
