@@ -139,7 +139,7 @@ function takePicture() {
       <div class="flex-container">
         <Card
           v-for="(n, index) in store2.kosar"
-          v-if="store2.kosar.length > 0 && n.darab[0]"
+          v-if="store2.kosar.length > 0"
           :key="n.darab[0].id"
           :id="n.darab[0].id"
           :nev="n.darab[0].etel_nev"
