@@ -24,9 +24,9 @@ onMounted(async () => {
       resolve(valasz);
     })
     .catch((error) => console.log("error", error));
-  setTimeout(() => {
-    location.replace("https://bufe.pollak.info/Kezdes");
-  }, 5000);
+  // setTimeout(() => {
+  //   location.replace("https://bufe.pollak.info/Kezdes");
+  // }, 5000);
 });
 </script>
 <template>
