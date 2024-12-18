@@ -345,9 +345,37 @@ async function Rendeles_Fetch(
     fetch(`https://pollakbufe.hu/noLogin/ujrendeles`, requestOptions)
       .then(async (result) => {
         const res = await result.text();
+        if(res === "Hibás token") {
+          console.error("Token error")
+          await logout();
+          location.replace("https://bufe.pollak.info");
+        }
         console.log(res);
       })
       .catch((error) => console.log("error", error));
+  });
+}
+
+export async function logout() {
+  var requestOptions = {
+    method: "POST",
+  };
+  return new Promise((resolve, reject) => {
+    fetch(`https://auth.pollak.info/auth/logout`, requestOptions)
+      .then(async (result) => {
+        const res = await result.json();
+        deleteAllCookies();
+        resolve(res);
+      })
+      .catch((error) => console.log("error", error));
+  });
+}
+
+function deleteAllCookies() {
+  document.cookie.split(';').forEach(cookie => {
+      const eqPos = cookie.indexOf('=');
+      const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+      document.cookie = name + '=;domain=.pollak.info;expires=Thu, 01 Jan 1970 00:00:00 GMT';
   });
 }
 
