@@ -55,7 +55,7 @@ export async function AktualisSzunetLekerdezes() {
   var requestOptions = {
     method: "GET",
     headers: {
-      'Authorization': accessToken,
+      'X-Authorization': accessToken,
       'RefreshToken': refreshToken
     },
     credentials: "include",
