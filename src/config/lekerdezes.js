@@ -57,7 +57,8 @@ export async function AktualisSzunetLekerdezes() {
     headers: {
       'Authorization': accessToken,
       'RefreshToken': refreshToken
-    }
+    },
+    credentials: "include",
   };
   return new Promise((resolve, reject) => {
     fetch(`https://pollakbufe.hu/noLogin/aktualisSzunet`, requestOptions)
