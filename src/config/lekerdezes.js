@@ -49,16 +49,31 @@ export async function SzunetLekerdezes() {
 }
 
 export async function AktualisSzunetLekerdezes() {
+  const accessToken = document.cookie.replace(/ /g, '').split(";").find((row)=>row.startsWith("access_token"))
+  const refreshToken = document.cookie.replace(/ /g, '').split(";").find((row)=>row.startsWith("refresh_token"))
+
   var requestOptions = {
     method: "GET",
+    headers: {
+      'Authorization': accessToken,
+      'RefreshToken': refreshToken
+    }
   };
   return new Promise((resolve, reject) => {
     fetch(`https://pollakbufe.hu/noLogin/aktualisSzunet`, requestOptions)
       .then(async (result) => {
         const res = await result.text();
-        const valasz = JSON.parse(res);
-        console.log(valasz);
-        resolve(valasz);
+        console.log(res);
+
+        if(res === "Hibás token") {
+          await logout();
+          location.replace("https://bufe.pollak.info");
+          reject(res);
+        } else {
+          const valasz = JSON.parse(res);
+          console.log(valasz);
+          resolve(valasz);
+        }        
       })
       .catch((error) => console.log("error", error));
   });
@@ -349,6 +364,7 @@ async function Rendeles_Fetch(
           console.error("Token error")
           await logout();
           location.replace("https://bufe.pollak.info");
+          reject(res);
         }
         console.log(res);
       })
