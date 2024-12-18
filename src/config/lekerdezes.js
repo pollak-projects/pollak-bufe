@@ -319,9 +319,8 @@ async function Rendeles_Fetch(
   csipos,
   hagyma
 ) {
-  const accessToken = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("access_token="));
+  const accessToken = document.cookie.replace(/ /g, '').split(";").find((row)=>row.startsWith("access_token"))
+  const refreshToken = document.cookie.replace(/ /g, '').split(";").find((row)=>row.startsWith("refresh_token"))
 
   const parsedJwt = parseJwt(accessToken.split("=")[1]);
 
@@ -332,6 +331,7 @@ async function Rendeles_Fetch(
   basketData.append("csipos", csipos);
   basketData.append("hagyma", hagyma);
   basketData.append("access_token", accessToken.split("=")[1]);
+  basketData.append("refresh_token", refreshToken.split("=")[1]);
   basketData.append("sub", parsedJwt.sub);
   basketData.append("group", parsedJwt.userGroup);
   console.log(basketData.getAll("egyeb"));
