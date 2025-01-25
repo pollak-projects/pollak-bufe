@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import { SzunetEltarolasa } from "../config/lekerdezes";
-import { store, store2 } from "../config/store";
+import { store, store2, store3, kosarExtra } from "../config/store";
 
 function kezdes() {
   store.kosar = [
@@ -17,6 +17,10 @@ function kezdes() {
   ];
 
   store2.szoszok = [];
+
+  store3.van = false;
+
+  storeExtra.kosarExtra = [];
 
   SzunetEltarolasa();
 }
