@@ -20,7 +20,6 @@ let szunet = storeszunet.elsoszunet[0].elsoszunet;
 let kivalasztottSzunet = storeszunet.elsoszunet[0].elsoszunet;
 let elsoszunet = ref(null);
 let image_data_url = "";
-const szunetek = ref(null);
 const video = ref(null);
 const canvas = ref(null);
 
@@ -38,9 +37,10 @@ const options = ref([
 const router = useRouter();
 
 onMounted(async () => {
+  console.log("On Mounted");
+
   elsoszunet.value = await AktualisSzunetLekerdezes();
   elsoszunet.value = elsoszunet.value[0].id;
-  szunetek.value = await SzunetLekerdezes();
 
   // Get the video element
   navigator.mediaDevices
