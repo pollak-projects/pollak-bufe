@@ -1,6 +1,17 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import { SzunetEltarolasa } from "../config/lekerdezes";
+import { store } from "../config/store";
+
+function kezdes() {
+  store.kosar = [
+    {
+      darab: 0,
+    },
+  ];
+
+  SzunetEltarolasa();
+}
 </script>
 
 <template>
@@ -21,7 +32,7 @@ import { SzunetEltarolasa } from "../config/lekerdezes";
     >
       <RouterLink to="/szendvicsek">
         <button
-          @click="SzunetEltarolasa()"
+          @click="kezdes()"
           class="blink-button px-8 py-4 border-2 border-solid rounded-xl drop-shadow-2xl"
         >
           Kezdés
