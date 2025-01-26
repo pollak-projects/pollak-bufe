@@ -71,7 +71,7 @@ router.beforeEach(async (to, from) => {
   const accessToken = getCookie("access_token");
   const parsedToken = parseJwt(accessToken);
 
-  if (accessToken && parsedToken.userGroup !== "ADMIN") {
+  if (accessToken && parsedToken && parsedToken.userGroup !== "ADMIN") {
     alert(
       "Nem vagy adminisztrátor, kérlek jelentkezz be az adminisztrációs felületre!"
     );
@@ -83,15 +83,16 @@ router.beforeEach(async (to, from) => {
     return;
   }
 
-  if (to.name === "Login" && accessToken && parsedToken.userGroup === "ADMIN") {
+  if (
+    to.name === "Login" &&
+    accessToken &&
+    parsedToken &&
+    parsedToken.userGroup === "ADMIN"
+  ) {
     return { name: "Kezdés" };
   }
 
-  if (
-    !accessToken &&
-    parsedToken.userGroup !== "ADMIN" &&
-    to.name !== "Login"
-  ) {
+  if (!accessToken && to.name !== "Login") {
     return { name: "Login" };
   }
 });
