@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { store_login } from "../config/store";
+import { delete_cookie, getCookie, parseJwt } from "../lib/common";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -63,15 +64,34 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from) => {
-  const accessToken = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("access_token="));
+  // const accessToken = document.cookie
+  //   .split("; ")
+  //   .find((row) => row.startsWith("access_token="));
 
-  if (to.name === "Login" && accessToken) {
+  const accessToken = getCookie("access_token");
+  const parsedToken = parseJwt(accessToken);
+
+  if (accessToken && parsedToken.userGroup !== "ADMIN") {
+    alert(
+      "Nem vagy adminisztrátor, kérlek jelentkezz be az adminisztrációs felületre!"
+    );
+
+    delete_cookie("access_token");
+    delete_cookie("refresh_token");
+
+    window.location.href = "https://pollak.info";
+    return;
+  }
+
+  if (to.name === "Login" && accessToken && parsedToken.userGroup === "ADMIN") {
     return { name: "Kezdés" };
   }
 
-  if (!accessToken && to.name !== "Login") {
+  if (
+    !accessToken &&
+    parsedToken.userGroup !== "ADMIN" &&
+    to.name !== "Login"
+  ) {
     return { name: "Login" };
   }
 });
