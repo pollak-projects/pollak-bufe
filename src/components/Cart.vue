@@ -41,24 +41,7 @@ onMounted(async () => {
 
   elsoszunet.value = await AktualisSzunetLekerdezes();
   elsoszunet.value = elsoszunet.value[0].id;
-
-  // Get the video element
-  navigator.mediaDevices
-    .getUserMedia({ video: { width: 1920, height: 1080 }, audio: false })
-    .then((stream) => {
-      video.value.srcObject = stream;
-      video.value.play();
-
-      // Set video width and height to canvas
-      video.value.addEventListener("loadedmetadata", () => {
-        canvas.value.width = video.value.videoWidth;
-        canvas.value.height = video.value.videoHeight;
-        console.log(video.value.videoWidth, video.value.videoHeight);
-      });
-    })
-    .catch((err) => {
-      console.error("Error accessing media devices.", err);
-    });
+  
 });
 
 const trackStyle = computed(() => {

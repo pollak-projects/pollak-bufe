@@ -49,14 +49,20 @@ export async function SzunetLekerdezes() {
 }
 
 export async function AktualisSzunetLekerdezes() {
-  const accessToken = document.cookie.replace(/ /g, '').split(";").find((row)=>row.startsWith("access_token"))
-  const refreshToken = document.cookie.replace(/ /g, '').split(";").find((row)=>row.startsWith("refresh_token"))
+  const accessToken = document.cookie
+    .replace(/ /g, "")
+    .split(";")
+    .find((row) => row.startsWith("access_token"));
+  const refreshToken = document.cookie
+    .replace(/ /g, "")
+    .split(";")
+    .find((row) => row.startsWith("refresh_token"));
 
   var requestOptions = {
     method: "GET",
     headers: {
-      'X-Authorization': accessToken,
-      'RefreshToken': refreshToken
+      "X-Authorization": accessToken,
+      RefreshToken: refreshToken,
     },
     credentials: "include",
   };
@@ -66,7 +72,7 @@ export async function AktualisSzunetLekerdezes() {
         const res = await result.text();
         console.log(res);
 
-        if(res === "Hibás token") {
+        if (res === "Hibás token") {
           await logout();
           location.replace("https://bufe.pollak.info");
           reject(res);
@@ -74,7 +80,7 @@ export async function AktualisSzunetLekerdezes() {
           const valasz = JSON.parse(res);
           console.log(valasz);
           resolve(valasz);
-        }        
+        }
       })
       .catch((error) => console.log("error", error));
   });
@@ -267,7 +273,7 @@ export async function Rendeles_Leadasa(szunet, bankkartya) {
       basketData.append("egyeb", ital[i]);
     }
     if (store2.kosar[i] != undefined)
-      Rendeles_Fetch(
+      await Rendeles_Fetch(
         data[0].id,
         dataszosz.mustar,
         dataszosz.ketchup,
@@ -276,7 +282,7 @@ export async function Rendeles_Leadasa(szunet, bankkartya) {
         dataszosz.hagyma
       );
     else {
-      Rendeles_Fetch(0, 0, 0, 0, 0, 0);
+      await Rendeles_Fetch(0, 0, 0, 0, 0, 0);
     }
   }
   console.log(sorszam.sorszam);
@@ -335,8 +341,14 @@ async function Rendeles_Fetch(
   csipos,
   hagyma
 ) {
-  const accessToken = document.cookie.replace(/ /g, '').split(";").find((row)=>row.startsWith("access_token"))
-  const refreshToken = document.cookie.replace(/ /g, '').split(";").find((row)=>row.startsWith("refresh_token"))
+  const accessToken = document.cookie
+    .replace(/ /g, "")
+    .split(";")
+    .find((row) => row.startsWith("access_token"));
+  const refreshToken = document.cookie
+    .replace(/ /g, "")
+    .split(";")
+    .find((row) => row.startsWith("refresh_token"));
 
   const parsedJwt = parseJwt(accessToken.split("=")[1]);
 
@@ -361,8 +373,8 @@ async function Rendeles_Fetch(
     fetch(`https://pollakbufe.hu/noLogin/ujrendeles`, requestOptions)
       .then(async (result) => {
         const res = await result.text();
-        if(res === "Hibás token") {
-          console.error("Token error")
+        if (res === "Hibás token") {
+          console.error("Token error");
           await logout();
           location.replace("https://bufe.pollak.info");
           reject(res);
@@ -389,10 +401,11 @@ export async function logout() {
 }
 
 function deleteAllCookies() {
-  document.cookie.split(';').forEach(cookie => {
-      const eqPos = cookie.indexOf('=');
-      const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
-      document.cookie = name + '=;domain=.pollak.info;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+  document.cookie.split(";").forEach((cookie) => {
+    const eqPos = cookie.indexOf("=");
+    const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+    document.cookie =
+      name + "=;domain=.pollak.info;expires=Thu, 01 Jan 1970 00:00:00 GMT";
   });
 }
 
