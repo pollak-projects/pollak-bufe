@@ -14,7 +14,7 @@ onMounted(async () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      order_number: (re.value + 1).toString(),
+      order_number: re.value.toString(),
     }),
   })
     .then(async (result) => {
@@ -44,7 +44,7 @@ onMounted(async () => {
     <div class="flex justify-center items-center h-7/16">
       <div class="kulsonegy flex justify-center items-center">
         <div class="belsonegy flex justify-center items-center" id="sorszamDiv">
-          {{ re + 1 }}
+          {{ re }}
         </div>
       </div>
     </div>
