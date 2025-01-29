@@ -248,6 +248,8 @@ export async function Rendeles_Leadasa(szunet, bankkartya) {
   basketData.append("bankkartya", bankkartya);
   let utolsoSorszam = await UtolsoSorszam();
   let utolsoNapiSorszam = await UtolsoNapiSorszam();
+
+  console.log("Getting daily number")
   sorszam.sorszam = utolsoNapiSorszam;
   let ital = basketData.getAll("egyeb");
   let szendvics = basketData.getAll("szendvics");
