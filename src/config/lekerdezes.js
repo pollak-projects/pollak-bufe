@@ -242,6 +242,8 @@ export function ToBasket() {
 }
 
 export async function Rendeles_Leadasa(szunet, bankkartya) {
+  let response = null;
+
   basketData.append("szunet", szunet);
   basketData.append("bankkartya", bankkartya);
   let utolsoSorszam = await UtolsoSorszam();
@@ -263,6 +265,7 @@ export async function Rendeles_Leadasa(szunet, bankkartya) {
   for (let i = 0; i < count; i++) {
     let data;
     let dataszosz;
+
     if (store2.kosar[i] != undefined) {
       data = JSON.parse(JSON.stringify(store2.kosar[i].darab));
       dataszosz = JSON.parse(JSON.stringify(store2.szoszok[i]));
@@ -272,8 +275,8 @@ export async function Rendeles_Leadasa(szunet, bankkartya) {
     if (ital.length >= 1) {
       basketData.append("egyeb", ital[i]);
     }
-    if (store2.kosar[i] != undefined)
-      await Rendeles_Fetch(
+    if (store2.kosar[i] != undefined) {
+      response = await Rendeles_Fetch(
         data[0].id,
         dataszosz.mustar,
         dataszosz.ketchup,
@@ -281,12 +284,14 @@ export async function Rendeles_Leadasa(szunet, bankkartya) {
         dataszosz.csipos,
         dataszosz.hagyma
       );
-    else {
-      await Rendeles_Fetch(0, 0, 0, 0, 0, 0);
+      console.log(response);
+    } else {
+      response = await Rendeles_Fetch(0, 0, 0, 0, 0, 0);
+      console.log(response);
     }
   }
   console.log(sorszam.sorszam);
-  // location.replace("http://localhost:5173/sorszam");
+  return response;
 }
 
 export function DeleteFromBasket() {
@@ -380,6 +385,7 @@ async function Rendeles_Fetch(
           reject(res);
         }
         console.log(res);
+        resolve(res);
       })
       .catch((error) => console.log("error", error));
   });
