@@ -384,7 +384,7 @@ async function Rendeles_Fetch(
           location.replace("https://bufe.pollak.info");
           reject(res);
         }
-        console.log(res);
+        console.log("-----Napi sorszam after fetch: ", res, "-----");
         resolve(res);
       })
       .catch((error) => console.log("error", error));
