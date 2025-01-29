@@ -247,11 +247,13 @@ export async function Rendeles_Leadasa(szunet, bankkartya) {
   basketData.append("szunet", szunet);
   basketData.append("bankkartya", bankkartya);
   let utolsoSorszam = await UtolsoSorszam();
-  sorszam.sorszam = await UtolsoNapiSorszam();
+  let utolsoNapiSorszam = await UtolsoNapiSorszam();
+  sorszam.sorszam = utolsoNapiSorszam;
   let ital = basketData.getAll("egyeb");
   let szendvics = basketData.getAll("szendvics");
 
   basketData.append("sorszam", utolsoSorszam + 1);
+  basketData.append("napi", utolsoNapiSorszam + 1);
 
   let count = 0;
 
