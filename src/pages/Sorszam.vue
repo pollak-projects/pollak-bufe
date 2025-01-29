@@ -12,6 +12,22 @@ const route = useRoute();
 console.log(route);
 
 onMounted(async () => {
+  fetch(`http://localhost:5000/print`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      order_number: route.value.params.sorszam.toString(),
+    }),
+  })
+    .then(async (result) => {
+      const res = await result.text();
+      const valasz = JSON.parse(res);
+      console.log(valasz);
+      resolve(valasz);
+    })
+    .catch((error) => console.log("error", error));
   setTimeout(() => {
     location.replace("https://bufe.pollak.info/Kezdes");
   }, 5000);
