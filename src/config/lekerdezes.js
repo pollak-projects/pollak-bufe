@@ -374,7 +374,7 @@ async function Rendeles_Fetch(
     body: basketData,
     credentials: "include",
   };
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     fetch(`https://pollakbufe.hu/noLogin/ujrendeles`, requestOptions)
       .then(async (result) => {
         const res = await result.text();
