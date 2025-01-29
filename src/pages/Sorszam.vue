@@ -7,7 +7,7 @@ import { sorszam } from "../config/store";
 const router = useRouter();
 const re = ref(0);
 
-const router = useRoute();
+const route = useRoute();
 
 console.log(route);
 
