@@ -38,6 +38,24 @@ const options = ref([
 
 const router = useRouter();
 
+function openModal(msg) {
+  const modal = document.getElementById("modalUres");
+  const content = document.getElementById("modalUresContent");
+
+  content.innerHTML = msg;
+  console.log("Modal elem:", modal); // Ellenőrzéshez
+  if (!modal) {
+    console.error("A modális elem nem található a DOM-ban!");
+    return;
+  }
+
+  modal.style.display = "flex"; // Megjelenítjük a modált
+
+  setTimeout(() => {
+    modal.style.display = "none"; // 800ms után elrejtjük
+  }, 800);
+}
+
 onMounted(async () => {
   console.log("On Mounted");
 
@@ -80,28 +98,33 @@ const prevOption = () => {
 
 const rendelesleadas = () => {
   if (!paymentMethod.value) {
-    alert("Kérjük, válasszon fizetési módot!");
+    openModal("Először válassz fizetési módot!");
     return;
   }
 
   isLoading.value = true;
 
-  Rendeles_Leadasa(kivalasztottSzunet, paymentMethod.value).then((res) => {
-    // Clear the cart
-    store.kosar = [
-      {
-        darab: 0,
-      },
-    ];
-    takePicture();
-    SendImage(image_data_url);
-    // Forward to the next page
+  Rendeles_Leadasa(kivalasztottSzunet, paymentMethod.value)
+    .then((res) => {
+      // Clear the cart
+      store.kosar = [
+        {
+          darab: 0,
+        },
+      ];
+      takePicture();
+      SendImage(image_data_url);
+      // Forward to the next page
 
-    console.log(res);
+      console.log(res);
 
-    isLoading.value = false;
-    router.push(`/sorszam/${res}`);
-  });
+      isLoading.value = false;
+      router.push(`/sorszam/${res}`);
+    })
+    .catch((err) => {
+      openModal("Valami hiba történt!");
+      router.push("/");
+    });
 };
 
 function takePicture() {
@@ -232,6 +255,11 @@ function takePicture() {
     class="rounded-md w-[960px] hidden"
   ></video>
   <canvas ref="canvas" class="rounded-md absolute hidden"></canvas>
+  <div class="ures-modal-background" id="modalUres">
+    <div class="ures-modal-content">
+      <h2 id="modalUresContent">Először válassz fizetési módot!</h2>
+    </div>
+  </div>
 </template>
 
 <style scoped>
@@ -338,5 +366,30 @@ function takePicture() {
     min-width: 100%;
     max-width: 100%;
   }
+}
+
+.ures-modal-background {
+  display: none; /* Kezdetben rejtve */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.445); /* Átlátszó fekete háttér */
+  justify-content: center;
+  align-items: center;
+}
+
+/* A modális tartalom */
+.ures-modal-content {
+  background-color: #bd1717;
+  padding: 80px;
+  border-radius: 30px;
+  text-align: center;
+  max-width: 1000px;
+  width: 200%;
+  font-size: 60px;
+  font-family: "Abril Fatface";
+  color: #ffffff;
 }
 </style>

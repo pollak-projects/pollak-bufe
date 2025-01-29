@@ -18,7 +18,7 @@ onMounted(async () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      order_number: route.value.params.sorszam.toString(),
+      order_number: route.params.sorszam.toString(),
     }),
   })
     .then(async (result) => {
