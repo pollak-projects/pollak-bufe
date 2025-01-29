@@ -13,7 +13,7 @@ console.log(route);
 
 onMounted(async () => {
   setTimeout(() => {
-    location.replace("https://bufe.pollak.info/Kezdes");
+    //location.replace("https://bufe.pollak.info/Kezdes");
   }, 8000);
 });
 </script>

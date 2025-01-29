@@ -290,7 +290,7 @@ export async function Rendeles_Leadasa(szunet, bankkartya) {
       console.log(response);
     }
   }
-  console.log(sorszam.sorszam);
+  console.log("Napi sorszám: ", response);
   return response;
 }
 
