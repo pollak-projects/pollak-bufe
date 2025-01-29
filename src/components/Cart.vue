@@ -23,6 +23,8 @@ let image_data_url = "";
 const video = ref(null);
 const canvas = ref(null);
 
+const isLoading = ref(false);
+
 const selectedIndex = ref(szunet - 1);
 const options = ref([
   "1.Szünet",
@@ -82,6 +84,8 @@ const rendelesleadas = () => {
     return;
   }
 
+  isLoading.value = true;
+
   Rendeles_Leadasa(kivalasztottSzunet, paymentMethod.value).then((res) => {
     // Clear the cart
     store.kosar = [
@@ -95,7 +99,8 @@ const rendelesleadas = () => {
 
     console.log(res);
 
-    router.push({ path: "/sorszam", params: { sorszam: res } });
+    isLoading.value = false;
+    router.push(`/sorszam/${res}`);
   });
 };
 
