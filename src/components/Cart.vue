@@ -95,7 +95,7 @@ const rendelesleadas = () => {
 
     console.log(res);
 
-    // router.push({ path: "/sorszam", params: { sorszam: res } });
+    router.push({ path: "/sorszam", params: { sorszam: res } });
   });
 };
 

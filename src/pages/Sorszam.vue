@@ -1,32 +1,20 @@
 <script setup>
-import { RouterLink, useRouter } from "vue-router";
+import { RouterLink, useRouter, useRoute } from "vue-router";
 import { ref, onMounted } from "vue";
 import { JelenlegiSorszam, UtolsoNapiSorszam } from "../config/lekerdezes";
 import { sorszam } from "../config/store";
 
 const router = useRouter();
 const re = ref(0);
+
+const router = useRoute();
+
+console.log(route);
+
 onMounted(async () => {
-  re.value = await UtolsoNapiSorszam();
-  fetch(`http://localhost:5000/print`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      order_number: (re.value + 1).toString(),
-    }),
-  })
-    .then(async (result) => {
-      const res = await result.text();
-      const valasz = JSON.parse(res);
-      console.log(valasz);
-      resolve(valasz);
-    })
-    .catch((error) => console.log("error", error));
   setTimeout(() => {
     location.replace("https://bufe.pollak.info/Kezdes");
-  }, 5000);
+  }, 8000);
 });
 </script>
 <template>
@@ -44,7 +32,7 @@ onMounted(async () => {
     <div class="flex justify-center items-center h-7/16">
       <div class="kulsonegy flex justify-center items-center">
         <div class="belsonegy flex justify-center items-center" id="sorszamDiv">
-          {{ re + 1 }}
+          {{ route.params.sorszam }}
         </div>
       </div>
     </div>
