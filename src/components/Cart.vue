@@ -41,7 +41,6 @@ onMounted(async () => {
 
   elsoszunet.value = await AktualisSzunetLekerdezes();
   elsoszunet.value = elsoszunet.value[0].id;
-  
 });
 
 const trackStyle = computed(() => {
@@ -83,7 +82,7 @@ const rendelesleadas = () => {
     return;
   }
 
-  Rendeles_Leadasa(kivalasztottSzunet, paymentMethod.value).then(() => {
+  Rendeles_Leadasa(kivalasztottSzunet, paymentMethod.value).then((res) => {
     // Clear the cart
     store.kosar = [
       {
@@ -93,7 +92,10 @@ const rendelesleadas = () => {
     takePicture();
     SendImage(image_data_url);
     // Forward to the next page
-    router.push("/sorszam");
+
+    console.log(res);
+
+    // router.push({ path: "/sorszam", params: { sorszam: res } });
   });
 };
 

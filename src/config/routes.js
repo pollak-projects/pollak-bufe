@@ -51,7 +51,7 @@ const router = createRouter({
       component: () => import("../pages/Kezdes.vue"),
     },
     {
-      path: "/sorszam",
+      path: "/sorszam/:sorszam",
       name: "Sorszám",
       component: () => import("../pages/Sorszam.vue"),
     },
