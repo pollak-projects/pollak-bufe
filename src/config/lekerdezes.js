@@ -478,6 +478,9 @@ export async function SendImage(image) {
   return new Promise((resolve, reject) => {
     fetch(`https://api-selfie.pollak.info/api/sender/send`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         image: image,
         path: "bufe-rendelesek",
