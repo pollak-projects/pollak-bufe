@@ -26,7 +26,7 @@ const props = defineProps({
 });
 
 function getImageUrl() {
-  return new URL(`/${props.kep}`, import.meta.url);
+  return "/" + props.imgName;
 }
 
 const isActive = ref(false);

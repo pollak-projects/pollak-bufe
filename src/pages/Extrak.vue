@@ -37,7 +37,7 @@ function getSelected() {
 }
 
 function getImageUrl() {
-  return new URL(`/${kep.value ? kep.value : " "}`, import.meta.url);
+  return "/" + props.imgName;
 }
 
 const props = defineProps({
