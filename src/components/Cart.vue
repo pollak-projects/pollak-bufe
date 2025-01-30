@@ -125,7 +125,7 @@ const rendelesleadas = () => {
     return;
   }
 
-  if (store2.kosar.length < 2) {
+  if (store2.kosar.length < 1) {
     openModal("Nem adhatsz le üres rendelést!");
     return;
   }
