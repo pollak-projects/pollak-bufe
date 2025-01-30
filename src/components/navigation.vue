@@ -10,27 +10,27 @@ import { RouterLink } from "vue-router";
         >
           <li class="w-full border-b border-[#D1C0FB] pr-2 pl-2 pb-3">
             <RouterLink to="/szendvicsek" class="flex justify-between w-full"
-              >Szendvicsek <img width="20px" src="../assets/arrow_right.svg"
+              >Szendvicsek <img width="20px" src="/arrow_right.svg"
             /></RouterLink>
           </li>
           <li class="w-full border-b border-[#D1C0FB] pr-2 pl-2 pb-3">
             <RouterLink class="flex justify-between w-full" to="/hot-dogok"
-              >Hot-dogok <img width="20px" src="../assets/arrow_right.svg"
+              >Hot-dogok <img width="20px" src="/arrow_right.svg"
             /></RouterLink>
           </li>
           <li class="w-full border-b border-[#D1C0FB] pr-2 pl-2 pb-3">
             <RouterLink class="flex justify-between w-full" to="/hamburgerek"
-              >Hamburgerek <img width="20px" src="../assets/arrow_right.svg"
+              >Hamburgerek <img width="20px" src="/arrow_right.svg"
             /></RouterLink>
           </li>
           <li class="w-full border-b border-[#D1C0FB] pr-2 pl-2 pb-3">
             <RouterLink class="flex justify-between w-full" to="/italok"
-              >Italok <img width="20px" src="../assets/arrow_right.svg"
+              >Italok <img width="20px" src="/arrow_right.svg"
             /></RouterLink>
           </li>
           <li class="w-full border-b border-[#D1C0FB] pr-2 pl-2 pb-3">
             <RouterLink class="flex justify-between w-full" to="/nasik"
-              >Nasik <img width="20px" src="../assets/arrow_right.svg"
+              >Nasik <img width="20px" src="/arrow_right.svg"
             /></RouterLink>
           </li>
         </ul>

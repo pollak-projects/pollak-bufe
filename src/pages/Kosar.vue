@@ -11,7 +11,7 @@ function navBack() {
 
 <template>
 <img
-    src="../assets/arrow_left.svg"
+    src="/arrow_left.svg"
     alt=""
     class="h-8 w-8 absolute left-16 top-20"
     @click="navBack()"

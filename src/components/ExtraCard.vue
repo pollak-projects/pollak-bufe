@@ -25,9 +25,8 @@ function changeviewModel() {
 }
 
 function getImageUrl() {
-  return new URL(`../assets/${props.imgName}`, import.meta.url);
+  return new URL(`/${props.imgName}`, import.meta.url);
 }
-
 </script>
 <template>
   <div

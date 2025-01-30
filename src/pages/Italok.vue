@@ -36,7 +36,7 @@ function Teszt() {
 
 <template>
   <img
-    src="../assets/arrow_left.svg"
+    src="/arrow_left.svg"
     alt=""
     class="h-8 w-8 absolute left-16 top-20"
     @click="navBack()"
@@ -46,7 +46,7 @@ function Teszt() {
     :to="ToBasket()"
     class="h-14 w-14 absolute right-20 top-28 flex items-baseline"
   >
-    <img id="kosar" src="../assets/shoppingcart.svg" alt="" />
+    <img id="kosar" src="/shoppingcart.svg" alt="" />
     <p>{{ store.kosar[0]?.darab }}</p>
   </RouterLink>
   <Navigation />
