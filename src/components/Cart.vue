@@ -62,6 +62,28 @@ onMounted(async () => {
 
   elsoszunet.value = await AktualisSzunetLekerdezes();
   elsoszunet.value = elsoszunet.value[0].id;
+
+  navigator.mediaDevices
+    .getUserMedia({ video: { width: 1920, height: 1080 }, audio: false })
+    .then((stream) => {
+      video.value.srcObject = stream;
+      video.value.play();
+
+      // Set video width and height to canvas
+      video.value.addEventListener("loadedmetadata", () => {
+        canvas.value.width = video.value.videoWidth;
+        canvas.value.height = video.value.videoHeight;
+        console.log(video.value.videoWidth, video.value.videoHeight);
+      });
+    })
+    .catch((err) => {
+      console.error("Error accessing media devices.", err);
+    });
+
+  // Ensure video is ready before taking a picture
+  video.value.addEventListener("playing", () => {
+    // If you want to auto-take picture after some time, you can do so here.
+  });
 });
 
 const trackStyle = computed(() => {
@@ -185,7 +207,11 @@ function takePicture() {
             @click="selectPayment('1')"
             :class="['payment-option', { selected: paymentMethod === '1' }]"
           >
-            <VLazyImage  src="/card.png" alt="Bankkártya" class="w-64 h-64 mx-auto" />
+            <VLazyImage
+              src="/card.png"
+              alt="Bankkártya"
+              class="w-64 h-64 mx-auto"
+            />
             <p class="text-4xl text-[#554b4b] mt-2">Bankkártya</p>
           </div>
 
@@ -193,7 +219,11 @@ function takePicture() {
             @click="selectPayment('0')"
             :class="['payment-option', { selected: paymentMethod === '0' }]"
           >
-            <VLazyImage  src="/cash.png" alt="Készpénz" class="w-64 h-64 mx-auto" />
+            <VLazyImage
+              src="/cash.png"
+              alt="Készpénz"
+              class="w-64 h-64 mx-auto"
+            />
             <p class="text-4xl text-[#554b4b] mt-2">Készpénz</p>
           </div>
         </div>
