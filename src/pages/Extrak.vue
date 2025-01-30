@@ -143,7 +143,7 @@ function openModal() {
 </script>
 
 <template>
-  <img
+  <v-lazy-image
     src="./arrow_left.svg"
     alt=""
     class="h-8 w-8 absolute left-16 top-20"
@@ -155,7 +155,7 @@ function openModal() {
     :to="ToBasket()"
     class="h-14 w-14 absolute right-20 top-28 flex items-baseline"
   >
-    <img id="kosar" src="/shoppingcart.svg" alt="" />
+    <v-lazy-image id="kosar" src="/shoppingcart.svg" alt="" />
     <p>{{ store.kosar[0].darab }}</p>
   </RouterLink>
   <div class="bg"></div>
@@ -166,7 +166,7 @@ function openModal() {
       {{ re ? re[0].etel_nev : "" }}
     </h1>
     <div class="justify-center flex">
-      <img
+      <v-lazy-image
         :src="getImageUrl()"
         alt=""
         class="w-3/5 h-3/5 mb-2"

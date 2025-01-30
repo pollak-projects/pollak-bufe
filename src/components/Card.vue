@@ -66,14 +66,14 @@ function AddToBasket(ital, route) {
     id="app"
     @click="AddToBasket(ital, $route.path)"
   >
-    <img
+    <v-lazy-image
       v-if="$route.path === '/kosar' && italiksz == 0"
       class="iksz"
       src="/public/IKSZ.png"
       alt="iksz"
       @click="DeleteSzendvics(index)"
     />
-    <img
+    <v-lazy-image
       v-if="$route.path === '/kosar' && italiksz == 1"
       class="iksz"
       src="/public/IKSZ.png"
@@ -81,7 +81,7 @@ function AddToBasket(ital, route) {
       @click="DeleteExtra(index)"
     />
     <RouterLink :to="RedirectToExtras(id)">
-      <img
+      <v-lazy-image
         :src="getImageUrl()"
         alt=""
         class="w-full h-3/5 mb-2 mainImg"
@@ -95,10 +95,10 @@ function AddToBasket(ital, route) {
         v-if="ketchup == 1 || mustar == 1 || majonez == 1 || csipos == 1"
         class="extra-icons"
       >
-        <p v-if="ketchup == 1"><img src="/ketchup.png" alt="Ketchup" /></p>
-        <p v-if="mustar == 1"><img src="/majo.png" alt="Mayonnaise" /></p>
-        <p v-if="majonez == 1"><img src="/must.png" alt="Mustard" /></p>
-        <p v-if="csipos == 1"><img src="/csip.png" alt="Chili" /></p>
+        <p v-if="ketchup == 1"><v-lazy-image src="/ketchup.png" alt="Ketchup" /></p>
+        <p v-if="mustar == 1"><v-lazy-image src="/majo.png" alt="Mayonnaise" /></p>
+        <p v-if="majonez == 1"><v-lazy-image src="/must.png" alt="Mustard" /></p>
+        <p v-if="csipos == 1"><v-lazy-image src="/csip.png" alt="Chili" /></p>
       </div>
     </RouterLink>
   </div>
@@ -108,14 +108,14 @@ function AddToBasket(ital, route) {
     id="app"
     @click="AddToBasket(ital, $route.path)"
   >
-    <img
+    <v-lazy-image
       v-if="$route.path === '/kosar' && italiksz == 0"
       class="iksz"
       src="/public/IKSZ.png"
       alt="iksz"
       @click="DeleteSzendvics(index)"
     />
-    <img
+    <v-lazy-image
       v-if="$route.path === '/kosar' && italiksz == 1"
       class="iksz"
       src="/public/IKSZ.png"
@@ -123,7 +123,7 @@ function AddToBasket(ital, route) {
       @click="DeleteExtra(index)"
     />
     <RouterLink :to="RedirectToExtras(id)">
-      <img
+      <v-lazy-image
         :src="getImageUrl()"
         alt=""
         class="w-full h-3/5 mb-2 mainImg"
@@ -138,15 +138,15 @@ function AddToBasket(ital, route) {
         class="extra-icons"
       >
         <p v-if="ketchup == 1">
-          <img src="/ketchup.png" alt="Ketchup" />
+          <v-lazy-image src="/ketchup.png" alt="Ketchup" />
         </p>
         <p v-if="mustar == 1">
-          <img src="/majo.png" alt="Mayonnaise" />
+          <v-lazy-image src="/majo.png" alt="Mayonnaise" />
         </p>
         <p v-if="majonez == 1">
-          <img src="/must.png" alt="Mustard" />
+          <v-lazy-image src="/must.png" alt="Mustard" />
         </p>
-        <p v-if="csipos == 1"><img src="/csip.png" alt="Chili" /></p>
+        <p v-if="csipos == 1"><v-lazy-image src="/csip.png" alt="Chili" /></p>
       </div>
     </RouterLink>
   </div>

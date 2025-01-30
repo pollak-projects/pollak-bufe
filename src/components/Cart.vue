@@ -184,7 +184,7 @@ function takePicture() {
             @click="selectPayment('1')"
             :class="['payment-option', { selected: paymentMethod === '1' }]"
           >
-            <img src="/card.png" alt="Bankkártya" class="w-64 h-64 mx-auto" />
+            <v-lazy-image src="/card.png" alt="Bankkártya" class="w-64 h-64 mx-auto" />
             <p class="text-4xl text-[#554b4b] mt-2">Bankkártya</p>
           </div>
 
@@ -192,7 +192,7 @@ function takePicture() {
             @click="selectPayment('0')"
             :class="['payment-option', { selected: paymentMethod === '0' }]"
           >
-            <img src="/cash.png" alt="Készpénz" class="w-64 h-64 mx-auto" />
+            <v-lazy-image src="/cash.png" alt="Készpénz" class="w-64 h-64 mx-auto" />
             <p class="text-4xl text-[#554b4b] mt-2">Készpénz</p>
           </div>
         </div>

@@ -28,7 +28,7 @@ function kezdes() {
 
 <template>
   <div class="h-screen">
-    <img
+    <v-lazy-image
       class="logo w-screen absolute move left-16 top-16"
       src="/public/logo.png"
       alt=""

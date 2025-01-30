@@ -10,7 +10,7 @@ function navBack() {
 </script>
 
 <template>
-<img
+<v-lazy-image
     src="/arrow_left.svg"
     alt=""
     class="h-8 w-8 absolute left-16 top-20"
