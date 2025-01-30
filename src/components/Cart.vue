@@ -63,27 +63,27 @@ onMounted(async () => {
   elsoszunet.value = await AktualisSzunetLekerdezes();
   elsoszunet.value = elsoszunet.value[0].id;
 
-  navigator.mediaDevices
-    .getUserMedia({ video: { width: 1920, height: 1080 }, audio: false })
-    .then((stream) => {
-      video.value.srcObject = stream;
-      video.value.play();
+  // navigator.mediaDevices
+  //   .getUserMedia({ video: { width: 1920, height: 1080 }, audio: false })
+  //   .then((stream) => {
+  //     video.value.srcObject = stream;
+  //     video.value.play();
 
-      // Set video width and height to canvas
-      video.value.addEventListener("loadedmetadata", () => {
-        canvas.value.width = video.value.videoWidth;
-        canvas.value.height = video.value.videoHeight;
-        console.log(video.value.videoWidth, video.value.videoHeight);
-      });
-    })
-    .catch((err) => {
-      console.error("Error accessing media devices.", err);
-    });
+  //     // Set video width and height to canvas
+  //     video.value.addEventListener("loadedmetadata", () => {
+  //       canvas.value.width = video.value.videoWidth;
+  //       canvas.value.height = video.value.videoHeight;
+  //       console.log(video.value.videoWidth, video.value.videoHeight);
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     console.error("Error accessing media devices.", err);
+  //   });
 
-  // Ensure video is ready before taking a picture
-  video.value.addEventListener("playing", () => {
-    // If you want to auto-take picture after some time, you can do so here.
-  });
+  // // Ensure video is ready before taking a picture
+  // video.value.addEventListener("playing", () => {
+  //   // If you want to auto-take picture after some time, you can do so here.
+  // });
 });
 
 const trackStyle = computed(() => {
@@ -136,7 +136,7 @@ const rendelesleadas = () => {
         },
       ];
       takePicture();
-      SendImage(image_data_url);
+      //SendImage(image_data_url);
       // Forward to the next page
 
       console.log(res);
