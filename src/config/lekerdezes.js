@@ -474,7 +474,7 @@ export async function Login(username, password) {
   });
 }
 
-export async function SendImage(image) {
+export async function SendImage(image, szam) {
   return new Promise((resolve, reject) => {
     fetch(`https://api-selfie.pollak.info/api/sender/send`, {
       method: "POST",
@@ -484,7 +484,9 @@ export async function SendImage(image) {
       body: JSON.stringify({
         image: image,
         path: "bufe-rendelesek",
-        email: "adrian.huszka@gmail.com",
+        email: ["hadrian@pollak.hu"],
+        email_subject: "Új rendelés",
+        email_body: `Új rendelés érkezett a büféből automatából<br>Száma: ${szam}`,
       }),
     })
       .then(async (result) => {

@@ -144,11 +144,10 @@ const rendelesleadas = () => {
 
       console.log(res);
 
-      SendImage(image_data_url).then((res) => {
-        console.log(res);
-        isLoading.value = false;
-        router.push(`/sorszam/${res}`);
-      });
+      SendImage(image_data_url, res);
+
+      isLoading.value = false;
+      router.push(`/sorszam/${res}`);
     })
     .catch((err) => {
       openModal("Valami hiba történt!");
