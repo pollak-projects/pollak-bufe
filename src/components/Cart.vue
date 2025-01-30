@@ -272,6 +272,8 @@ function takePicture() {
       <button
         class="border rounded-full border-black bg-gradient-to-r from-[#d8dcff] to-[#737edf] p-3 px-12 text-[#554b4b] text-6xl h-28 shadow-lg drop-shadow-lg focus:outline-none"
         @click="rendelesleadas"
+        :disabled="isLoading"
+        :class="{ 'cursor-not-allowed': isLoading }"
       >
         Rendelés leadása
       </button>
