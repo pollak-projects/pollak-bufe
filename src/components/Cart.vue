@@ -141,7 +141,7 @@ const rendelesleadas = () => {
         },
       ];
       takePicture();
-      SendImage(image_data_url);
+      await SendImage(image_data_url);
       // Forward to the next page
 
       console.log(res);
