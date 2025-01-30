@@ -37,7 +37,7 @@ function getSelected() {
 }
 
 function getImageUrl() {
-  return "/" + props.imgName;
+  return kep.value ? "/" + kep.value : "/";
 }
 
 const props = defineProps({

@@ -26,7 +26,7 @@ const props = defineProps({
 });
 
 function getImageUrl() {
-  return "/" + props.imgName;
+  return "/" + props.kep;
 }
 
 const isActive = ref(false);
