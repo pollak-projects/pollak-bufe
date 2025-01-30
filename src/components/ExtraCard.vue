@@ -1,4 +1,5 @@
 <script setup>
+import VLazyImage from "v-lazy-image";
 import { ref, defineModel } from "vue";
 
 const props = defineProps({
@@ -37,7 +38,7 @@ function getImageUrl() {
       class="h-56 w-56 bg-[#d9d9d9] drop-shadow-lg rounded-[20%] p-2"
       :class="{ '!bg-[#bee46c]': isActive }"
     >
-      <v-lazy-image :src="getImageUrl()" alt="" />
+      <VLazyImage :src="getImageUrl()" alt="" />
     </div>
     <p class="text-5xl text-[#554b4b] kecsufont">{{ text }}</p>
   </div>

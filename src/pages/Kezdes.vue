@@ -1,4 +1,5 @@
 <script setup>
+import VLazyImage from "v-lazy-image";
 import { RouterLink } from "vue-router";
 import { SzunetEltarolasa } from "../config/lekerdezes";
 import { store, store2, store3, storeExtra } from "../config/store";
@@ -28,7 +29,7 @@ function kezdes() {
 
 <template>
   <div class="h-screen">
-    <v-lazy-image
+    <VLazyImage
       class="logo w-screen absolute move left-16 top-16"
       src="/public/logo.png"
       alt=""

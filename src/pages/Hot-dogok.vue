@@ -1,4 +1,5 @@
 <script setup>
+import VLazyImage from "v-lazy-image";
 import Rightside from "../components/Rightside.vue";
 import Navigation from "../components/navigation.vue";
 import { store, store2, store3 } from "../config/store.js";
@@ -40,18 +41,18 @@ console.log("Kosár állapota:", store.kosar, store3.van);
 </script>
 
 <template>
-  <v-lazy-image
+  <VLazyImage
     src="/arrow_left.svg"
     alt=""
     class="h-8 w-8 absolute left-16 top-20"
     @click="navBack()"
   />
   <RouterLink
-   @click.prevent="Teszt()"
+    @click.prevent="Teszt()"
     :to="ToBasket()"
     class="h-14 w-14 absolute right-20 top-28 flex items-baseline"
   >
-    <v-lazy-image id="kosar" src="/shoppingcart.svg" alt="" />
+    <VLazyImage id="kosar" src="/shoppingcart.svg" alt="" />
     <p>{{ store.kosar[0]?.darab }}</p>
   </RouterLink>
   <Navigation />

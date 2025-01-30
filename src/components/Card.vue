@@ -1,4 +1,5 @@
 <script setup>
+import VLazyImage from "v-lazy-image";
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
 import {
@@ -66,14 +67,14 @@ function AddToBasket(ital, route) {
     id="app"
     @click="AddToBasket(ital, $route.path)"
   >
-    <v-lazy-image
+    <VLazyImage
       v-if="$route.path === '/kosar' && italiksz == 0"
       class="iksz"
       src="/public/IKSZ.png"
       alt="iksz"
       @click="DeleteSzendvics(index)"
     />
-    <v-lazy-image
+    <VLazyImage
       v-if="$route.path === '/kosar' && italiksz == 1"
       class="iksz"
       src="/public/IKSZ.png"
@@ -81,49 +82,7 @@ function AddToBasket(ital, route) {
       @click="DeleteExtra(index)"
     />
     <RouterLink :to="RedirectToExtras(id)">
-      <v-lazy-image
-        :src="getImageUrl()"
-        alt=""
-        class="w-full h-3/5 mb-2 mainImg"
-        :class="{ active: isActive }"
-        @click="toggleAnimation"
-      />
-      <p class="font-sans h-[12%] leading-4">{{ nev }}</p>
-      <p class="font-sans font-bold h-[8%]">{{ ar }} Ft</p>
-
-      <div
-        v-if="ketchup == 1 || mustar == 1 || majonez == 1 || csipos == 1"
-        class="extra-icons"
-      >
-        <p v-if="ketchup == 1"><v-lazy-image src="/ketchup.png" alt="Ketchup" /></p>
-        <p v-if="mustar == 1"><v-lazy-image src="/majo.png" alt="Mayonnaise" /></p>
-        <p v-if="majonez == 1"><v-lazy-image src="/must.png" alt="Mustard" /></p>
-        <p v-if="csipos == 1"><v-lazy-image src="/csip.png" alt="Chili" /></p>
-      </div>
-    </RouterLink>
-  </div>
-  <div
-    v-if="$route.path != '/kosar'"
-    class="bg-white rounded-md border-[#9EA8FF] border-2 drop-shadow-lg p-3 w-60 h-[400px]"
-    id="app"
-    @click="AddToBasket(ital, $route.path)"
-  >
-    <v-lazy-image
-      v-if="$route.path === '/kosar' && italiksz == 0"
-      class="iksz"
-      src="/public/IKSZ.png"
-      alt="iksz"
-      @click="DeleteSzendvics(index)"
-    />
-    <v-lazy-image
-      v-if="$route.path === '/kosar' && italiksz == 1"
-      class="iksz"
-      src="/public/IKSZ.png"
-      alt="iksz"
-      @click="DeleteExtra(index)"
-    />
-    <RouterLink :to="RedirectToExtras(id)">
-      <v-lazy-image
+      <VLazyImage
         :src="getImageUrl()"
         alt=""
         class="w-full h-3/5 mb-2 mainImg"
@@ -138,15 +97,61 @@ function AddToBasket(ital, route) {
         class="extra-icons"
       >
         <p v-if="ketchup == 1">
-          <v-lazy-image src="/ketchup.png" alt="Ketchup" />
+          <VLazyImage src="/ketchup.png" alt="Ketchup" />
         </p>
         <p v-if="mustar == 1">
-          <v-lazy-image src="/majo.png" alt="Mayonnaise" />
+          <VLazyImage src="/majo.png" alt="Mayonnaise" />
+        </p>
+        <p v-if="majonez == 1"><VLazyImage src="/must.png" alt="Mustard" /></p>
+        <p v-if="csipos == 1"><VLazyImage src="/csip.png" alt="Chili" /></p>
+      </div>
+    </RouterLink>
+  </div>
+  <div
+    v-if="$route.path != '/kosar'"
+    class="bg-white rounded-md border-[#9EA8FF] border-2 drop-shadow-lg p-3 w-60 h-[400px]"
+    id="app"
+    @click="AddToBasket(ital, $route.path)"
+  >
+    <VLazyImage
+      v-if="$route.path === '/kosar' && italiksz == 0"
+      class="iksz"
+      src="/public/IKSZ.png"
+      alt="iksz"
+      @click="DeleteSzendvics(index)"
+    />
+    <VLazyImage
+      v-if="$route.path === '/kosar' && italiksz == 1"
+      class="iksz"
+      src="/public/IKSZ.png"
+      alt="iksz"
+      @click="DeleteExtra(index)"
+    />
+    <RouterLink :to="RedirectToExtras(id)">
+      <VLazyImage
+        :src="getImageUrl()"
+        alt=""
+        class="w-full h-3/5 mb-2 mainImg"
+        :class="{ active: isActive }"
+        @click="toggleAnimation"
+      />
+      <p class="font-sans h-[12%] leading-4">{{ nev }}</p>
+      <p class="font-sans font-bold h-[8%]">{{ ar }} Ft</p>
+
+      <div
+        v-if="ketchup == 1 || mustar == 1 || majonez == 1 || csipos == 1"
+        class="extra-icons"
+      >
+        <p v-if="ketchup == 1">
+          <VLazyImage src="/ketchup.png" alt="Ketchup" />
+        </p>
+        <p v-if="mustar == 1">
+          <VLazyImage src="/majo.png" alt="Mayonnaise" />
         </p>
         <p v-if="majonez == 1">
-          <v-lazy-image src="/must.png" alt="Mustard" />
+          <VLazyImage src="/must.png" alt="Mustard" />
         </p>
-        <p v-if="csipos == 1"><v-lazy-image src="/csip.png" alt="Chili" /></p>
+        <p v-if="csipos == 1"><VLazyImage src="/csip.png" alt="Chili" /></p>
       </div>
     </RouterLink>
   </div>

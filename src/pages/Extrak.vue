@@ -1,4 +1,5 @@
 <script setup>
+import VLazyImage from "v-lazy-image";
 import ExtraCard from "../components/ExtraCard.vue";
 import { routerKey, useRoute, useRouter } from "vue-router";
 import { AddElementsToBasket, GetFormData } from "../config/lekerdezes.js";
@@ -143,7 +144,7 @@ function openModal() {
 </script>
 
 <template>
-  <v-lazy-image
+  <VLazyImage
     src="./arrow_left.svg"
     alt=""
     class="h-8 w-8 absolute left-16 top-20"
@@ -155,7 +156,7 @@ function openModal() {
     :to="ToBasket()"
     class="h-14 w-14 absolute right-20 top-28 flex items-baseline"
   >
-    <v-lazy-image id="kosar" src="/shoppingcart.svg" alt="" />
+    <VLazyImage id="kosar" src="/shoppingcart.svg" alt="" />
     <p>{{ store.kosar[0].darab }}</p>
   </RouterLink>
   <div class="bg"></div>
@@ -166,7 +167,7 @@ function openModal() {
       {{ re ? re[0].etel_nev : "" }}
     </h1>
     <div class="justify-center flex">
-      <v-lazy-image
+      <VLazyImage
         :src="getImageUrl()"
         alt=""
         class="w-3/5 h-3/5 mb-2"
