@@ -70,14 +70,14 @@ function AddToBasket(ital, route) {
     <VLazyImage
       v-if="$route.path === '/kosar' && italiksz == 0"
       class="iksz"
-      src="/public/IKSZ.png"
+      src="/IKSZ.png"
       alt="iksz"
       @click="DeleteSzendvics(index)"
     />
     <VLazyImage
       v-if="$route.path === '/kosar' && italiksz == 1"
       class="iksz"
-      src="/public/IKSZ.png"
+      src="/IKSZ.png"
       alt="iksz"
       @click="DeleteExtra(index)"
     />
@@ -116,14 +116,14 @@ function AddToBasket(ital, route) {
     <VLazyImage
       v-if="$route.path === '/kosar' && italiksz == 0"
       class="iksz"
-      src="/public/IKSZ.png"
+      src="/IKSZ.png"
       alt="iksz"
       @click="DeleteSzendvics(index)"
     />
     <VLazyImage
       v-if="$route.path === '/kosar' && italiksz == 1"
       class="iksz"
-      src="/public/IKSZ.png"
+      src="/IKSZ.png"
       alt="iksz"
       @click="DeleteExtra(index)"
     />

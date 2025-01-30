@@ -31,7 +31,7 @@ function kezdes() {
   <div class="h-screen">
     <VLazyImage
       class="logo w-screen absolute move left-16 top-16"
-      src="/public/logo.png"
+      src="/logo.png"
       alt=""
     />
     <h1
