@@ -481,6 +481,7 @@ export async function SendImage(image) {
       body: JSON.stringify({
         image: image,
         path: "bufe-rendelesek",
+        email: "adrian.huszka@gmail.com",
       }),
     })
       .then(async (result) => {
