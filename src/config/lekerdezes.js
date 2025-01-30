@@ -480,7 +480,7 @@ export async function SendImage(image) {
       method: "POST",
       body: JSON.stringify({
         image: image,
-        // path: "bufe-rendelesek",
+        path: "bufe-rendelesek",
         email: "adrian.huszka@gmail.com",
       }),
     })
