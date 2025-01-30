@@ -10,8 +10,10 @@ import { ref, onMounted } from "vue";
 import { store, store2, store3 } from "../config/store.js";
 import { ToBasket } from "../config/lekerdezes.js";
 
+const router = useRouter();
+
 function navBack() {
-  history.back();
+  router.push("/szendvicsek");
 }
 
 function Teszt() {
@@ -25,7 +27,6 @@ function Teszt() {
 }
 
 const route = useRoute();
-const router = useRouter();
 
 const extraModel = defineModel({
   default: [],

@@ -4,9 +4,12 @@ import Rightside from "../components/Rightside.vue";
 import Navigation from "../components/navigation.vue";
 import { store, store2, store3 } from "../config/store.js";
 import { ToBasket } from "../config/lekerdezes.js";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 function navBack() {
-  history.back();
+  router.push("/");
 }
 
 function openModal() {

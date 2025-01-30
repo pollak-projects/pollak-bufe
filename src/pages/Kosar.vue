@@ -3,9 +3,12 @@ import VLazyImage from "v-lazy-image";
 import Cart from "../components/Cart.vue";
 import Rightside from "../components/Rightside.vue";
 import { store } from "../config/store.js";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 function navBack() {
-  history.back();
+  router.push("/szendvicsek");
 }
 </script>
 
