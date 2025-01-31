@@ -488,13 +488,8 @@ export async function SendImage(image, szam) {
         email_subject: "Új rendelés",
         email_body: `Új rendelés érkezett a büféből automatából<br>Száma: ${szam}`,
       }),
-    })
-      .then(async (result) => {
-        const res = await result.text();
-        const valasz = JSON.parse(res);
-        console.log(valasz);
-        resolve(valasz);
-      })
-      .catch((error) => console.log("error", error));
+    }).finally(() => {
+      resolve(200);
+    });
   });
 }
