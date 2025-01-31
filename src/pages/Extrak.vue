@@ -171,7 +171,7 @@ function openModal() {
       <VLazyImage
         :src="getImageUrl()"
         alt=""
-        class="w-3/5 h-3/5 mb-2"
+        class="w-3/5 h-3/5 xl:w-1/6 mb-2"
         :class="{ active: isActive }"
         @click="toggleAnimation"
       />
@@ -181,8 +181,10 @@ function openModal() {
     >
       <h1>{{ re ? re[0].ar : "" }} Ft</h1>
     </div>
-    <div class="flex gap-10">
-      <div class="h-[50%] flex flex-wrap gap-10 p-5 mb-13 justify-center">
+    <div>
+      <div
+        class="h-[50%] flex flex-wrap gap-10 xl:gap-0 p-5 mb-13 justify-center items-center"
+      >
         <ExtraCard
           text="Ketchup"
           imgName="ketchup.png"

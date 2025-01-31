@@ -31,15 +31,15 @@ function getImageUrl() {
 </script>
 <template>
   <div
-    class="h-72 w-56 flex flex-col items-center justify-between cursor-pointer"
+    class="h-72 w-56 xl:h-56 flex flex-col items-center justify-between cursor-pointer"
     @click="changeviewModel()"
   >
     <div
-      class="h-56 w-56 bg-[#d9d9d9] drop-shadow-lg rounded-[20%] p-2"
+      class="h-56 w-56 xl:h-40 xl:w-40 bg-[#d9d9d9] drop-shadow-lg rounded-[20%] p-2"
       :class="{ '!bg-[#bee46c]': isActive }"
     >
       <VLazyImage :src="getImageUrl()" alt="" />
     </div>
-    <p class="text-5xl text-[#554b4b] kecsufont">{{ text }}</p>
+    <p class="text-5xl xl:text-4xl text-[#554b4b] kecsufont">{{ text }}</p>
   </div>
 </template>

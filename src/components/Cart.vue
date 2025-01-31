@@ -9,6 +9,7 @@ import {
   SzunetLekerdezes,
   AktualisSzunetLekerdezes,
   SendImage,
+  SzunetEltarolasa,
 } from "../config/lekerdezes";
 import Card from "./Card.vue";
 import { useRouter } from "vue-router";
@@ -59,6 +60,7 @@ function openModal(msg) {
 
 onMounted(async () => {
   console.log("On Mounted");
+  await SzunetEltarolasa();
 
   elsoszunet.value = await AktualisSzunetLekerdezes();
   elsoszunet.value = elsoszunet.value[0].id;
@@ -205,7 +207,7 @@ function takePicture() {
         />
       </div>
 
-      <div class="mt-36 text-center mb-5">
+      <div class="mt-36 xl:mt-10 text-center mb-5">
         <h2 class="mt-16 text-6xl text-[#554b4b] arnyek mb-6">Fizetési Mód</h2>
         <div class="flex justify-center gap-12">
           <div
@@ -235,7 +237,7 @@ function takePicture() {
       </div>
 
       <div
-        class="melyik_szunet text-[#554b4b] text-center arnyek text-6xl mt-36"
+        class="melyik_szunet text-[#554b4b] text-center arnyek text-6xl mt-36 xl:mt-14"
       >
         Melyik szünetre kéred?:
       </div>
@@ -270,12 +272,19 @@ function takePicture() {
       v-if="storeszunet.elsoszunet[0].elsoszunet != 0"
     >
       <button
+        v-if="!isLoading"
         class="border rounded-full border-black bg-gradient-to-r from-[#d8dcff] to-[#737edf] p-3 px-12 text-[#554b4b] text-6xl h-28 shadow-lg drop-shadow-lg focus:outline-none"
         @click="rendelesleadas"
-        :disabled="isLoading"
-        :class="{ 'cursor-not-allowed': isLoading }"
       >
         Rendelés leadása
+      </button>
+      <button
+        v-else
+        class="border rounded-full border-black bg-gradient-to-r from-[#d8dcff] to-[#737edf] p-3 px-12 text-[#554b4b] text-6xl h-28 shadow-lg drop-shadow-lg focus:outline-none"
+        disabled
+      >
+        <VLazyImage src="/spinner.svg" alt="" class="w-16 h-16" />
+        Rendelés folyamatban...
       </button>
     </div>
   </div>

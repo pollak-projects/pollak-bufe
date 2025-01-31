@@ -63,38 +63,38 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach(async (to, from) => {
-  // const accessToken = document.cookie
-  //   .split("; ")
-  //   .find((row) => row.startsWith("access_token="));
+// router.beforeEach(async (to, from) => {
+//   // const accessToken = document.cookie
+//   //   .split("; ")
+//   //   .find((row) => row.startsWith("access_token="));
 
-  const accessToken = getCookie("access_token");
-  const parsedToken = parseJwt(accessToken);
+//   const accessToken = getCookie("access_token");
+//   const parsedToken = parseJwt(accessToken);
 
-  if (accessToken && parsedToken && parsedToken.userGroup !== "ADMIN") {
-    alert(
-      "Nem vagy adminisztrátor, kérlek jelentkezz be az adminisztrációs felületre!"
-    );
+//   if (accessToken && parsedToken && parsedToken.userGroup !== "ADMIN") {
+//     alert(
+//       "Nem vagy adminisztrátor, kérlek jelentkezz be az adminisztrációs felületre!"
+//     );
 
-    delete_cookie("access_token");
-    delete_cookie("refresh_token");
+//     delete_cookie("access_token");
+//     delete_cookie("refresh_token");
 
-    window.location.href = "https://pollak.info";
-    return;
-  }
+//     window.location.href = "https://pollak.info";
+//     return;
+//   }
 
-  if (
-    to.name === "Login" &&
-    accessToken &&
-    parsedToken &&
-    parsedToken.userGroup === "ADMIN"
-  ) {
-    return { name: "Kezdés" };
-  }
+//   if (
+//     to.name === "Login" &&
+//     accessToken &&
+//     parsedToken &&
+//     parsedToken.userGroup === "ADMIN"
+//   ) {
+//     return { name: "Kezdés" };
+//   }
 
-  if (!accessToken && to.name !== "Login") {
-    return { name: "Login" };
-  }
-});
+//   if (!accessToken && to.name !== "Login") {
+//     return { name: "Login" };
+//   }
+// });
 
 export default router;
