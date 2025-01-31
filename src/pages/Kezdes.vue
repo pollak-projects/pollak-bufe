@@ -30,12 +30,12 @@ function kezdes() {
 <template>
   <div class="h-screen">
     <VLazyImage
-      class="logo w-screen absolute move left-16 top-16"
+      class="md:w-32 w-16 absolute move md:left-16 left-0 md:top-16 top-3"
       src="/logo.png"
       alt=""
     />
     <h1
-      class="w-screen h-1/3 flex justify-center items-end drop-shadow-2xl move"
+      class="w-screen h-1/3 flex justify-center items-end drop-shadow-2xl move md:text-9xl text-6xl"
     >
       Pollák Büfé
     </h1>
@@ -46,7 +46,7 @@ function kezdes() {
       <RouterLink to="/szendvicsek">
         <button
           @click="kezdes()"
-          class="blink-button px-8 py-4 border-2 border-solid rounded-xl drop-shadow-2xl"
+          class="blink-button md:px-40 px-10 py-4 border-2 border-solid rounded-xl drop-shadow-2xl text-3xl"
         >
           Kezdés
         </button>
@@ -65,16 +65,12 @@ button {
   border-color: black;
   color: rgb(240 228 228);
   background-color: rgb(61 68 135);
-  font-size: 50px;
-  padding-left: 120px;
-  padding-right: 120px;
 }
 
 h1 {
   color: rgb(57 74 135);
   opacity: 70%;
   text-align: center;
-  font-size: 110px;
   font-family: "Abril Fatface";
 }
 
@@ -90,11 +86,6 @@ p {
 
 .move {
   animation: move 600s infinite;
-}
-
-.logo {
-  width: 120px;
-  height: 100px;
 }
 
 @keyframes blink {

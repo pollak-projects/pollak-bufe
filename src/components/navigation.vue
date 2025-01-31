@@ -1,10 +1,24 @@
 <script setup>
 import VLazyImage from "v-lazy-image";
 import { RouterLink } from "vue-router";
+import { ref, onMounted, h } from "vue";
+
+const isMobile = ref(false);
+const isOpen = ref(false);
+
+onMounted(() => {
+  if (window.innerWidth < 768) {
+    isMobile.value = true;
+  }
+});
 </script>
 
 <template>
-  <div class="w-96 h-full bg-[#D9D9D9]">
+  <button @click="isOpen = !isOpen" class="lg:hidden absolute">Open</button>
+  <div
+    class="md:w-96 h-full bg-[#D9D9D9]"
+    :class="{ hidden: isMobile && !isOpen }"
+  >
     <nav class="h-full p-6">
       <ul
         class="h-full flex flex-col justify-evenly content-center flex-wrap text-[#6750A4] text-2xl"

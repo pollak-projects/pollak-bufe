@@ -19,7 +19,7 @@ const getHours = computed(() =>
 
 <template>
   <div
-    class="h-10 w-20 absolute right-16 top-16 bg-[#F7F2FA] drop-shadow-lg text-3xl flex justify-center items-center rounded-xl font-sans"
+    class="h-10 w-20 absolute right-16 top-16 bg-[#F7F2FA] drop-shadow-lg text-3xl md:flex hidden justify-center items-center rounded-xl font-sans"
   >
     {{ getHours }}:{{ getMinutes }}
   </div>

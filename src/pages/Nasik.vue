@@ -42,16 +42,16 @@ function Teszt() {
   <VLazyImage
     src="/arrow_left.svg"
     alt=""
-    class="h-8 w-8 absolute left-16 top-20"
+    class="h-8 w-8 absolute left-16 top-20 md:block hidden"
     @click="navBack()"
   />
   <RouterLink
     @click.prevent="Teszt()"
     :to="ToBasket()"
-    class="h-14 w-14 absolute right-20 top-28 flex items-baseline"
+    class="md:h-14 md:w-14 h-10 w-10 absolute md:right-20 right-4 top-4 md:top-28 flex items-baseline"
   >
     <VLazyImage id="kosar" src="/shoppingcart.svg" alt="" />
-    <p>{{ store.kosar[0]?.darab }}</p>
+    <p class="md:text-xl text-sm">{{ store.kosar[0]?.darab }}</p>
   </RouterLink>
   <Navigation />
   <div
