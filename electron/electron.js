@@ -8,15 +8,15 @@ function createWindow() {
     width: 1920,
     height: 1080,
     autoHideMenuBar: true,
-    resizable: true,
-    frame: true,
+    resizable: false,
+    frame: false,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: false,
-      // devTools: isDev,
+      devTools: isDev,
     },
-    // kiosk: true,
+    kiosk: true,
   });
 
   mainWindow.webContents.setWindowOpenHandler((edata) => {
