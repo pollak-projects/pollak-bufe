@@ -493,25 +493,7 @@ export async function SendImage(image, szam) {
     });
   });
 }
-/**
- * 
- const response = await checkTokenValidity();
 
-  if (response.message === "Refreshed") {
-    localStorage.setItem("access_token", response.access_token);
-  }
-
-  // check if rejected
-  if (response.message === "Rejected") {
-    delete_cookie("access_token");
-    delete_cookie("refresh_token");
-
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-
-    router.push("/");
-  }
- */
 export async function checkTokenValidity() {
   const accessToken = getAccessToken();
   const refreshToken = "refresh_token=" + getRefreshToken();
