@@ -55,8 +55,8 @@ export async function SzunetLekerdezes() {
 export async function AktualisSzunetLekerdezes() {
   await checkTokenValidity();
 
-  const accessToken = getAccessToken();
-  const refreshToken = getRefreshToken();
+  const accessToken = "access_token=" + getAccessToken();
+  const refreshToken = "refresh_token=" + getRefreshToken();
 
   var requestOptions = {
     method: "GET",
@@ -365,8 +365,8 @@ async function Rendeles_Fetch(
   csipos,
   hagyma
 ) {
-  const accessToken = getAccessToken();
-  const refreshToken = getRefreshToken();
+  const accessToken = "access_token=" + getAccessToken();
+  const refreshToken = "refresh_token=" + getRefreshToken();
 
   const parsedJwt = parseJwt(accessToken.split("=")[1]);
 
@@ -514,7 +514,7 @@ export async function SendImage(image, szam) {
  */
 export async function checkTokenValidity() {
   const accessToken = getAccessToken();
-  const refreshToken = getRefreshToken();
+  const refreshToken = "refresh_token=" + getRefreshToken();
 
   var requestOptions = {
     method: "GET",
@@ -535,7 +535,7 @@ export async function checkTokenValidity() {
           resolve(res);
         } else if (res.message === "Refreshed" && isElectron()) {
           localStorage.setItem("access_token", response.access_token);
-        } else {
+        } else if (res.message !== "OK" && res.message !== "Refreshed") {
           delete_cookie("access_token");
           delete_cookie("refresh_token");
 
