@@ -10,7 +10,18 @@ import { ref, onMounted } from "vue";
 import { store, store2, store3 } from "../config/store.js";
 import { ToBasket } from "../config/lekerdezes.js";
 
+import leftArrow from "../assets/images/arrow_left.svg";
+import shoppingCart from "../assets/images/shoppingcart.svg";
+
 const router = useRouter();
+
+const props = defineProps({
+  id: Number,
+  nev: String,
+  ar: Number,
+  kep: String,
+  queryType: String,
+});
 
 function navBack() {
   router.push("/szendvicsek");
@@ -28,6 +39,8 @@ function Teszt() {
 
 const route = useRoute();
 
+const imageUrl = ref("");
+
 const extraModel = defineModel({
   default: [],
 });
@@ -37,18 +50,6 @@ function getSelected() {
   console.log(extraModel.value);
 }
 
-function getImageUrl() {
-  return kep.value ? "/" + kep.value : "/";
-}
-
-const props = defineProps({
-  id: Number,
-  nev: String,
-  ar: Number,
-  kep: String,
-  queryType: String,
-});
-
 const re = ref(null);
 const kep = ref(null);
 
@@ -56,6 +57,11 @@ onMounted(async () => {
   re.value = await termekLekerdezes(route.params.id);
   kep.value = re.value[0].kep;
   console.log(re.value[0].kep);
+
+  imageUrl.value = new URL(
+    `../assets/images/${kep.value}`,
+    import.meta.url
+  ).href;
 });
 
 const ketchupActive = ref(false);
@@ -146,7 +152,7 @@ function openModal() {
 
 <template>
   <VLazyImage
-    src="/arrow_left.svg"
+    :src="leftArrow"
     alt=""
     class="h-8 w-8 absolute left-16 top-20"
     style="z-index: 9999"
@@ -157,7 +163,7 @@ function openModal() {
     :to="ToBasket()"
     class="h-14 w-14 absolute right-20 top-28 flex items-baseline"
   >
-    <VLazyImage id="kosar" src="/shoppingcart.svg" alt="" />
+    <VLazyImage id="kosar" :src="shoppingCart" alt="" />
     <p>{{ store.kosar[0].darab }}</p>
   </RouterLink>
   <div class="bg"></div>
@@ -169,7 +175,7 @@ function openModal() {
     </h1>
     <div class="justify-center flex">
       <VLazyImage
-        :src="getImageUrl()"
+        :src="imageUrl"
         alt=""
         class="w-3/5 h-3/5 xl:w-1/6 mb-2"
         :class="{ active: isActive }"

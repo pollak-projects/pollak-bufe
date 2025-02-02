@@ -1,9 +1,14 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHistory,
+  createWebHashHistory,
+} from "vue-router";
 import { store_login } from "../config/store";
-import { delete_cookie, getCookie, parseJwt } from "../lib/common";
+import { delete_cookie, getCookie, isElectron, parseJwt } from "../lib/common";
+import { checkTokenValidity } from "./lekerdezes";
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(),
   routes: [
     {
       path: "/",
@@ -63,38 +68,43 @@ const router = createRouter({
   ],
 });
 
-// router.beforeEach(async (to, from) => {
-//   // const accessToken = document.cookie
-//   //   .split("; ")
-//   //   .find((row) => row.startsWith("access_token="));
+router.beforeEach(async (to, from) => {
+  // const accessToken = document.cookie
+  //   .split("; ")
+  //   .find((row) => row.startsWith("access_token="));
 
-//   const accessToken = getCookie("access_token");
-//   const parsedToken = parseJwt(accessToken);
+  const accessToken = isElectron()
+    ? localStorage.getItem("access_token") ?? null
+    : getCookie("access_token");
 
-//   if (accessToken && parsedToken && parsedToken.userGroup !== "ADMIN") {
-//     alert(
-//       "Nem vagy adminisztrátor, kérlek jelentkezz be az adminisztrációs felületre!"
-//     );
+  const parsedToken = parseJwt(accessToken);
 
-//     delete_cookie("access_token");
-//     delete_cookie("refresh_token");
+  if (accessToken && parsedToken && parsedToken.userGroup !== "ADMIN") {
+    alert(
+      "Nem vagy adminisztrátor, kérlek jelentkezz be az adminisztrációs felületre!"
+    );
 
-//     window.location.href = "https://pollak.info";
-//     return;
-//   }
+    delete_cookie("access_token");
+    delete_cookie("refresh_token");
 
-//   if (
-//     to.name === "Login" &&
-//     accessToken &&
-//     parsedToken &&
-//     parsedToken.userGroup === "ADMIN"
-//   ) {
-//     return { name: "Kezdés" };
-//   }
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
 
-//   if (!accessToken && to.name !== "Login") {
-//     return { name: "Login" };
-//   }
-// });
+    return;
+  }
+
+  if (
+    to.name === "Login" &&
+    accessToken &&
+    parsedToken &&
+    parsedToken.userGroup === "ADMIN"
+  ) {
+    return { name: "Kezdés" };
+  }
+
+  if (!accessToken && to.name !== "Login") {
+    return { name: "Login" };
+  }
+});
 
 export default router;

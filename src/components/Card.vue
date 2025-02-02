@@ -1,6 +1,6 @@
 <script setup>
 import VLazyImage from "v-lazy-image";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { RouterLink } from "vue-router";
 import {
   AddItalToBasket,
@@ -9,6 +9,11 @@ import {
   GetFormData2,
 } from "../config/lekerdezes";
 import Kosar from "../pages/Kosar.vue";
+import IKSZ from "../assets/images/IKSZ.png";
+import ketchupImg from "../assets/images/ketchup.png";
+import majo from "../assets/images/majo.png";
+import must from "../assets/images/must.png";
+import csip from "../assets/images/csip.png";
 
 const props = defineProps({
   id: Number,
@@ -25,9 +30,7 @@ const props = defineProps({
   italiksz: Number,
 });
 
-function getImageUrl() {
-  return "/" + props.kep;
-}
+const imageUrl = ref("");
 
 const isActive = ref(false);
 let ital = 0;
@@ -58,6 +61,13 @@ function AddToBasket(ital, route) {
     openModal();
   }
 }
+
+onMounted(() => {
+  imageUrl.value = new URL(
+    `../assets/images/${props.kep}`,
+    import.meta.url
+  ).href;
+});
 </script>
 
 <template>
@@ -70,21 +80,21 @@ function AddToBasket(ital, route) {
     <VLazyImage
       v-if="$route.path === '/kosar' && italiksz == 0"
       class="iksz"
-      src="/IKSZ.png"
+      :src="IKSZ"
       alt="iksz"
       @click="DeleteSzendvics(index)"
     />
     <VLazyImage
       v-if="$route.path === '/kosar' && italiksz == 1"
       class="iksz"
-      src="/IKSZ.png"
+      :src="IKSZ"
       alt="iksz"
       @click="DeleteExtra(index)"
     />
     <RouterLink :to="RedirectToExtras(id)">
       <VLazyImage
-        :src="getImageUrl()"
-        alt=""
+        :src="imageUrl"
+        alt="dynamic image"
         class="w-full h-3/5 mb-2 mainImg"
         :class="{ active: isActive }"
         @click="toggleAnimation"
@@ -97,13 +107,13 @@ function AddToBasket(ital, route) {
         class="extra-icons"
       >
         <p v-if="ketchup == 1">
-          <VLazyImage src="/ketchup.png" alt="Ketchup" />
+          <VLazyImage :src="ketchupImg" alt="Ketchup" />
         </p>
         <p v-if="mustar == 1">
-          <VLazyImage src="/majo.png" alt="Mayonnaise" />
+          <VLazyImage :src="majo" alt="Mayonnaise" />
         </p>
-        <p v-if="majonez == 1"><VLazyImage src="/must.png" alt="Mustard" /></p>
-        <p v-if="csipos == 1"><VLazyImage src="/csip.png" alt="Chili" /></p>
+        <p v-if="majonez == 1"><VLazyImage :src="must" alt="Mustard" /></p>
+        <p v-if="csipos == 1"><VLazyImage :src="csip" alt="Chili" /></p>
       </div>
     </RouterLink>
   </div>
@@ -116,21 +126,21 @@ function AddToBasket(ital, route) {
     <VLazyImage
       v-if="$route.path === '/kosar' && italiksz == 0"
       class="iksz"
-      src="/IKSZ.png"
+      :src="IKSZ"
       alt="iksz"
       @click="DeleteSzendvics(index)"
     />
     <VLazyImage
       v-if="$route.path === '/kosar' && italiksz == 1"
       class="iksz"
-      src="/IKSZ.png"
+      :src="IKSZ"
       alt="iksz"
       @click="DeleteExtra(index)"
     />
     <RouterLink :to="RedirectToExtras(id)">
       <VLazyImage
-        :src="getImageUrl()"
-        alt=""
+        :src="imageUrl"
+        alt="Dynamic image"
         class="w-full h-3/5 mb-2 mainImg"
         :class="{ active: isActive }"
         @click="toggleAnimation"
@@ -143,15 +153,15 @@ function AddToBasket(ital, route) {
         class="extra-icons"
       >
         <p v-if="ketchup == 1">
-          <VLazyImage src="/ketchup.png" alt="Ketchup" />
+          <VLazyImage :src="ketchupImg" alt="Ketchup" />
         </p>
         <p v-if="mustar == 1">
-          <VLazyImage src="/majo.png" alt="Mayonnaise" />
+          <VLazyImage :src="majo" alt="Mayonnaise" />
         </p>
         <p v-if="majonez == 1">
-          <VLazyImage src="/must.png" alt="Mustard" />
+          <VLazyImage :src="must" alt="Mustard" />
         </p>
-        <p v-if="csipos == 1"><VLazyImage src="/csip.png" alt="Chili" /></p>
+        <p v-if="csipos == 1"><VLazyImage :src="csip" alt="Chili" /></p>
       </div>
     </RouterLink>
   </div>

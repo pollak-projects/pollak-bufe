@@ -14,9 +14,11 @@ export function getCookie(cname) {
 }
 
 export function parseJwt(token) {
-  if (!token || token === "") {
+  if (!token || token === "" || token === "undefined") {
+    // WHY JS WHY
     return null;
   }
+
   var base64Url = token.split(".")[1];
   var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
   var jsonPayload = decodeURIComponent(
@@ -36,4 +38,44 @@ export function delete_cookie(name) {
   document.cookie =
     name +
     "=; Path=/; domain=.pollak.info; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+}
+
+export function isElectron() {
+  // Renderer process
+  if (
+    typeof window !== "undefined" &&
+    typeof window.process === "object" &&
+    window.process.type === "renderer"
+  ) {
+    return true;
+  }
+
+  // Main process
+  if (
+    typeof process !== "undefined" &&
+    typeof process.versions === "object" &&
+    !!process.versions.electron
+  ) {
+    return true;
+  }
+
+  // Detect the user agent when the `nodeIntegration` option is set to true
+  if (
+    typeof navigator === "object" &&
+    typeof navigator.userAgent === "string" &&
+    navigator.userAgent.indexOf("Electron") >= 0
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
+export function deleteAllCookies() {
+  document.cookie.split(";").forEach((cookie) => {
+    const eqPos = cookie.indexOf("=");
+    const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+    document.cookie =
+      name + "=;domain=.pollak.info;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  });
 }

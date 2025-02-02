@@ -1,8 +1,9 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { Login } from "../config/lekerdezes";
 import { store_login } from "../config/store";
 import { useRouter } from "vue-router";
+import { isElectron } from "../lib/common";
 
 // Reaktív változó a jelszó láthatóságának kezeléséhez
 const isPasswordVisible = ref(false);
@@ -20,6 +21,12 @@ const login = async () => {
     if (response.message) {
       errorMsg.value = response.message;
     }
+
+    if (isElectron) {
+      localStorage.setItem("access_token", response.access_token);
+      localStorage.setItem("refresh_token", response.refresh_token);
+    }
+
     router.push("/kezdes");
   } catch (error) {
     console.error(error);

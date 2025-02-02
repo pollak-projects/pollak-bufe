@@ -2,6 +2,7 @@
 import VLazyImage from "v-lazy-image";
 import { RouterLink } from "vue-router";
 import { ref, onMounted, h } from "vue";
+import rightArrow from "../assets/images/arrow_right.svg";
 
 const isMobile = ref(false);
 const isOpen = ref(false);
@@ -25,27 +26,27 @@ onMounted(() => {
       >
         <li class="w-full border-b border-[#D1C0FB] pr-2 pl-2 pb-3">
           <RouterLink to="/szendvicsek" class="flex justify-between w-full"
-            >Szendvicsek <VLazyImage width="20px" src="/arrow_right.svg"
+            >Szendvicsek <VLazyImage width="20px" :src="rightArrow"
           /></RouterLink>
         </li>
         <li class="w-full border-b border-[#D1C0FB] pr-2 pl-2 pb-3">
           <RouterLink class="flex justify-between w-full" to="/hot-dogok"
-            >Hot-dogok <VLazyImage width="20px" src="/arrow_right.svg"
+            >Hot-dogok <VLazyImage width="20px" :src="rightArrow"
           /></RouterLink>
         </li>
         <li class="w-full border-b border-[#D1C0FB] pr-2 pl-2 pb-3">
           <RouterLink class="flex justify-between w-full" to="/hamburgerek"
-            >Hamburgerek <VLazyImage width="20px" src="/arrow_right.svg"
+            >Hamburgerek <VLazyImage width="20px" :src="rightArrow"
           /></RouterLink>
         </li>
         <li class="w-full border-b border-[#D1C0FB] pr-2 pl-2 pb-3">
           <RouterLink class="flex justify-between w-full" to="/italok"
-            >Italok <VLazyImage width="20px" src="/arrow_right.svg"
+            >Italok <VLazyImage width="20px" :src="rightArrow"
           /></RouterLink>
         </li>
         <li class="w-full border-b border-[#D1C0FB] pr-2 pl-2 pb-3">
           <RouterLink class="flex justify-between w-full" to="/nasik"
-            >Nasik <VLazyImage width="20px" src="/arrow_right.svg"
+            >Nasik <VLazyImage width="20px" :src="rightArrow"
           /></RouterLink>
         </li>
       </ul>

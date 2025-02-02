@@ -1,6 +1,6 @@
 <script setup>
 import VLazyImage from "v-lazy-image";
-import { ref, defineModel } from "vue";
+import { ref, defineModel, onMounted } from "vue";
 
 const props = defineProps({
   text: String,
@@ -12,6 +12,7 @@ const model = defineModel({
 });
 
 const isActive = ref(false);
+const imageUrl = ref("");
 
 function changeviewModel() {
   isActive.value = !isActive.value;
@@ -25,9 +26,12 @@ function changeviewModel() {
   }
 }
 
-function getImageUrl() {
-  return "/" + props.imgName;
-}
+onMounted(() => {
+  imageUrl.value = new URL(
+    `../assets/images/${props.imgName}`,
+    import.meta.url
+  ).href;
+});
 </script>
 <template>
   <div
@@ -38,7 +42,7 @@ function getImageUrl() {
       class="h-56 w-56 xl:h-40 xl:w-40 bg-[#d9d9d9] drop-shadow-lg rounded-[20%] p-2"
       :class="{ '!bg-[#bee46c]': isActive }"
     >
-      <VLazyImage :src="getImageUrl()" alt="" />
+      <VLazyImage :src="imageUrl" alt="" />
     </div>
     <p class="text-5xl xl:text-4xl text-[#554b4b] kecsufont">{{ text }}</p>
   </div>

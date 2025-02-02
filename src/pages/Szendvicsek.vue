@@ -6,6 +6,9 @@ import { store, store2, store3 } from "../config/store.js";
 import { ToBasket } from "../config/lekerdezes.js";
 import { useRouter } from "vue-router";
 
+import leftArrow from "../assets/images/arrow_left.svg";
+import shoppingCart from "../assets/images/shoppingcart.svg";
+
 const router = useRouter();
 
 function navBack() {
@@ -40,7 +43,7 @@ function Teszt() {
 
 <template>
   <VLazyImage
-    src="/arrow_left.svg"
+    :src="leftArrow"
     alt=""
     class="h-8 w-8 absolute left-16 top-20 md:block hidden"
     @click="navBack()"
@@ -50,7 +53,7 @@ function Teszt() {
     :to="ToBasket()"
     class="md:h-14 md:w-14 h-10 w-10 absolute md:right-20 right-4 top-4 md:top-28 flex items-baseline"
   >
-    <VLazyImage id="kosar" src="/shoppingcart.svg" alt="" />
+    <VLazyImage id="kosar" :src="shoppingCart" alt="" />
     <p class="md:text-xl text-sm">{{ store.kosar[0]?.darab }}</p>
   </RouterLink>
   <Navigation />

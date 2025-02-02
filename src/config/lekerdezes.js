@@ -1,6 +1,8 @@
 import { callWithAsyncErrorHandling, ref } from "vue";
 import { sorszam, store, storeExtra, storeszunet } from "../config/store.js";
 import { store2, store3, store_login } from "../config/store.js";
+import { getAccessToken, getRefreshToken } from "../lib/tokenFinder.js";
+import { delete_cookie, deleteAllCookies, isElectron } from "../lib/common.js";
 
 export async function Burgercucc(termek) {
   var requestOptions = {
@@ -33,6 +35,8 @@ export async function termekLekerdezes(id) {
 }
 
 export async function SzunetLekerdezes() {
+  await checkTokenValidity();
+
   var requestOptions = {
     method: "GET",
   };
@@ -49,14 +53,10 @@ export async function SzunetLekerdezes() {
 }
 
 export async function AktualisSzunetLekerdezes() {
-  const accessToken = document.cookie
-    .replace(/ /g, "")
-    .split(";")
-    .find((row) => row.startsWith("access_token"));
-  const refreshToken = document.cookie
-    .replace(/ /g, "")
-    .split(";")
-    .find((row) => row.startsWith("refresh_token"));
+  await checkTokenValidity();
+
+  const accessToken = getAccessToken();
+  const refreshToken = getRefreshToken();
 
   var requestOptions = {
     method: "GET",
@@ -117,6 +117,19 @@ export async function UtolsoNapiSorszam() {
 }
 
 let basketData = new FormData();
+
+export function clearBasket() {
+  basketData = new FormData();
+  store.kosar = [
+    {
+      darab: 0,
+    },
+  ];
+  store2.kosar = [];
+  store2.szoszok = [];
+  store3.van = false;
+  storeExtra.kosarExtra = [];
+}
 
 export function AddElementsToBasket(
   id,
@@ -242,6 +255,8 @@ export function ToBasket() {
 }
 
 export async function Rendeles_Leadasa(szunet, bankkartya) {
+  await checkTokenValidity();
+
   let response = null;
 
   basketData.append("szunet", szunet);
@@ -350,14 +365,8 @@ async function Rendeles_Fetch(
   csipos,
   hagyma
 ) {
-  const accessToken = document.cookie
-    .replace(/ /g, "")
-    .split(";")
-    .find((row) => row.startsWith("access_token"));
-  const refreshToken = document.cookie
-    .replace(/ /g, "")
-    .split(";")
-    .find((row) => row.startsWith("refresh_token"));
+  const accessToken = getAccessToken();
+  const refreshToken = getRefreshToken();
 
   const parsedJwt = parseJwt(accessToken.split("=")[1]);
 
@@ -407,15 +416,6 @@ export async function logout() {
         resolve(res);
       })
       .catch((error) => console.log("error", error));
-  });
-}
-
-function deleteAllCookies() {
-  document.cookie.split(";").forEach((cookie) => {
-    const eqPos = cookie.indexOf("=");
-    const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
-    document.cookie =
-      name + "=;domain=.pollak.info;expires=Thu, 01 Jan 1970 00:00:00 GMT";
   });
 }
 
@@ -484,12 +484,65 @@ export async function SendImage(image, szam) {
       body: JSON.stringify({
         image: image,
         path: "bufe-rendelesek",
-        email: ["hadrian@pollak.hu", "vmihaly@pollak.hu"],
+        email: ["hadrian@pollak.hu"],
         email_subject: "Új rendelés",
         email_body: `Új rendelés érkezett a büféből automatából<br>Száma: ${szam}`,
       }),
     }).finally(() => {
       resolve(200);
     });
+  });
+}
+/**
+ * 
+ const response = await checkTokenValidity();
+
+  if (response.message === "Refreshed") {
+    localStorage.setItem("access_token", response.access_token);
+  }
+
+  // check if rejected
+  if (response.message === "Rejected") {
+    delete_cookie("access_token");
+    delete_cookie("refresh_token");
+
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+
+    router.push("/");
+  }
+ */
+export async function checkTokenValidity() {
+  const accessToken = getAccessToken();
+  const refreshToken = getRefreshToken();
+
+  var requestOptions = {
+    method: "GET",
+    headers: {
+      "X-Authorization": accessToken,
+      RefreshToken: refreshToken,
+    },
+    credentials: "include",
+  };
+
+  return new Promise((resolve, reject) => {
+    fetch(`https://auth.pollak.info/auth/verify`, requestOptions)
+      .then(async (result) => {
+        const res = await result.json();
+        console.log(res);
+
+        if (res.message === "OK") {
+          resolve(res);
+        } else if (res.message === "Refreshed" && isElectron()) {
+          localStorage.setItem("access_token", response.access_token);
+        } else {
+          delete_cookie("access_token");
+          delete_cookie("refresh_token");
+
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("refresh_token");
+        }
+      })
+      .catch((error) => console.log("error", error));
   });
 }

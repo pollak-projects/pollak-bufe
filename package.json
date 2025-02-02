@@ -1,28 +1,65 @@
 {
-  "name": "bufe",
+  "name": "pollak-bufe",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "main": "electron/electron.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "electron": "wait-on tcp:3000 && cross-env IS_DEV=true electron .",
+    "electron:pack": "electron-builder --dir",
+    "electron:dev": "concurrently -k \"cross-env BROWSER=none npm run dev\" \"npm run electron\"",
+    "electron:builder": "electron-builder",
+    "build:for:electron": "cross-env ELECTRON=true vite build --mode electron",
+    "app:build": "npm run build:for:electron && npm run electron:builder"
   },
   "dependencies": {
     "@fontsource/abril-fatface": "^5.1.0",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
     "v-lazy-image": "^2.1.1",
     "vue": "^3.4.37",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "wait-on": "^8.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.2",
     "autoprefixer": "^10.4.20",
+    "electron": "^34.0.2",
+    "electron-builder": "^25.1.8",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.12",
     "vite": "^5.4.1"
   },
-  "description": "This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.",
-  "main": "postcss.config.js",
-  "author": "",
-  "license": "ISC"
+  "description": "Pollák Büfé Projekt - 13SZF2",
+  "author": "Pollák Diákok - 13SZF2 2024",
+  "copyright": "Copyright © 2024 ${author}",
+  "license": "GPL-3.0-only",
+  "build": {
+    "appId": "info.pollak.bufe",
+    "productName": "Pollák Büfé",
+    "copyright": "Copyright © 2024 ${author}",
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist_electron"
+    },
+    "extraFiles": [
+      {
+        "from": "assets",
+        "to": "assets",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
+  }
 }

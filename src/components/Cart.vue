@@ -14,6 +14,18 @@ import {
 import Card from "./Card.vue";
 import { useRouter } from "vue-router";
 
+import card from "../assets/images/card.png";
+import cash from "../assets/images/cash.png";
+import spinner from "../assets/images/spinner.svg";
+
+console.log(
+  "----- Kosar ----\n",
+  store2.kosar,
+  "\n",
+  "------ Szószok -----\n",
+  store2.szoszok
+);
+
 const props = defineProps({
   title: String,
 });
@@ -146,10 +158,10 @@ const rendelesleadas = () => {
 
       console.log(res);
 
-      SendImage(image_data_url, res).then(() => {
-        isLoading.value = false;
-        router.push(`/sorszam/${res}`);
-      });
+      // SendImage(image_data_url, res);
+
+      isLoading.value = false;
+      router.push(`/sorszam/${res}`);
     })
     .catch((err) => {
       openModal("Valami hiba történt!");
@@ -215,7 +227,7 @@ function takePicture() {
             :class="['payment-option', { selected: paymentMethod === '1' }]"
           >
             <VLazyImage
-              src="/card.png"
+              :src="card"
               alt="Bankkártya"
               class="w-64 h-64 mx-auto"
             />
@@ -226,11 +238,7 @@ function takePicture() {
             @click="selectPayment('0')"
             :class="['payment-option', { selected: paymentMethod === '0' }]"
           >
-            <VLazyImage
-              src="/cash.png"
-              alt="Készpénz"
-              class="w-64 h-64 mx-auto"
-            />
+            <VLazyImage :src="cash" alt="Készpénz" class="w-64 h-64 mx-auto" />
             <p class="text-4xl text-[#554b4b] mt-2">Készpénz</p>
           </div>
         </div>
@@ -268,7 +276,7 @@ function takePicture() {
     </div>
 
     <div
-      class="mt-20 mb-20 text-center"
+      class="mt-20 mb-20 text-center items-center justify-center flex"
       v-if="storeszunet.elsoszunet[0].elsoszunet != 0"
     >
       <button
@@ -280,10 +288,10 @@ function takePicture() {
       </button>
       <button
         v-else
-        class="border rounded-full border-black bg-gradient-to-r from-[#d8dcff] to-[#737edf] p-3 px-12 text-[#554b4b] text-6xl h-28 shadow-lg drop-shadow-lg focus:outline-none"
+        class="border rounded-full border-black bg-gradient-to-r from-[#d8dcff] to-[#737edf] p-3 px-12 text-[#554b4b] text-6xl h-28 shadow-lg drop-shadow-lg focus:outline-none flex flex-row gap-2 justify-center items-center"
         disabled
       >
-        <VLazyImage src="/spinner.svg" alt="" class="w-16 h-16" />
+        <VLazyImage :src="spinner" alt="" class="w-16 h-16" />
         Rendelés folyamatban...
       </button>
     </div>

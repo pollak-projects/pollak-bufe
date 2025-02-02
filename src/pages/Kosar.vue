@@ -5,6 +5,8 @@ import Rightside from "../components/Rightside.vue";
 import { store } from "../config/store.js";
 import { useRouter } from "vue-router";
 
+import leftArrow from "../assets/images/arrow_left.svg";
+
 const router = useRouter();
 
 function navBack() {
@@ -14,7 +16,7 @@ function navBack() {
 
 <template>
   <VLazyImage
-    src="/arrow_left.svg"
+    :src="leftArrow"
     alt=""
     class="h-8 w-8 absolute left-16 top-20"
     @click="navBack()"

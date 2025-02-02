@@ -1,27 +1,22 @@
 <script setup>
 import VLazyImage from "v-lazy-image";
 import { RouterLink } from "vue-router";
-import { SzunetEltarolasa } from "../config/lekerdezes";
+import { clearBasket, SzunetEltarolasa } from "../config/lekerdezes";
 import { store, store2, store3, storeExtra } from "../config/store";
+import logo from "../assets/images/logo.png";
 
 function kezdes() {
-  store.kosar = [
-    {
-      darab: 0,
-    },
-  ];
-
-  store2.kosar = [
-    {
-      darab: "",
-    },
-  ];
-
+  // store.kosar = [
+  //   {
+  //     darab: 0,
+  //   },
+  // ];
+  // store2.kosar = [];
   // store2.szoszok = [];
+  // store3.van = false;
+  // storeExtra.kosarExtra = [];
 
-  store3.van = false;
-
-  storeExtra.kosarExtra = [];
+  clearBasket();
 
   SzunetEltarolasa();
 }
@@ -31,7 +26,7 @@ function kezdes() {
   <div class="h-screen">
     <VLazyImage
       class="md:w-32 w-16 absolute move md:left-16 left-0 md:top-16 top-3"
-      src="/logo.png"
+      :src="logo"
       alt=""
     />
     <h1

@@ -9,11 +9,7 @@ export const store = reactive({
 });
 
 export const store2 = reactive({
-  kosar: [
-    {
-      darab: "",
-    },
-  ],
+  kosar: [],
   szoszok: [],
 });
 export const storeExtra = reactive({

@@ -29,7 +29,8 @@ onMounted(async () => {
     })
     .catch((error) => console.log("error", error));
   setTimeout(() => {
-    location.replace("https://bufe.pollak.info/Kezdes");
+    // location.replace("https://bufe.pollak.info/Kezdes");
+    router.push("/");
   }, 5000);
 });
 </script>
