@@ -534,7 +534,7 @@ export async function checkTokenValidity() {
         if (res.message === "OK") {
           resolve(res);
         } else if (res.message === "Refreshed" && isElectron()) {
-          localStorage.setItem("access_token", response.access_token);
+          localStorage.setItem("access_token", res.access_token);
         } else if (res.message !== "OK" && res.message !== "Refreshed") {
           delete_cookie("access_token");
           delete_cookie("refresh_token");
