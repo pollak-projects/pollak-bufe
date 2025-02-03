@@ -38,9 +38,9 @@ function createWindow() {
   });
 
   // Open the DevTools.
-  // if (isDev) {
-  mainWindow.webContents.openDevTools();
-  // }
+  if (isDev) {
+    mainWindow.webContents.openDevTools();
+  }
 }
 
 app.whenReady().then(() => {

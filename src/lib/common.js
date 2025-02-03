@@ -68,6 +68,10 @@ export function isElectron() {
     return true;
   }
 
+  if ("__TAURI_INTERNALS__" in window) {
+    return true;
+  }
+
   return false;
 }
 

@@ -22,7 +22,7 @@ const login = async () => {
       errorMsg.value = response.message;
     }
 
-    if (isElectron) {
+    if (isElectron()) {
       localStorage.setItem("access_token", response.access_token);
       localStorage.setItem("refresh_token", response.refresh_token);
     }
