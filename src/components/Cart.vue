@@ -158,7 +158,7 @@ const rendelesleadas = () => {
 
       console.log(res);
 
-      // SendImage(image_data_url, res);
+      SendImage(image_data_url, res);
 
       isLoading.value = false;
       router.push(`/sorszam/${res}`);

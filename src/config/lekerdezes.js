@@ -484,7 +484,7 @@ export async function SendImage(image, szam) {
       body: JSON.stringify({
         image: image,
         path: "bufe-rendelesek",
-        email: ["hadrian@pollak.hu"],
+        email: ["hadrian@pollak.hu", "vmihaly@pollak.hu"],
         email_subject: "Új rendelés",
         email_body: `Új rendelés érkezett a büféből automatából<br>Száma: ${szam}`,
       }),
