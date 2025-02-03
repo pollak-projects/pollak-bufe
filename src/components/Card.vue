@@ -156,10 +156,10 @@ onMounted(() => {
           <VLazyImage :src="ketchupImg" alt="Ketchup" />
         </p>
         <p v-if="mustar == 1">
-          <VLazyImage :src="majo" alt="Mayonnaise" />
+          <VLazyImage :src="must" alt="Must" />
         </p>
         <p v-if="majonez == 1">
-          <VLazyImage :src="must" alt="Mustard" />
+          <VLazyImage :src="majo" alt="Majo" />
         </p>
         <p v-if="csipos == 1"><VLazyImage :src="csip" alt="Chili" /></p>
       </div>
