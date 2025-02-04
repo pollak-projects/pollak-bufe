@@ -496,7 +496,20 @@ export async function SendImage(image, szam) {
 
 export async function checkTokenValidity() {
   const accessToken = getAccessToken();
-  const refreshToken = "refresh_token=" + getRefreshToken();
+  const refreshToken = getRefreshToken();
+
+  if (
+    !refreshToken ||
+    refreshToken === "" ||
+    !accessToken ||
+    accessToken === ""
+  ) {
+    delete_cookie("access_token");
+    delete_cookie("refresh_token");
+
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+  }
 
   var requestOptions = {
     method: "GET",
