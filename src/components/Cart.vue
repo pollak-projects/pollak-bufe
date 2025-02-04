@@ -72,7 +72,7 @@ function openModal(msg) {
 
 onMounted(async () => {
   console.log("On Mounted");
-  await SzunetEltarolasa();
+  // await SzunetEltarolasa();
 
   elsoszunet.value = await AktualisSzunetLekerdezes();
   elsoszunet.value = elsoszunet.value[0].id;
