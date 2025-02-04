@@ -6,6 +6,7 @@ import {
 import { store_login } from "../config/store";
 import { delete_cookie, getCookie, isElectron, parseJwt } from "../lib/common";
 import { checkTokenValidity } from "./lekerdezes";
+import { getRefreshToken } from "../lib/tokenFinder";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -78,6 +79,23 @@ router.beforeEach(async (to, from) => {
     : getCookie("access_token");
 
   const parsedToken = parseJwt(accessToken);
+
+  const refreshToken = getRefreshToken();
+
+  if (
+    !accessToken ||
+    !refreshToken ||
+    accessToken === "" ||
+    refreshToken === "" ||
+    localStorage.accessToken === "undefined" ||
+    localStorage.refreshToken === "undefined"
+  ) {
+    delete_cookie("access_token");
+    delete_cookie("refresh_token");
+
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+  }
 
   if (accessToken && parsedToken && parsedToken.userGroup !== "ADMIN") {
     alert(

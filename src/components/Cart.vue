@@ -1,6 +1,6 @@
 <script setup>
 import VLazyImage from "v-lazy-image";
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { store, storeszunet } from "../config/store";
 import { store2 } from "../config/store";
 import { storeExtra } from "../config/store";
@@ -160,7 +160,6 @@ const rendelesleadas = () => {
 
       SendImage(image_data_url, res);
 
-      isLoading.value = false;
       router.push(`/sorszam/${res}`);
     })
     .catch((err) => {
@@ -182,6 +181,10 @@ function takePicture() {
     console.warn("Video is not ready yet.");
   }
 }
+
+onUnmounted(() => {
+  isLoading.value = false;
+});
 </script>
 
 <template>

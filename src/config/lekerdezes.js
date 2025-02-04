@@ -1,6 +1,5 @@
-import { callWithAsyncErrorHandling, ref } from "vue";
 import { sorszam, store, storeExtra, storeszunet } from "../config/store.js";
-import { store2, store3, store_login } from "../config/store.js";
+import { store2, store3 } from "../config/store.js";
 import { getAccessToken, getRefreshToken } from "../lib/tokenFinder.js";
 import { delete_cookie, deleteAllCookies, isElectron } from "../lib/common.js";
 
@@ -502,7 +501,9 @@ export async function checkTokenValidity() {
     !refreshToken ||
     refreshToken === "" ||
     !accessToken ||
-    accessToken === ""
+    accessToken === "" ||
+    localStorage.accessToken === "undefined" ||
+    localStorage.refreshToken === "undefined"
   ) {
     delete_cookie("access_token");
     delete_cookie("refresh_token");
