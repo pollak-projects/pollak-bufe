@@ -1,0 +1,7 @@
+services:
+  bufe_new:
+    image: ghcr.io/pollak-projects/pollak-bufe/app:latest
+    ports:
+      - '3013:80'
+    platform: linux/amd64
+    restart: always
